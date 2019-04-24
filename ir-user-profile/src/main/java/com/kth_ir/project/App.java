@@ -1,4 +1,4 @@
-package com.kth-ir.project;
+package com.kth_ir.project;
 
 /**
  * Hello world!
