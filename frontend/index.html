@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
+    <title>User profile project</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/style.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+    <link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/lodash.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="section no-pad" id="index-banner">
+        <div class="container">
+            <br><br>
+            <h1 class="header center grey-text text-darken-2">User profile project</h1>
+            <h5 class="header center grey-text text-darken-2">DD2476 - Search Engines and Information Retrieval</h5>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section row">
+            <div class="input-field col s6">
+                <input placeholder="Enter your email" id="email" type="email" class="validate center" v-model="email">
+                <label for="email">Your email</label>
+            </div>
+            <div class="input-field col s6">
+                <input placeholder="Enter your search" :disabled="email === ''" id="search" type="text" class="validate center" v-model="query">
+                <label for="search">Your query</label>
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+    <div class="container">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>Search results <span v-if="searching == false">( {{ results.length }} )</span></h4></li>
+            <div class="progress" v-if="searching">
+                <div class="indeterminate"></div>
+            </div>
+            <li class="collection-item" v-for="item in results_this_page" v-else>
+                <div><span style="padding-right: 20px;">{{ item.id }}</span>{{ item.string }}<a :href="item.url" class="secondary-content"><i class="material-icons blue-text">send</i></a></div>
+            </li>
+        </ul>
+        <ul class="pagination">
+            <li :class="{ disabled: current_page == 0 }"><a href="#!" v-on:click="current_page > 0 ? current_page-- : 0"><i class="material-icons">chevron_left</i></a></li>
+            <li :class="{ active: current_page == 0 }"><a href="#!" v-on:click="current_page = 0">1</a></li>
+            <li :class="{ active: current_page == page }" class="waves-effect" v-for="page in results_pages - 1"><a href="#!"  v-on:click="current_page = page">{{ page + 1 }}</a></li>
+            <li :class="{ disabled: current_page == results_pages - 1 }"><a href="#!" v-on:click="current_page < results_pages - 1 ? current_page++ : 0"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+    </div>
+
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Group 8</h5>
+                    <ul>
+                        <li>Sergio Liberman Bronfman</li>
+                        <li>Chun Hung Lin</li>
+                        <li>Björn Lindqvist</li>
+                        <li>Anton Lu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    Made with <a class="blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>, <a
+                        class="blue-text text-lighten-3" href="#">Vue.js</a>, <a class="blue-text text-lighten-3" href="#">Flask</a>
+                    and <a class="blue-text text-lighten-3" href="#">Elasticsearch</a>
+                </div>
+            </div>
+    </footer>
+</div>
+<script src="js/jquery-3.4.0.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+
+<script>
+    const config = {
+        results_per_page: 5
+    };
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            results: [
+                {
+                    id: 1,
+                    string: 'this is a result',
+                    url: 'http://result1'
+                },
+                {
+                    id: 2,
+                    string: 'this is another',
+                    url: 'http://result2'
+                },
+                {
+                    id: 3,
+                    string: 'this is a result',
+                    url: 'http://result1'
+                },
+                {
+                    id: 4,
+                    string: 'this is another',
+                    url: 'http://result2'
+                },
+                {
+                    id: 5,
+                    string: 'this is a result',
+                    url: 'http://result1'
+                },
+                {
+                    id: 6,
+                    string: 'this is another',
+                    url: 'http://result2'
+                },
+                {
+                    id: 7,
+                    string: 'this is a result',
+                    url: 'http://result1'
+                },
+                {
+                    id: 8,
+                    string: 'this is another',
+                    url: 'http://result2'
+                },
+                {
+                    id: 9,
+                    string: 'this is a result',
+                    url: 'http://result1'
+                },
+                {
+                    id: 10,
+                    string: 'this is another',
+                    url: 'http://result2'
+                },
+                {
+                    id: 11,
+                    string: 'this is a result',
+                    url: 'http://result1'
+                },
+                {
+                    id: 12,
+                    string: 'this is another',
+                    url: 'http://result2'
+                },
+            ],
+            query: "",
+            email: "",
+            searching: false,
+            current_page: 0
+        },
+        watch: {
+            // whenever question changes, this function will run
+            query: function (new_query) {
+                this.debouncedSearch(new_query)
+            }
+        },
+        computed: {
+            results_pages: function () {
+                num_results = 0
+                while (num_results * config.results_per_page < this.results.length) {
+                    num_results++
+                }
+                return num_results
+            },
+            results_this_page: function () {
+                results = []
+                for (i = this.current_page * config.results_per_page; i < Math.min((this.current_page + 1) * config.results_per_page, this.results.length); i++) {
+                    results.push(this.results[i]);
+                }
+                results.push()
+                return results
+            }
+        },
+        created: function() {
+            this.debouncedSearch = _.debounce(this.search, 500)
+        },
+        methods: {
+            search: function (query) {
+                this.searching = true
+
+                // const axios = require('axios');
+                // axios.get('/user?ID=12345')
+                //     .then(function (response) {
+                //         // handle success
+                //         console.log(response);
+                //     })
+                //     .catch(function (error) {
+                //         // handle error
+                //         console.log(error);
+                //     })
+                //     .then(function () {
+                //         // always executed
+                //     });
+
+                setTimeout(() => {this.searching = false}, 1000)
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
