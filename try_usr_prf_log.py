@@ -15,5 +15,10 @@ if __name__ == "__main__":
     profile_logger.log_search(
         query="zombie attack", query_type="ranking", ranking_type="tf-idf")
 
+    # log retrieved
+    profile_logger.log_retrieved(
+        selected_doc="Zombie_Walk.f"
+    )
+
     # close db
     conn.close()

@@ -1,4 +1,3 @@
-# import sqlite3
 import logging
 import time
 
@@ -37,12 +36,34 @@ class UserProfileLogger:
         if ranking_type is None:
             col_val['ranking_type'] = "NULL"
 
+        # # create a sql with placeholder
+        # col = ','.join(col_val.keys())
+        # placeholders = ':'+', :'.join(col_val.keys())
+        # sql = "INSERT INTO user_search_log ({}) VALUES({});".format(col, placeholders)
+
+        # # execute the command
+        # cur = self.conn.cursor()
+        # cur.execute(sql, col_val)
+        # self.conn.commit()
+        self._insert_col_val_to_db_table(self.conn, "user_search_log", col_val)
+
+    def log_retrieved(self, selected_doc):
+        col_val = {
+            'userid': str(self.user_id),
+            'posix_time': str(int(time.time())),
+            'selected_doc': selected_doc
+        }
+        self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)
+
+    @staticmethod
+    def _insert_col_val_to_db_table(db_conn, table_name, col_val):
+
         # create a sql with placeholder
         col = ','.join(col_val.keys())
         placeholders = ':'+', :'.join(col_val.keys())
-        sql = "INSERT INTO user_search_log ({}) VALUES({});".format(col, placeholders)
+        sql = "INSERT INTO {} ({}) VALUES({});".format(table_name, col, placeholders)
 
         # execute the command
-        cur = self.conn.cursor()
+        cur = db_conn.cursor()
         cur.execute(sql, col_val)
-        self.conn.commit()
+        db_conn.commit()
