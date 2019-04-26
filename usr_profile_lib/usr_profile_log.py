@@ -24,37 +24,6 @@ class UserProfileLogger:
         ret = row[0]
         return ret
 
-    def log_search(self, query, query_type, ranking_type=None):
-        # build col_val dict
-        col_val = {
-            'userid': str(self.user_id),
-            'posix_time': str(int(time.time())),
-            'query': query,
-            'query_type': query_type,
-            'ranking_type': ranking_type
-        }
-        if ranking_type is None:
-            col_val['ranking_type'] = "NULL"
-
-        # # create a sql with placeholder
-        # col = ','.join(col_val.keys())
-        # placeholders = ':'+', :'.join(col_val.keys())
-        # sql = "INSERT INTO user_search_log ({}) VALUES({});".format(col, placeholders)
-
-        # # execute the command
-        # cur = self.conn.cursor()
-        # cur.execute(sql, col_val)
-        # self.conn.commit()
-        self._insert_col_val_to_db_table(self.conn, "user_search_log", col_val)
-
-    def log_retrieved(self, selected_doc):
-        col_val = {
-            'userid': str(self.user_id),
-            'posix_time': str(int(time.time())),
-            'selected_doc': selected_doc
-        }
-        self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)
-
     @staticmethod
     def _insert_col_val_to_db_table(db_conn, table_name, col_val):
 
@@ -67,3 +36,22 @@ class UserProfileLogger:
         cur = db_conn.cursor()
         cur.execute(sql, col_val)
         db_conn.commit()
+
+    def log_search(self, query, query_type, ranking_type=None):
+        # build col_val dict
+        col_val = {
+            'userid': str(self.user_id),
+            'posix_time': str(int(time.time())),
+            'query': query,
+            'query_type': query_type,
+            'ranking_type': ranking_type
+        }
+        self._insert_col_val_to_db_table(self.conn, "user_search_log", col_val)
+
+    def log_retrieved(self, selected_doc):
+        col_val = {
+            'userid': str(self.user_id),
+            'posix_time': str(int(time.time())),
+            'selected_doc': selected_doc
+        }
+        self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)

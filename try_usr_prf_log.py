@@ -1,11 +1,15 @@
 import sqlite3
-from user_profile_lib.user_profile_logger import UserProfileLogger
+from usr_profile_lib.usr_profile_log import UserProfileLogger
 import logging
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    conn = sqlite3.connect("user_profile_db/user_profile.db")
-    profile_logger = UserProfileLogger('chlin3@kth.se', dbconn=conn)
+    profile_db = "usr_profile_db/user_profile.db"
+    usr_email = "chlin3@kth.se"
+
+    # ========================================================================
+    conn = sqlite3.connect(profile_db)
+    profile_logger = UserProfileLogger(usr_email, dbconn=conn)
 
     # log search
     profile_logger.log_search(
