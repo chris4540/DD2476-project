@@ -9,11 +9,16 @@ CREATE TABLE users(
     lang        TEXT                NOT NULL
 );
 -- USER search log table
-CREATE TABLE user_search_log(
-    id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    userid          INTEGER,
-    "posix_time"	INTEGER,
-    action_         TEXT                NOT NULL,
-    action_details  TEXT                NOT NULL, -- Changable
-    FOREIGN KEY(userid) REFERENCES users(id)
-)
+CREATE TABLE IF NOT EXISTS user_search_log (
+	id	            INTEGER         PRIMARY KEY AUTOINCREMENT,
+	userid	        INTEGER         NOT NULL,
+	posix_time	    INTEGER         NOT NULL,
+	query	        TEXT            NOT NULL,
+	query_type	    CHAR(15)        NOT NULL,
+	ranking_type	CHAR(10)		DEFAULT NULL,
+	FOREIGN KEY(userid) REFERENCES users(id)
+);
+-- CREATE TABLE IF NOT EXISTS "user_retrival_log" (
+-- 	"id"	INTEGER,
+-- 	"userid"	INTEGER
+-- );

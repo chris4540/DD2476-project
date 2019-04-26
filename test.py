@@ -5,10 +5,15 @@ import logging
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     conn = sqlite3.connect("user_profile_db/user_profile.db")
-    p = UserProfileLogger(conn, 'chlin3@kth.se')
-    # c = conn.cursor()
+    profile_logger = UserProfileLogger('chlin3@kth.se', dbconn=conn)
 
-    # c.execute("select id from users where email='chlin3@kth.se';")
-    # row = c.fetchone()
-    # print('2):', row)
-    # conn.close()
+    # log search
+    profile_logger.log_search(
+        query="zombie", query_type="intersection", ranking_type=None)
+    profile_logger.log_search(
+        query="zombie attack", query_type="phase", ranking_type=None)
+    profile_logger.log_search(
+        query="zombie attack", query_type="ranking", ranking_type="tf-idf")
+
+    # close db
+    conn.close()
