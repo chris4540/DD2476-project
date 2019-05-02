@@ -7,3 +7,6 @@
 3. okay to extend it to log other stuff like click, scan time, mouse over time.
    Please create a new table called user_xxx_log and use foreign key to reference
    to which user.
+
+## Useful tool
+Sqlite DB browser (https://sqlitebrowser.org/)
