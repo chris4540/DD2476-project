@@ -2,8 +2,12 @@ import logging
 import time
 import sqlite3
 
-logger = logging.getLogger('UserProfileLogger')
+# FOR DEBUG USE
+# logging.basicConfig(
+#         filename='/var/log/usr_prof.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',
+#         level=logging.DEBUG)
 
+logger = logging.getLogger('UserProfileLogger')
 class UserProfileLogger:
 
     USER_PROFILE_DB = "usr_profile_db/user_profile.db"
@@ -29,7 +33,8 @@ class UserProfileLogger:
         row = cur.fetchone()
 
         if row is None:
-            logger.debug("The user email not found in the database. No profiling for the user")
+            logger.debug(
+                "User email %s not found in the database. No profiling for the user", user_email)
             ret = None
         else:
             # parse user id
@@ -78,7 +83,6 @@ class UserProfileLogger:
 
 if __name__ == "__main__":
     import sqlite3
-    from usr_profile_lib.usr_profile_log import UserProfileLogger
     logging.basicConfig(level=logging.DEBUG)
     usr_email = "chlin3@kth.se"
     # Developers can alway change the profile db like this
