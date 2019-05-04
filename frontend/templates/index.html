@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
@@ -23,19 +23,24 @@
 
     <div class="container">
         <div class="section row">
-            <div class="input-field col s6">
-                <input class="validate center" id="email" placeholder="Enter your email" type="email" v-model="email">
-                <label for="email">Your email</label>
-            </div>
-            <div class="input-field col s6">
-                <input :disabled="email === ''" class="validate center" id="search" placeholder="Enter your search" type="text" v-model="query">
-                <label for="search">Your query</label>
-            </div>
+            <form v-on:submit.prevent="search(query, 0)">
+                <div class="input-field col s5">
+                    <input class="validate center" id="email" placeholder="Enter your email" type="email" v-model="email">
+                    <label for="email">Your email</label>
+                </div>
+                <div class="input-field col s6">
+                    <input :disabled="email === ''" class="validate center" id="search" placeholder="Enter your search" type="text" v-model="query">
+                    <label for="search">Your query</label>
+                </div>
+                <div class="input-field col s1">
+                    <button type="submit" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons right">search</i></button>
+                </div>
+            </form>
         </div>
         <br><br>
     </div>
 
-    <div class="container" v-if="results.length > 0">
+    <div class="container">
         <ul class="collection with-header">
             <li class="collection-header"><h4>Search results <span v-if="searching == false">( [[ current_page * results_per_page + 1]]-[[ Math.min((current_page + 1) * results_per_page, n_results)]] / [[ n_results ]] )</span></h4></li>
             <div class="progress" v-if="searching">
@@ -93,15 +98,6 @@
             search_url: "/search",
             log_url: "/log"
         },
-        watch: {
-            // whenever question changes, this function will run
-            query: function (new_query) {
-                this.debouncedSearch(new_query, 0)
-            }
-        },
-        created: function() {
-            this.debouncedSearch = _.debounce(this.search, 500)
-        },
         methods: {
             search: function (query, page) {
                 this.searching = true
@@ -130,9 +126,9 @@
             click_link: function (element_id, url) {
                 window.open(url)
                 this.$http.post(this.log_url + "/click", {"email": email, "element_id": element_id}).then(success_response => {
-                    
+
                 }, failed_response => {
-                    
+
                 })
             }
         }
