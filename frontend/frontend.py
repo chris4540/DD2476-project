@@ -5,6 +5,7 @@ import json
 app = Flask(__name__)
 
 es = Elasticsearch("elastic.haochen.lu", port="9200")
+#es = Elasticsearch("localhost:9200", port="9200")
 
 @app.route("/")
 def index():
@@ -21,8 +22,9 @@ def log():
 def search(email, query, results_size, results_from):
     q = {
         "query": {
-            "match": {
-                "title": query
+            "multi_match" : {
+                "query" : query,
+                "fields" : [ "title", "text"]
             }
         },
         "from": results_from,
