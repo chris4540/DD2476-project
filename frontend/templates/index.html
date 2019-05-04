@@ -129,7 +129,7 @@
             },
             click_link: function (element_id, url) {
                 window.open(url)
-                this.$http.get(this.log_url + "/" + element_id).then(success_response => {
+                this.$http.post(this.log_url + "/click", {"email": email, "element_id": element_id}).then(success_response => {
                     
                 }, failed_response => {
                     
