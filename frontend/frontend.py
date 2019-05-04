@@ -38,6 +38,7 @@ def search(email, query, results_size, results_from):
         obj["id"] = pe["_id"]
         obj["string"] = pe["_source"]["title"]
         obj["url"] = "http://en.wikipedia.org/wiki/" + pe["_source"]["title"]
+        obj["synopsys"] = pe["_source"]["text"][:400]
         res["results"].append(obj)
 
     return json.dumps(res)
