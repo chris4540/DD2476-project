@@ -2,7 +2,10 @@ from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 from datetime import datetime
 import json
+from usr_profile_lib.usr_profile_log import UserProfileLogger
+
 app = Flask(__name__)
+UserProfileLogger.USER_PROFILE_DB = "/var/usr_prf/user_profile.db"
 
 es = Elasticsearch("elastic.haochen.lu", port="9200")
 #es = Elasticsearch("localhost:9200", port="9200")
@@ -20,6 +23,12 @@ def log():
 
 @app.route("/search/<email>/<query>/<results_size>_<results_from>")
 def search(email, query, results_size, results_from):
+
+    # log the user query
+    with UserProfileLogger(email) as profile_logger:
+        profile_logger.log_search(
+            query=query, query_type="Unknown", ranking_type=None)
+
     q = {
         "query": {
             "multi_match" : {

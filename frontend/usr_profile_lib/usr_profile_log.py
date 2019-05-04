@@ -17,7 +17,7 @@ class UserProfileLogger:
 
     def __init__(self, user_email):
         self.conn = sqlite3.connect(self.USER_PROFILE_DB)
-        logger.info("Using the profile database: %s", self.USER_PROFILE_DB)
+        logger.debug("Using the profile database: %s", self.USER_PROFILE_DB)
 
         self.user_id = self._get_user_id(user_email)
         logger.debug("Initialized UserProfileLogger: user_id = %s", self.user_id)
@@ -29,7 +29,7 @@ class UserProfileLogger:
         row = cur.fetchone()
 
         if row is None:
-            logger.info("The user email not found in the database. No profiling for the user")
+            logger.debug("The user email not found in the database. No profiling for the user")
             ret = None
         else:
             # parse user id
