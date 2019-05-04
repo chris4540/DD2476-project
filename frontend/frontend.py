@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from elasticsearch import Elasticsearch
+from datetime import datetime
 import json
 app = Flask(__name__)
 
@@ -9,9 +10,23 @@ es = Elasticsearch("elastic.haochen.lu", port="9200")
 def index():
     return render_template("index.html")
 
-@app.route("/search/<query>")
-def search(query):
-    el_res = es.search(body={"query": {"match": {"title": query}}})
+@app.route("/log/click/<element_id>")
+def log(element_id):
+    # log into db
+    timestamp = datetime.now()
+
+@app.route("/search/<email>/<query>/<results_size>_<results_from>")
+def search(email, query, results_size, results_from):
+    q = {
+        "query": {
+            "match": {
+                "title": query
+            }
+        },
+        "from": results_from,
+        "size": results_size
+    }
+    el_res = es.search(body=q)
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
     for pe in el_res["hits"]["hits"]:

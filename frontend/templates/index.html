@@ -37,19 +37,18 @@
 
     <div class="container" v-if="results.length > 0">
         <ul class="collection with-header">
-            <li class="collection-header"><h4>Search results <span v-if="searching == false">( [[ results.length ]] )</span></h4></li>
+            <li class="collection-header"><h4>Search results <span v-if="searching == false">( [[ current_page * results_per_page + 1]]-[[ Math.min((current_page + 1) * results_per_page, n_results)]] / [[ n_results ]] )</span></h4></li>
             <div class="progress" v-if="searching">
                 <div class="indeterminate"></div>
             </div>
-            <li class="collection-item" v-else v-for="item in results_this_page">
-                <div><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<a :href="item.url" class="secondary-content"><i class="material-icons blue-text">send</i></a></div>
+            <li class="collection-item" v-else v-for="item in results">
+                <div><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span style="cursor: pointer;" v-on:click="click_link(item.id, item.url)" class="secondary-content"><i class="material-icons blue-text">send</i></span></div>
             </li>
         </ul>
-        <ul class="pagination">
-            <li :class="{ disabled: current_page == 0 }"><a href="#!" v-on:click="current_page > 0 ? current_page-- : 0"><i class="material-icons">chevron_left</i></a></li>
-            <li :class="{ active: current_page == 0 }"><a href="#!" v-on:click="current_page = 0">1</a></li>
-            <li :class="{ active: current_page == page }" class="waves-effect" v-for="page in results_pages - 1"><a href="#!"  v-on:click="current_page = page">[[ page + 1 ]]</a></li>
-            <li :class="{ disabled: current_page == results_pages - 1 }"><a href="#!" v-on:click="current_page < results_pages - 1 ? current_page++ : 0"><i class="material-icons">chevron_right</i></a></li>
+        <ul class="pagination center">
+        <li :class="{ disabled: current_page == 0 }"><a href="#!" v-on:click="current_page > 0 ? search(query, current_page - 1) : 0"><i class="material-icons">chevron_left</i></a></li>
+        <li :class="{ active: current_page == page }" class="waves-effect" v-for="page in range_pages()"><a href="#!"  v-on:click="search(query, page)">[[ page >= 0 && page < results_pages() ? ("    " + (page + 1)).slice(-4) : "    "]]</a></li>
+        <li :class="{ disabled: current_page == results_pages() - 1 }"><a href="#!" v-on:click="current_page < results_pages() - 1 ? search(query, current_page + 1) : 0"><i class="material-icons">chevron_right</i></a></li>
         </ul>
     </div>
 
@@ -80,11 +79,6 @@
 <script src="./static/js/init.js"></script>
 
 <script>
-    const config = {
-        results_per_page: 5,
-        search_url: "/search"
-    };
-
     var app = new Vue({
         el: '#app',
         delimiters: ['[[', ']]'],
@@ -93,44 +87,52 @@
             query: "",
             email: "",
             searching: false,
-            current_page: 0
+            current_page: 0,
+            n_results: 0,
+            results_per_page: 10,
+            search_url: "/search",
+            log_url: "/log"
         },
         watch: {
             // whenever question changes, this function will run
             query: function (new_query) {
-                this.debouncedSearch(new_query)
-            }
-        },
-        computed: {
-            results_pages: function () {
-                num_results = 0
-                while (num_results * config.results_per_page < this.results.length) {
-                    num_results++
-                }
-                return num_results
-            },
-            results_this_page: function () {
-                results = []
-                for (i = this.current_page * config.results_per_page; i < Math.min((this.current_page + 1) * config.results_per_page, this.results.length); i++) {
-                    results.push(this.results[i]);
-                }
-                results.push()
-                return results
+                this.debouncedSearch(new_query, 0)
             }
         },
         created: function() {
             this.debouncedSearch = _.debounce(this.search, 500)
         },
         methods: {
-            search: function (query) {
+            search: function (query, page) {
                 this.searching = true
 
-                this.$http.get(config.search_url + "/" + query).then(success_response => {
-                    console.log(this.results.length)
+                this.$http.get(this.search_url + "/" + email + "/" + query + "/" + this.results_per_page + "_" + (page * this.results_per_page)).then(success_response => {
                     this.results = success_response.body.results
+                    this.n_results = success_response.body.n_results
                     this.searching = false
+                    this.current_page = page
                 }, failed_response => {
                     this.results.splice(0, this.results.length)
+                })
+            },
+            results_pages: function () {
+                return Math.ceil(this.n_results / this.results_per_page)
+            },
+            range_pages: function () {
+                var res = new Array();
+                min = this.current_page - 5
+                max = this.current_page + 5
+                for (i = min; i < max; i++) {
+                    res.push(i)
+                }
+                return res
+            },
+            click_link: function (element_id, url) {
+                window.open(url)
+                this.$http.get(this.log_url + "/" + element_id).then(success_response => {
+                    
+                }, failed_response => {
+                    
                 })
             }
         }
