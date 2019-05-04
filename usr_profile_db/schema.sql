@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS user_profile_vector_table;
 DROP TABLE IF EXISTS user_retrieved_log;
 DROP TABLE IF EXISTS user_search_log;
 DROP TABLE IF EXISTS users;
@@ -9,7 +10,7 @@ CREATE TABLE users(
     gender      CHAR(1)             NOT NULL,
     lang        TEXT                NOT NULL,
     city        TEXT                NOT NULL,
-    country     TEXT                NOT NULL,
+    country     TEXT                NOT NULL
 );
 -- USER search log table
 CREATE TABLE user_search_log (
