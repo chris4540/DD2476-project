@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 from datetime import datetime
 import json
@@ -8,15 +8,18 @@ app = Flask(__name__)
 UserProfileLogger.USER_PROFILE_DB = "/var/usr_prf/user_profile.db"
 
 es = Elasticsearch("elastic.haochen.lu", port="9200")
+#es = Elasticsearch("localhost:9200", port="9200")
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/log/click/<element_id>")
-def log(element_id):
+@app.route("/log/click", methods=["POST"])
+def log():
+    data = request.get_json()
     # log into db
     timestamp = datetime.now()
+    return "Ok"
 
 @app.route("/search/<email>/<query>/<results_size>_<results_from>")
 def search(email, query, results_size, results_from):
@@ -28,8 +31,9 @@ def search(email, query, results_size, results_from):
 
     q = {
         "query": {
-            "match": {
-                "title": query
+            "multi_match" : {
+                "query" : query,
+                "fields" : [ "title", "text"]
             }
         },
         "from": results_from,
@@ -43,6 +47,7 @@ def search(email, query, results_size, results_from):
         obj["id"] = pe["_id"]
         obj["string"] = pe["_source"]["title"]
         obj["url"] = "http://en.wikipedia.org/wiki/" + pe["_source"]["title"]
+        obj["synopsys"] = pe["_source"]["text"][:400]
         res["results"].append(obj)
 
     return json.dumps(res)

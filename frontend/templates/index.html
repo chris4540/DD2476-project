@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
@@ -9,7 +9,6 @@
     <link href="./static/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
     <script src="./static/js/vue.js"></script>
     <script src="./static/js/vue-resource@1.5.1.js"></script>
-    <script src="./static/js/lodash.js"></script>
 </head>
 <body>
 <div id="app">
@@ -23,28 +22,35 @@
 
     <div class="container">
         <div class="section row">
-            <div class="input-field col s6">
-                <input class="validate center" id="email" placeholder="Enter your email" type="email" v-model="email">
-                <label for="email">Your email</label>
-            </div>
-            <div class="input-field col s6">
-                <input :disabled="email === ''" class="validate center" id="search" placeholder="Enter your search" type="text" v-model="query">
-                <label for="search">Your query</label>
-            </div>
+            <form v-on:submit.prevent="search(query, 0)">
+                <div class="input-field col s5">
+                    <input class="validate center" id="email" placeholder="Enter your email" type="email" v-model="email">
+                    <label for="email">Your email</label>
+                </div>
+                <div class="input-field col s6">
+                    <input :disabled="email === ''" class="validate center" id="search" placeholder="Enter your search" type="text" v-model="query">
+                    <label for="search">Your query</label>
+                </div>
+                <div class="input-field col s1">
+                    <button type="submit" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons right">search</i></button>
+                </div>
+            </form>
         </div>
         <br><br>
     </div>
 
-    <div class="container" v-if="results.length > 0">
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>Search results <span v-if="searching == false">( [[ current_page * results_per_page + 1]]-[[ Math.min((current_page + 1) * results_per_page, n_results)]] / [[ n_results ]] )</span></h4></li>
+    <div class="container">
+        <ul class="collapsible popout with-header">
+            <li class="collapsible-header"><h4>Search results <span v-if="searching == false">( [[ current_page * results_per_page + 1]]-[[ Math.min((current_page + 1) * results_per_page, n_results)]] / [[ n_results ]] )</span></h4></li>
             <div class="progress" v-if="searching">
                 <div class="indeterminate"></div>
             </div>
-            <li class="collection-item" v-else v-for="item in results">
-                <div><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span style="cursor: pointer;" v-on:click="click_link(item.id, item.url)" class="secondary-content"><i class="material-icons blue-text">send</i></span></div>
+            <li v-else v-for="item in results">
+                <div class="collapsible-header"><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span style="cursor: pointer;" v-on:click="click_link(item.id, item.url)" class="secondary-content"><i class="material-icons blue-text">send</i></span></div>
+                <div class="collapsible-body">[[ item.synopsys ]]...</div>
             </li>
         </ul>
+
         <ul class="pagination center">
         <li :class="{ disabled: current_page == 0 }"><a href="#!" v-on:click="current_page > 0 ? search(query, current_page - 1) : 0"><i class="material-icons">chevron_left</i></a></li>
         <li :class="{ active: current_page == page }" class="waves-effect" v-for="page in range_pages()"><a href="#!"  v-on:click="search(query, page)">[[ page >= 0 && page < results_pages() ? ("    " + (page + 1)).slice(-4) : "    "]]</a></li>
@@ -93,15 +99,6 @@
             search_url: "/search",
             log_url: "/log"
         },
-        watch: {
-            // whenever question changes, this function will run
-            query: function (new_query) {
-                this.debouncedSearch(new_query, 0)
-            }
-        },
-        created: function() {
-            this.debouncedSearch = _.debounce(this.search, 500)
-        },
         methods: {
             search: function (query, page) {
                 this.searching = true
@@ -129,12 +126,17 @@
             },
             click_link: function (element_id, url) {
                 window.open(url)
-                this.$http.get(this.log_url + "/" + element_id).then(success_response => {
-                    
+                this.$http.post(this.log_url + "/click", {"email": email, "element_id": element_id}).then(success_response => {
+
                 }, failed_response => {
-                    
+
                 })
             }
+        },
+        created: function () {
+            $(document).ready(function(){
+                $('.collapsible').collapsible();
+              });
         }
     })
 </script>
