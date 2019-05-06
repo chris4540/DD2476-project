@@ -6,3 +6,5 @@ db=${script_dir}/user_profile.db
 rm -f ${db}
 sqlite3 ${db} < ${script_dir}/schema.sql
 sqlite3 ${db} < ${script_dir}/data.sql
+
+# copy
