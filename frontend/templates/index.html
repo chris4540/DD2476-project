@@ -32,7 +32,7 @@
                     <label for="search">Your query</label>
                 </div>
                 <div class="input-field col s1">
-                    <button type="submit" class="btn-floating btn-large waves-effect waves-light grey"><i class="material-icons right">search</i></button>
+                    <button class="btn-floating btn-large waves-effect waves-light grey" type="submit"><i class="material-icons right">search</i></button>
                 </div>
             </form>
         </div>
@@ -46,7 +46,7 @@
                 <div class="indeterminate"></div>
             </div>
             <li v-else v-for="item in results">
-                <div class="collapsible-header"><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span style="cursor: pointer;" v-on:click="click_link(item.id, item.url)" class="secondary-content"><i class="material-icons blue-text">send</i></span></div>
+                <div class="collapsible-header"><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span class="secondary-content" style="cursor: pointer;" v-on:click="click_link(item.id, item.url)"></span><i class="material-icons floating blue-text">send</i></div>
                 <div class="collapsible-body">[[ item.synopsys ]]...</div>
             </li>
         </ul>
@@ -103,7 +103,12 @@
             search: function (query, page) {
                 this.searching = true
 
-                this.$http.get(this.search_url + "/" + email + "/" + query + "/" + this.results_per_page + "_" + (page * this.results_per_page)).then(success_response => {
+                this.$http.post(this.search_url, {
+                    email: email.value,
+                    results_size: this.results_per_page,
+                    query: query,
+                    results_from: page * this.results_per_page
+                }).then(success_response => {
                     this.results = success_response.body.results
                     this.n_results = success_response.body.n_results
                     this.searching = false

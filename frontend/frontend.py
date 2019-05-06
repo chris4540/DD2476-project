@@ -21,8 +21,13 @@ def log():
     timestamp = datetime.now()
     return "Ok"
 
-@app.route("/search/<email>/<query>/<results_size>_<results_from>")
-def search(email, query, results_size, results_from):
+@app.route("/search", methods=["POST"])
+def search():
+    data = request.get_json()
+    query = data["query"]
+    results_size = data["results_size"]
+    results_from = data["results_from"]
+    email = data["email"]
 
     # log the user query
     with UserProfileLogger(email) as profile_logger:
