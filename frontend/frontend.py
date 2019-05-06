@@ -5,7 +5,7 @@ import json
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 
 app = Flask(__name__)
-UserProfileLogger.USER_PROFILE_DB = "/var/usr_prf/user_profile.db"
+UserProfileLogger.USER_PROFILE_DB = "/var/www/frontend/user_profile.db"
 
 es = Elasticsearch("elastic.haochen.lu", port="9200")
 #es = Elasticsearch("localhost:9200", port="9200")
