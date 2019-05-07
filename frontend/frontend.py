@@ -1,16 +1,17 @@
-from flask import Flask, render_template, request
-from elasticsearch import Elasticsearch
 from datetime import datetime
+from elasticsearch import Elasticsearch
+from flask import Flask, render_template, request
+from time import time
 import json
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 
 app = Flask(__name__)
 UserProfileLogger.USER_PROFILE_DB = "/var/usr_prf/user_profile.db"
 
-es = Elasticsearch("elastic.haochen.lu", port="9200")
-#es = Elasticsearch("localhost:9200", port="9200")
+es = Elasticsearch("elastic.haochen.lu", port="9200", timeout = 100)
+#es = Elasticsearch("localhost:9200", port="9200", timeout = 100)
 
-INDEX = 'data'
+INDEX = 'enwiki'
 DOC_TYPE = 'page'
 
 def get_doc_vecs(doc):
@@ -25,7 +26,11 @@ def get_doc_vecs(doc):
     # Same for the text
     terms = vecs['text']['terms']
     text_vec = {w : d['term_freq'] for w, d in terms.items()}
-    return id, title_vec, text_vec
+
+    # And for categories
+    terms = vecs['category']['terms']
+    cat_vec = {w : d['term_freq'] for w, d in terms.items()}
+    return id, title_vec, text_vec, cat_vec
 
 def fetch_docs_vecs(es, el_res):
     '''Fetches the documents' vectors for the result set.'''
@@ -38,7 +43,7 @@ def fetch_docs_vecs(es, el_res):
     }
     res = es.mtermvectors(index = INDEX, doc_type = DOC_TYPE,
                           body = body)
-    return [get_doc_vectors(d) for d in res['docs']]
+    return [get_doc_vecs(d) for d in res['docs']]
 
 def fetch_query_vec(es, query):
     '''Fetches a term frequency vector from the query.'''
@@ -87,8 +92,10 @@ def search():
     el_res = es.search(body=q)
 
     # Proof of concept code for fetching tf vectors:
-    #print(fetch_docs_vecs(es, el_res))
-    #print(fetch_query_vec(es, query))
+    # fetch_query_vec(es, query)
+    # t0 = time()
+    # fetch_docs_vecs(es, el_res)
+    # print('Took %.2f seconds.' % (time() - t0))
 
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
