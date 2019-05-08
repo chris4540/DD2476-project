@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
+    <title>User profile project</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./static/css/style.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+    <link href="./static/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+    <script src="./static/js/vue.js"></script>
+    <script src="./static/js/vue-resource@1.5.1.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="section no-pad" id="index-banner">
+        <div class="container">
+            <br><br>
+            <h1 class="header center grey-text text-darken-2">User profile project</h1>
+            <h5 class="header center grey-text text-darken-2">DD2476 - Search Engines and Information Retrieval</h5>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section row">
+            <form v-on:submit.prevent="search(query, 0)">
+                <div class="input-field col s5">
+                    <input class="validate center" id="email" placeholder="Enter your email" type="email" v-model="email">
+                    <label for="email">Your email</label>
+                </div>
+                <div class="input-field col s6">
+                    <input :disabled="email === ''" class="validate center" id="search" placeholder="Enter your search" type="text" v-model="query">
+                    <label for="search">Your query</label>
+                </div>
+                <div class="input-field col s1">
+                    <button class="btn-floating btn-large waves-effect waves-light grey" type="submit"><i class="material-icons right">search</i></button>
+                </div>
+            </form>
+        </div>
+        <br><br>
+    </div>
+
+    <div class="container">
+        <ul class="collapsible popout with-header">
+            <li class="collapsible-header"><h4>Search results <span v-if="searching == false">( [[ current_page * results_per_page + 1]]-[[ Math.min((current_page + 1) * results_per_page, n_results)]] / [[ n_results ]] )</span></h4></li>
+            <div class="progress" v-if="searching">
+                <div class="indeterminate"></div>
+            </div>
+            <li v-else v-for="item in results">
+                <div class="collapsible-header"><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span class="secondary-content" style="cursor: pointer;" v-on:click="click_link(item.id, item.url)"></span><i class="material-icons floating blue-text">send</i></div>
+                <div class="collapsible-body">[[ item.synopsys ]]...</div>
+            </li>
+        </ul>
+
+        <ul class="pagination center">
+        <li :class="{ disabled: current_page == 0 }"><a href="#!" v-on:click="current_page > 0 ? search(query, current_page - 1) : 0"><i class="material-icons">chevron_left</i></a></li>
+        <li :class="{ active: current_page == page }" class="waves-effect" v-for="page in range_pages()"><a href="#!"  v-on:click="search(query, page)">[[ page >= 0 && page < results_pages() ? ("    " + (page + 1)).slice(-4) : "    "]]</a></li>
+        <li :class="{ disabled: current_page == results_pages() - 1 }"><a href="#!" v-on:click="current_page < results_pages() - 1 ? search(query, current_page + 1) : 0"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+    </div>
+
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Group 8</h5>
+                    <ul>
+                        <li>Sergio Liberman Bronfman</li>
+                        <li>Chun Hung Lin</li>
+                        <li>Björn Lindqvist</li>
+                        <li>Anton Lu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    Made with <a class="blue-text text-lighten-3" href="http://materializecss.com">Materialize</a>, <a
+                        class="blue-text text-lighten-3" href="#">Vue.js</a>, <a class="blue-text text-lighten-3" href="#">Flask</a>
+                    and <a class="blue-text text-lighten-3" href="#">Elasticsearch</a>
+                </div>
+            </div>
+    </footer>
+</div>
+<script src="./static/js/jquery-3.4.0.js"></script>
+<script src="./static/js/materialize.js"></script>
+<script src="./static/js/init.js"></script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+            results: [],
+            query: "",
+            email: "",
+            searching: false,
+            current_page: 0,
+            n_results: 0,
+            results_per_page: 50,
+            search_url: "/search",
+            log_url: "/log"
+        },
+        methods: {
+            search: function (query, page) {
+                this.searching = true
+
+                this.$http.post(this.search_url, {
+                    email: email.value,
+                    results_size: this.results_per_page,
+                    query: query,
+                    results_from: page * this.results_per_page
+                }).then(success_response => {
+                    this.results = success_response.body.results
+                    this.n_results = success_response.body.n_results
+                    this.searching = false
+                    this.current_page = page
+                }, failed_response => {
+                    this.results.splice(0, this.results.length)
+                })
+            },
+            results_pages: function () {
+                return Math.ceil(this.n_results / this.results_per_page)
+            },
+            range_pages: function () {
+                var res = new Array();
+                min = this.current_page - 5
+                max = this.current_page + 5
+                for (i = min; i < max; i++) {
+                    res.push(i)
+                }
+                return res
+            },
+            click_link: function (element_id, url) {
+                window.open(url)
+                this.$http.post(this.log_url + "/click", {"email": email, "element_id": element_id}).then(success_response => {
+
+                }, failed_response => {
+
+                })
+            }
+        },
+        created: function () {
+            $(document).ready(function(){
+                $('.collapsible').collapsible();
+              });
+        }
+    })
+</script>
+
+</body>
+</html>
