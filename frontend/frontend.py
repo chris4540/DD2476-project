@@ -4,15 +4,35 @@ from flask import Flask, render_template, request
 from math import sqrt
 from time import time
 import json
+import os.path
+import json
+from flask import Flask, render_template, request
+from elasticsearch import Elasticsearch
+from datetime import datetime
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 
-app = Flask(__name__)
-UserProfileLogger.USER_PROFILE_DB = "/var/usr_prf/user_profile.db"
+# the folder containing this script
+script_dir = os.path.dirname(__file__)
 
 es = Elasticsearch("elastic.haochen.lu", port="9200", timeout = 100)
 #es = Elasticsearch("localhost:9200", port="9200", timeout = 100)
 
 INDEX = 'enwiki'
+app = Flask(__name__)
+#es = Elasticsearch("localhost:9200", port="9200")
+
+# ===========================================================
+# check the path of the user profile db
+default_db_file = "/var/www/frontend/user_profile.db"
+if os.path.exists(default_db_file):
+    UserProfileLogger.USER_PROFILE_DB = default_db_file
+else:
+    db_file = os.path.join(script_dir, "../usr_profile_db/user_profile.db")
+    print("[DEV MODE] Using the profile db: ", db_file)
+    UserProfileLogger.USER_PROFILE_DB = db_file
+
+# ===========================================================
+
 DOC_TYPE = 'page'
 
 # A test user that likes Adolf Hitler, Albert Speer and Java
