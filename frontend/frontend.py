@@ -139,6 +139,7 @@ def log():
     data = request.get_json()
     # log into db
     timestamp = datetime.now()
+    print(timestamp, data)
     return "Ok"
 
 @app.route("/search", methods=["POST"])
@@ -168,12 +169,12 @@ def search():
     el_res = es.search(body=q)
 
     # Proof of concept code for fetching tf vectors:
-    print('Fetching query vectors...')
-    t0 = time()
-    query_vec = fetch_query_vec(es, query)
-    doc_vecs = fetch_docs_vecs(es, el_res)
-    print('... took %.2f seconds.' % (time() - t0))
-    score_docs(doc_vecs, TEST_USER, query_vec)
+    # print('Fetching query vectors...')
+    # t0 = time()
+    # query_vec = fetch_query_vec(es, query)
+    # doc_vecs = fetch_docs_vecs(es, el_res)
+    # print('... took %.2f seconds.' % (time() - t0))
+    # score_docs(doc_vecs, TEST_USER, query_vec)
 
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
