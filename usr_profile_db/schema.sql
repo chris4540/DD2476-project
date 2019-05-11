@@ -34,11 +34,11 @@ CREATE TABLE user_retrieved_log (
 -- USER profile vector
 -- TODO: improve the search by adding index when we know how the application
 --       use the profile
-CREATE TABLE user_profile_vector_table (
+CREATE TABLE user_profile_vector (
     userid          INTEGER         NOT NULL,
-    keyword         TEXT            NOT NULL,
-    is_static       BOOLEAN         NOT NULL,
     posix_time      INTEGER         NOT NULL,
+    is_static       BOOLEAN         NOT NULL,
+    keyword         TEXT            NOT NULL,
     score           FLOAT           NOT NULL,
     PRIMARY KEY (userid, keyword, is_static),
     FOREIGN KEY(userid) REFERENCES users(id)
