@@ -32,16 +32,3 @@ def cosine_similarity(vec1, vec2):
         ret += n_vec1.get(w, 0) * n_vec2.get(w, 0)
 
     return ret
-
-if __name__ == "__main__":
-    v1 = {'hitler' : 10}
-    v2 = {'hitler' : 3}
-    assert cosine_similarity(v1, v2) == 1.0
-
-    v1 = {'hitler' : 1, 'nazi' : 1}
-    v2 = {'banana' : 1, 'nazi' : 1}
-    assert round(cosine_similarity(v1, v2), 2) == 0.5
-
-    v1 = {}
-    v2 = {'foo' : 30}
-    assert cosine_similarity(v1, v2) == 0.0

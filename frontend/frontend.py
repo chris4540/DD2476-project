@@ -10,6 +10,7 @@ from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 from datetime import datetime
 from usr_profile_lib.usr_profile_log import UserProfileLogger
+from algorithm import cosine_similarity as cos_sim
 
 # the folder containing this script
 script_dir = os.path.dirname(__file__)
@@ -39,23 +40,11 @@ DOC_TYPE = 'page'
 # programming.
 TEST_USER = {
     'hitler' : 10,
-    'albert' : 5, 'speer' : 3,
-    'java' : 2, 'programming' : 2
+    'albert' : 5,
+    'speer' : 3,
+    'java' : 2,
+    'programming' : 2
 }
-
-def cos_sim(v1, v2):
-    '''Computes the cosine similarity between two vectors stored as Python
-    dictionaries.'''
-
-    # Euclidean norm
-    l1 = sqrt(sum(e*e for e in v1.values()))
-    l2 = sqrt(sum(e*e for e in v2.values()))
-
-    # Normalize vectors
-    v1 = {w : e / l1 for w, e in v1.items()}
-    v2 = {w : e / l2 for w, e in v2.items()}
-    parts = [v1.get(w, 0)*v2.get(w, 0) for w in v1]
-    return sum(parts)
 
 def score_doc(doc_vec, u, q):
     '''For ease of typing:
@@ -123,8 +112,8 @@ def fetch_docs_vecs(es, el_res):
 
 def fetch_query_vec(es, query):
     '''Fetches a term frequency vector from the query.'''
-    res = es.termvectors(index = INDEX, doc_type = DOC_TYPE,
-                         body = {'doc' : {'text' : query}})
+    res = es.termvectors(index=INDEX, doc_type=DOC_TYPE,
+                         body={'doc' : {'text' : query}})
     vecs = res['term_vectors']
     terms = vecs['text']['terms']
     query_vec = {w : d['term_freq'] for w, d in terms.items()}
@@ -144,6 +133,7 @@ def log():
 
 @app.route("/search", methods=["POST"])
 def search():
+    # Extracting information of post body
     data = request.get_json()
     query = data["query"]
     results_size = data["results_size"]
@@ -166,14 +156,15 @@ def search():
         "size": results_size
     }
 
+    # search with the query body
     el_res = es.search(body=q)
 
     # Proof of concept code for fetching tf vectors:
-    # print('Fetching query vectors...')
-    # t0 = time()
-    # query_vec = fetch_query_vec(es, query)
+    print('Fetching query vectors...')
+    t0 = time()
+    query_vec = fetch_query_vec(es, query)
     # doc_vecs = fetch_docs_vecs(es, el_res)
-    # print('... took %.2f seconds.' % (time() - t0))
+    print('... took %.2f seconds.' % (time() - t0))
     # score_docs(doc_vecs, TEST_USER, query_vec)
 
     res = {"results": []}
