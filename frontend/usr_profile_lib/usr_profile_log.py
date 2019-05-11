@@ -54,6 +54,21 @@ class UserProfileLogger:
         cur.execute(sql, col_val)
         db_conn.commit()
 
+    @staticmethod
+    def _insert_many_col_vals_to_db_table(db_conn, table_name, col_key, col_vals):
+        """
+        Args:
+            col_key (list / tuple):
+            col_vals (list of tuples):
+        """
+        col = ','.join(col_key)
+        placeholders = ','.join(['?' for _ in col_key])
+        sql = "INSERT INTO {} ({}) VALUES({});".format(table_name, col, placeholders)
+
+        cur = db_conn.cursor()
+        cur.executemany(sql, col_vals)
+        db_conn.commit()
+
     def log_search(self, query, query_type, ranking_type=None):
         if self.user_id is None:
             return
@@ -82,6 +97,38 @@ class UserProfileLogger:
         logger.debug('[user_retrieved_log] profile: %s', col_val)
         self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)
 
+    def log_term_vec_to_profile(self, term_vec):
+        """
+        log the term vector to a user profile as a dynamic part of profile
+        Args:
+            term_vec (dict): a term vector
+            E.g.: {
+                'apple': 50.0,
+                'japan': 10.0,
+                ...
+            }
+        """
+        col_key = (
+            'userid',
+            'posix_time',
+            'is_static',
+            'keyword',
+            'score',
+        )
+        # perpare some common values
+        col_vals = list()
+
+        user_id = str(self.user_id)
+        posix_time = str(int(time.time()))
+        is_static = False
+        for term in term_vec:
+            score = term_vec[term]
+            col_vals.append(
+                (user_id, posix_time, is_static, term, score)
+            )
+        self._insert_many_col_vals_to_db_table(
+            self.conn, "user_profile_vector", col_key, col_vals)
+
 if __name__ == "__main__":
     import sqlite3
     logging.basicConfig(level=logging.DEBUG)
@@ -100,3 +147,11 @@ if __name__ == "__main__":
 
         # log retrieved
         profile_logger.log_retrieved(doc_id="25609", index="enwiki")
+
+        # log term vector
+        profile_logger.log_term_vec_to_profile(
+            {
+                'apple': 10.0,
+                'japan': 1.0
+            }
+        )
