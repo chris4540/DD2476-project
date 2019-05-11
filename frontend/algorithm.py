@@ -50,3 +50,21 @@ def get_tfidf_weight(term_vec, doc_count):
     tf = term_vec['term_freq']
     idf = np.log(doc_count / term_vec['doc_freq'])  # natual log
     return tf*idf
+
+def aggregate_term_vecs(term_vecs, weigths):
+    """
+    Args:
+        term_vecs from fetcher.fetch_term_vecs
+    """
+    ret = dict()
+
+    for cat in weigths.keys():
+        w = weigths[cat]
+        t_vecs = term_vecs[cat]
+        for t_vec in t_vecs:
+            for term in t_vec.keys():
+                if term not in ret:
+                    ret[term] = 0
+                ret[term] += w*t_vec[term]
+    print(len(ret))
+    return ret
