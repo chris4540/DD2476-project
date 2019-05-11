@@ -4,6 +4,9 @@ A module for all NLP or IR related algorithms or subroutines
 
 import numpy as np
 from math import sqrt
+from math import exp
+from math import log
+import time
 
 def cosine_similarity(vec1, vec2):
     """
@@ -67,4 +70,25 @@ def aggregate_term_vecs(term_vecs, weigths):
                     ret[term] = 0
                 ret[term] += w*t_vec[term]
     print(len(ret))
+    return ret
+
+def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
+    """
+    Aggregate term vector at centain time t to current term vec
+
+    Args:
+        half_life (float): the half life in exponential decay.
+            Default is one day
+    """
+
+    decay_rate = log(2) / half_life
+    t_now = int(time.time())
+    ret = term_vec_now.copy()
+    for term in term_vec_t:
+        t_past = term_vec_t[term]['posix_time']
+        time_decay_factor = exp(-decay_rate*(t_now-t_past))
+        print(time_decay_factor)
+        val = ret.get(term, 0) + time_decay_factor*term_vec_t[term]['score']
+        ret[term] = val
+
     return ret

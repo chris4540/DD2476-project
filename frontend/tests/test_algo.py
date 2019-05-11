@@ -5,6 +5,8 @@ Run:
 """
 import unittest
 from algorithm import cosine_similarity
+from algorithm import aggregate_time_term_vecs
+import time
 
 class TestAlgorithmModule(unittest.TestCase):
 
@@ -23,4 +25,25 @@ class TestAlgorithmModule(unittest.TestCase):
         v1 = {}
         v2 = {'foo' : 30}
         self.assertEqual(cosine_similarity(v1, v2), 0.0)
+
+    def test_aggregate_time_term_vecs(self):
+        time_diff = 12 * 3600  # 12 hours
+        time_now = int(time.time())
+        v_now = {
+            'sweden': 1.0,
+            'meetball': 1.0,
+        }
+
+        v_old = {
+            'sweden': {
+                'score': 1.0,
+                'posix_time': (time_now - time_diff)
+            }
+        }
+        vec = aggregate_time_term_vecs(v_now, v_old, half_life=time_diff)
+
+        # The term sweden should be decayed by half.
+        self.assertEqual(vec['sweden'], 1.5)
+        self.assertEqual(vec['meetball'], 1.0)
+
 
