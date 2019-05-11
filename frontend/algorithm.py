@@ -32,3 +32,21 @@ def cosine_similarity(vec1, vec2):
         ret += n_vec1.get(w, 0) * n_vec2.get(w, 0)
 
     return ret
+
+def get_tfidf_weight(term_vec, doc_count):
+    """
+    Tranditional tf-idf algorithm
+    Args:
+        term_vec (dict):
+            E.g.
+            {
+                "doc_freq": 1012,
+                "term_freq": 2
+            }
+        doc_count (int): the total number of documents
+    Return:
+        tf-idf value
+    """
+    tf = term_vec['term_freq']
+    idf = np.log(doc_count / term_vec['doc_freq'])  # natual log
+    return tf*idf
