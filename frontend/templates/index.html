@@ -46,7 +46,7 @@
                 <div class="indeterminate"></div>
             </div>
             <li v-else v-for="item in results">
-                <div class="collapsible-header"><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span class="secondary-content" style="cursor: pointer;" v-on:click="click_link(item.id, item.url)"></span><i class="material-icons floating blue-text">send</i></div>
+                <div class="collapsible-header" style="display: block"><span style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span class="secondary-content" style="cursor: pointer" v-on:click="click_link(item.id, item.url)"><i class="material-icons blue-text" class="right">send</i></span></div>
                 <div class="collapsible-body">[[ item.synopsys ]]...</div>
             </li>
         </ul>
@@ -131,7 +131,7 @@
             },
             click_link: function (element_id, url) {
                 window.open(url)
-                this.$http.post(this.log_url + "/click", {"email": email, "element_id": element_id}).then(success_response => {
+                this.$http.post(this.log_url + "/click", {"email": email.value, "doc_id": element_id}).then(success_response => {
 
                 }, failed_response => {
 
