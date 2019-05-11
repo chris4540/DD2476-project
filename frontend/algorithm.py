@@ -80,10 +80,12 @@ def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
         half_life (float): the half life in exponential decay.
             Default is one day
     """
-
+    # calculate the decay rate lambda
     decay_rate = log(2) / half_life
+
     t_now = int(time.time())
     ret = term_vec_now.copy()
+
     for term in term_vec_t:
         t_past = term_vec_t[term]['posix_time']
         time_decay_factor = exp(-decay_rate*(t_now-t_past))
