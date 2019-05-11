@@ -38,8 +38,8 @@ CREATE TABLE user_profile_vector (
     userid          INTEGER         NOT NULL,
     posix_time      INTEGER         NOT NULL,
     is_static       BOOLEAN         NOT NULL,
-    keyword         TEXT            NOT NULL,
+    term            TEXT            NOT NULL,
     score           FLOAT           NOT NULL,
-    PRIMARY KEY (userid, keyword, is_static),
+    PRIMARY KEY (userid, term, is_static),
     FOREIGN KEY(userid) REFERENCES users(id)
 );
