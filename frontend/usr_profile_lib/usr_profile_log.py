@@ -70,13 +70,14 @@ class UserProfileLogger:
         logger.debug('[user_search_log] profile: %s', col_val)
         self._insert_col_val_to_db_table(self.conn, "user_search_log", col_val)
 
-    def log_retrieved(self, selected_doc):
+    def log_retrieved(self, doc_id, index):
         if self.user_id is None:
             return
         col_val = {
             'userid': str(self.user_id),
             'posix_time': str(int(time.time())),
-            'selected_doc': selected_doc
+            'doc_id': doc_id,
+            'index_': index
         }
         logger.debug('[user_retrieved_log] profile: %s', col_val)
         self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)
@@ -98,4 +99,4 @@ if __name__ == "__main__":
             query="zombie attack", query_type="ranking", ranking_type="tf-idf")
 
         # log retrieved
-        profile_logger.log_retrieved(selected_doc="Zombie_Walk.f")
+        profile_logger.log_retrieved(doc_id="25609", index="enwiki")

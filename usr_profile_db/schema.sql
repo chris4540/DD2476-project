@@ -27,7 +27,8 @@ CREATE TABLE user_retrieved_log (
     id              INTEGER         PRIMARY KEY AUTOINCREMENT,
     userid          INTEGER         NOT NULL,
     posix_time      INTEGER         NOT NULL,
-    selected_doc    TEXT            NOT NULL,
+    doc_id          TEXT            NOT NULL,
+    index_          TEXT            NOT NULL,
     FOREIGN KEY(userid) REFERENCES users(id)
 );
 -- USER profile vector
