@@ -1,6 +1,17 @@
+"""
+Test this file in the folder of frontend
+"""
 import logging
 import time
 import sqlite3
+
+def row_factory(cursor, row):
+    """
+    """
+    ret = {}
+    for idx, col in enumerate(cursor.description):
+        ret[col[0]] = row[idx]
+    return ret
 
 # FOR DEBUG USE
 # logging.basicConfig(
@@ -10,7 +21,7 @@ import sqlite3
 logger = logging.getLogger('UserProfileLogger')
 class UserProfileLogger:
 
-    USER_PROFILE_DB = "usr_profile_db/user_profile.db"
+    USER_PROFILE_DB = "../usr_profile_db/user_profile.db"
 
     def __enter__(self):
         return self
@@ -21,6 +32,7 @@ class UserProfileLogger:
 
     def __init__(self, user_email):
         self.conn = sqlite3.connect(self.USER_PROFILE_DB)
+        self.conn.row_factory = row_factory
         logger.debug("Using the profile database: %s", self.USER_PROFILE_DB)
 
         self.user_id = self._get_user_id(user_email)
@@ -38,7 +50,7 @@ class UserProfileLogger:
             ret = None
         else:
             # parse user id
-            ret = row[0]
+            ret = row["id"]
         return ret
 
     @staticmethod
@@ -97,6 +109,16 @@ class UserProfileLogger:
         logger.debug('[user_retrieved_log] profile: %s', col_val)
         self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)
 
+    def get_user_profile_rows(self, is_static=True):
+        table_name = "user_profile_vector"
+        sql = "SELECT * FROM {tbl} WHERE userid = {uid} AND is_static = {is_static}".format(
+            tbl=table_name, uid=self.user_id, is_static=bool(is_static))
+
+        cur = self.conn.cursor()
+        cur.execute(sql)
+        rows = cur.fetchall()
+        return rows
+
     def log_term_vec_to_profile(self, term_vec):
         """
         log the term vector to a user profile as a dynamic part of profile
@@ -112,7 +134,7 @@ class UserProfileLogger:
             'userid',
             'posix_time',
             'is_static',
-            'keyword',
+            'term',
             'score',
         )
         # perpare some common values
@@ -137,21 +159,34 @@ if __name__ == "__main__":
     # UserProfileLogger.USER_PROFILE_DB = "myfoler/userprofile.db"
     # ========================================================================
     with UserProfileLogger(usr_email) as profile_logger:
-        # log search
-        profile_logger.log_search(
-            query="zombie", query_type="intersection", ranking_type=None)
-        profile_logger.log_search(
-            query="zombie attack", query_type="phase", ranking_type=None)
-        profile_logger.log_search(
-            query="zombie attack", query_type="ranking", ranking_type="tf-idf")
+        # # log search
+        # profile_logger.log_search(
+        #     query="zombie", query_type="intersection", ranking_type=None)
+        # profile_logger.log_search(
+        #     query="zombie attack", query_type="phase", ranking_type=None)
+        # profile_logger.log_search(
+        #     query="zombie attack", query_type="ranking", ranking_type="tf-idf")
 
-        # log retrieved
-        profile_logger.log_retrieved(doc_id="25609", index="enwiki")
+        # # log retrieved
+        # profile_logger.log_retrieved(doc_id="25609", index="enwiki")
 
         # log term vector
-        profile_logger.log_term_vec_to_profile(
-            {
-                'apple': 10.0,
-                'japan': 1.0
-            }
-        )
+        # profile_logger.log_term_vec_to_profile(
+        #     {
+        #         'computer': 10.0,
+        #         'japan': 1.0
+        #     }
+        # )
+
+        # fetch profile as term vector
+        rows = profile_logger.get_user_profile_rows(is_static=True)
+        print(rows)
+        rows = profile_logger.get_user_profile_rows(is_static=False)
+        print(rows)
+
+
+        # profile_logger.log_term_vec_to_profile(
+        #     {
+        #         'japan': 2.0
+        #     }
+        # )
