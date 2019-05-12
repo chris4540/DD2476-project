@@ -23,4 +23,3 @@ class Config:
     elif index == "svwiki":
         wiki_url_fmt = "http://sv.wikipedia.org/wiki/{title}"
 
-    doc_count = None     # place to store the doc count

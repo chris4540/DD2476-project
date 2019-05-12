@@ -39,7 +39,9 @@ def term_vector_to_weight(term_vecs, weight_scheme):
     if weight_scheme == "tf":
         weight_fun = lambda term_vec: term_vec['term_freq']
     elif weight_scheme == "tfidf":
-        weight_fun = lambda term_vec: get_tfidf_weight(term_vec, Config.doc_count)
+        # this is the doc count per shard
+        doc_count = term_vecs['field_statistics']['doc_count']
+        weight_fun = lambda term_vec: get_tfidf_weight(term_vec, doc_count)
     else:
         raise ValueError("Unknown weighting scheme")
 
@@ -49,47 +51,34 @@ def term_vector_to_weight(term_vecs, weight_scheme):
         ret[t] = weight_fun(term_vecs['terms'][t])
     return ret
 
-def fetch_term_vecs(es, ids, index, doc_type="page", weight_scheme="tfidf"):
+def fetch_term_vecs(es, doc_id, index, doc_type="page", weight_scheme="tfidf"):
     """
-    Fetch term vectors for multiple documents
+    Fetch term vectors for one documents
 
     Args:
         es (elastic search instance): the connector of the elastic search
-        ids (list): list of document indices
+        id (str): the document index
         index (str): the name of the index in the engine, e.g. "enwiki" or "svwiki"
         doc_type (Optional [str]): the type of the docuement
     Return:
         a dictionary return:
         {
-            "ids": <list of ids>,
-            "title": <list of term vectors for title field only>,
-            "text": <list of term vectors for text field only>,
-            "category": <list of term vectors for category field only>
+            "title": <term vectors for title field only>,
+            "text": <term vectors for text field only>,
+            "category": <term vectors for category field only>
         }
     """
-    request_body = {
-        'ids' : ids,
-        'parameters' : {
-            'term_statistics' : True
-        }
-    }
-    resp = es.mtermvectors(index=index, doc_type=doc_type,body=request_body)
+    resp = es.termvectors(index=index, id=doc_id, doc_type=doc_type, term_statistics=True)
 
     # build up the return
     ret = dict()
-    for k in ["ids", "title", "text", "category"]:
-        ret[k] = list()
 
-    for d in resp['docs']:
-        if "term_vectors" in d:
-            ret['ids'].append(d['_id'])
-            for k in ["title", "text", "category"]:
-                ret[k].append(
-                    term_vector_to_weight(d["term_vectors"][k], weight_scheme)
-                )
+    if "term_vectors" in resp:
+        for k in ["title", "text", "category"]:
+            ret[k] = term_vector_to_weight(resp["term_vectors"][k], weight_scheme)
     return ret
 
 if __name__ == "__main__":
     es = Elasticsearch("elastic.haochen.lu", port="9200", timeout=1000)
-    term_vecs = fetch_term_vecs(es, ["25609"], "enwiki")
-    # print(term_vecs)
+    term_vecs = fetch_term_vecs(es, "25609", "enwiki")
+

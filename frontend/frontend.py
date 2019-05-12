@@ -1,4 +1,3 @@
-from datetime import datetime
 from elasticsearch import Elasticsearch
 from flask import Flask, render_template, request
 from math import sqrt
@@ -7,7 +6,6 @@ import json
 import os.path
 import json
 from flask import Flask, render_template, request
-from datetime import datetime
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 from algorithm import cosine_similarity as cos_sim
 from algorithm import aggregate_term_vecs
@@ -16,9 +14,6 @@ from config import Config
 
 # the folder containing this script
 script_dir = os.path.dirname(__file__)
-
-es = Elasticsearch(Config.elastic_host, port="9200", timeout = 100)
-
 app = Flask(__name__)
 # ===========================================================
 # check the path of the user profile db
@@ -29,8 +24,8 @@ else:
     db_file = os.path.join(script_dir, "../usr_profile_db/user_profile.db")
     print("[DEV MODE] Using the profile db: ", db_file)
     UserProfileLogger.USER_PROFILE_DB = db_file
-
 # ===========================================================
+es = Elasticsearch(Config.elastic_host, port="9200", timeout = 100)
 
 # DOC_TYPE = 'page'
 
@@ -135,19 +130,16 @@ def log():
     retrieved_doc_id = data['doc_id']
     with UserProfileLogger(email) as profile_logger:
         profile_logger.log_retrieved(doc_id=retrieved_doc_id, index=Config.index)
-    # --------------------------------------------------------------------------
+
+    # ==========================================================================
     # fetch the term vector
     term_vectors = fetch_term_vecs(
         es, [retrieved_doc_id], Config.index, doc_type=Config.doc_type)
-
     # save them to db
-    # TODO: Fix logging repeating term vec
     with UserProfileLogger(email) as profile_logger:
         # since we only fetch one doc
         for k in term_vectors.keys():
-            if k == "ids":
-                continue
-            profile_logger.log_term_vec_to_profile(term_vectors[k][0], field=k)
+            profile_logger.log_term_vec_to_profile(term_vectors[k], field=k)
     # ==========================================================================
     return "Ok"
 
@@ -178,14 +170,6 @@ def search():
 
     # search with the query body
     el_res = es.search(index=Config.index, body=query_body)
-
-    # Proof of concept code for fetching tf vectors:
-    # print('Fetching query vectors...')
-    # t0 = time()
-    # query_vec = fetch_query_vec(es, query)
-    # doc_vecs = fetch_docs_vecs(es, el_res)
-    # print('... took %.2f seconds.' % (time() - t0))
-    # score_docs(doc_vecs, TEST_USER, query_vec)
 
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]

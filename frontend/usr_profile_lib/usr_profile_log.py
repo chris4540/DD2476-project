@@ -182,7 +182,8 @@ class UserProfileLogger:
 
         # perpate column values
         col_vals = list()
-        # only insert the updated components to reduce the cost of transcation
+        # only insert or update the updated components to reduce
+        # the cost of transcation
         for term in term_vec:
             score = term_vec_now[term]
             col_vals.append(
