@@ -137,15 +137,17 @@ def log():
         profile_logger.log_retrieved(doc_id=retrieved_doc_id, index=Config.index)
     # --------------------------------------------------------------------------
     # fetch the term vector
-    term_vectors = fetch_term_vecs(es, [retrieved_doc_id], Config.index)
-
-    # aggregate different kind of term vectors
-    agg_term_vec = aggregate_term_vecs(term_vectors, Config.weights)
+    term_vectors = fetch_term_vecs(
+        es, [retrieved_doc_id], Config.index, doc_type=Config.doc_type)
 
     # save them to db
     # TODO: Fix logging repeating term vec
-    # with UserProfileLogger(email) as profile_logger:
-    #     profile_logger.log_term_vec_to_profile(agg_term_vec)
+    with UserProfileLogger(email) as profile_logger:
+        # since we only fetch one doc
+        for k in term_vectors.keys():
+            if k == "ids":
+                continue
+            profile_logger.log_term_vec_to_profile(term_vectors[k][0], field=k)
     # ==========================================================================
     return "Ok"
 

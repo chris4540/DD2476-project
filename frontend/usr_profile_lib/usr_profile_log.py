@@ -4,6 +4,8 @@ Test this file in the folder of frontend
 import logging
 import time
 import sqlite3
+from algorithm import aggregate_time_term_vecs
+from config import Config
 
 def row_factory(cursor, row):
     """
@@ -75,7 +77,7 @@ class UserProfileLogger:
         """
         col = ','.join(col_key)
         placeholders = ','.join(['?' for _ in col_key])
-        sql = "INSERT INTO {} ({}) VALUES({});".format(table_name, col, placeholders)
+        sql = "INSERT OR REPLACE INTO {} ({}) VALUES({});".format(table_name, col, placeholders)
 
         cur = db_conn.cursor()
         cur.executemany(sql, col_vals)
@@ -109,19 +111,29 @@ class UserProfileLogger:
         logger.debug('[user_retrieved_log] profile: %s', col_val)
         self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)
 
-    def _get_user_profile_rows(self, is_static=True):
-        table_name = "user_profile_vector"
+    def _get_user_profile_rows(self, is_static=True, field=None):
+        tbl = "user_profile_vector"
         cols = ','.join(['posix_time', 'term', 'score'])
-        sql = "SELECT {cols} FROM {tbl} WHERE userid = {uid} AND is_static = {is_static}".format(
-            cols=cols, tbl=table_name, uid=self.user_id, is_static=bool(is_static))
+
+        sql = ("SELECT {cols} FROM {tbl} WHERE userid=:uid "
+               "AND is_static=:is_static".format(cols=cols, tbl=tbl))
+        filter_val = {
+            "uid": self.user_id,
+            "is_static": is_static,
+        }
+        # ======================================================================
+        if not is_static:
+            sql += " AND field_=:field"
+            filter_val['field'] = field
 
         cur = self.conn.cursor()
-        cur.execute(sql)
+        cur.execute(sql, filter_val)
         rows = cur.fetchall()
         return rows
 
-    def get_user_dynamic_profile_vec(self):
+    def get_user_dynamic_profile_vec(self, field):
         """
+
         Return:
             return a term vector which is a function of time
             {
@@ -132,7 +144,8 @@ class UserProfileLogger:
                 ...
             }
         """
-        rows = self._get_user_profile_rows(is_static=False)
+        # Transform the rows to dict
+        rows = self._get_user_profile_rows(is_static=False, field=field)
         ret = dict()
         for r in rows:
             row_dict = dict()
@@ -142,40 +155,40 @@ class UserProfileLogger:
         return ret
 
 
-    def log_term_vec_to_profile(self, term_vec):
+    def log_term_vec_to_profile(self, term_vec, field):
         """
         log the term vector to a user profile as a dynamic part of the user profile
         Args:
             term_vec (dict): a term vector
-            E.g.: {
-                'apple': 50.0,
-                'japan': 10.0,
-                ...
-            }
+                E.g.: {
+                    'apple': 50.0,
+                    'japan': 10.0,
+                    ...
+                }
+            field (str): the field of the term vector. E.g. 'text', 'title', 'catagory'
         """
-        col_key = (
-            'userid',
-            'posix_time',
-            'is_static',
-            'term',
-            'score',
-        )
-        pass
+        col_key = ('userid', 'posix_time', 'is_static',
+                   'field_', 'term', 'score',)
         # agg the dynamic profile to the term vec
+        term_vec_t = self.get_user_dynamic_profile_vec(field)
+        term_vec_now = aggregate_time_term_vecs(
+            term_vec, term_vec_t, half_life=Config.half_life[field])
+
 
         # perpare some common values
-        # col_vals = list()
+        user_id = str(self.user_id)
+        posix_time = str(int(time.time()))
+        is_static = False
 
-        # user_id = str(self.user_id)
-        # posix_time = str(int(time.time()))
-        # is_static = False
-        # for term in term_vec:
-        #     score = term_vec[term]
-        #     col_vals.append(
-        #         (user_id, posix_time, is_static, term, score)
-        #     )
-        # self._write_many_col_vals_to_db_table(
-        #     self.conn, "user_profile_vector", col_key, col_vals)
+        # perpate column values
+        col_vals = list()
+        for term in term_vec_now:
+            score = term_vec_now[term]
+            col_vals.append(
+                (user_id, posix_time, is_static, field, term, score)
+            )
+        self._write_many_col_vals_to_db_table(
+            self.conn, "user_profile_vector", col_key, col_vals)
 
 if __name__ == "__main__":
     import sqlite3
@@ -197,23 +210,23 @@ if __name__ == "__main__":
         # profile_logger.log_retrieved(doc_id="25609", index="enwiki")
 
         # log term vector
-        # profile_logger.log_term_vec_to_profile(
-        #     {
-        #         'computer': 10.0,
-        #         'japan': 1.0
-        #     }
-        # )
+        profile_logger.log_term_vec_to_profile(
+            {
+                'computer': 10.0,
+                'japan': 1.0
+            }, field="title"
+        )
+
 
         # fetch profile as term vector
         rows = profile_logger._get_user_profile_rows(is_static=True)
-        print(rows)
-        rows = profile_logger._get_user_profile_rows(is_static=False)
-        print(rows)
+        rows = profile_logger.get_user_dynamic_profile_vec(field="title")
+        # rows = profile_logger._get_user_profile_rows(is_static=False)
+        # print(rows)
 
-        vec = profile_logger.get_user_dynamic_profile_vec()
+        vec = profile_logger.get_user_dynamic_profile_vec(field="title")
         print(vec)
-        # profile_logger.log_term_vec_to_profile(
-        #     {
-        #         'japan': 2.0
-        #     }
-        # )
+        profile_logger.log_term_vec_to_profile(
+            {'japan': 2.0}, field="title")
+        vec = profile_logger.get_user_dynamic_profile_vec(field="title")
+        print(vec)
