@@ -199,6 +199,8 @@ def search():
     }
     # ======================================================
     # query expansion
+    # TODO: add switch to off query expansion
+    # TODO: add using static profile
     term_vecs_t = dict()
     with UserProfileLogger(email) as profile_logger:
         for f in Config.weights.keys():
@@ -246,8 +248,6 @@ def search():
         obj["url"] = Config.wiki_url_fmt.format(title=pe["_source"]["title"])
         obj["synopsys"] = pe["_source"]["text"][:400]
         res["results"].append(obj)
-
-    print(res)
     # time_end = time() - time_start
     # print("Search used: ", time_end)
     return json.dumps(res)

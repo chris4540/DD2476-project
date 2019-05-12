@@ -28,6 +28,6 @@ class Config:
     expansion_size = 20
     feedback_weight = 1.0
     boost = {
-        "title": 5.0,
+        "title": 2.0,
         "text": 1.0
     }
