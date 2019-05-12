@@ -8,6 +8,16 @@ from math import exp
 from math import log
 import time
 
+def normalize_term_vec(term_vec, ord_=2):
+    elements = list(term_vec.values())
+    norm = np.linalg.norm(elements, ord=ord_)
+
+    ret = dict()
+    for t in term_vec.keys():
+        ret[t] = term_vec[t] / norm
+
+    return ret
+
 def cosine_similarity(vec1, vec2):
     """
     Computes the cosine similarity between two vectors stored as Python
@@ -21,13 +31,9 @@ def cosine_similarity(vec1, vec2):
         a floating point number representing the cosine similarity
     """
 
-    # Euclidean norm (L2-norm)
-    vec1_norm = np.linalg.norm(list(vec1.values()), ord=2)
-    vec2_norm = np.linalg.norm(list(vec2.values()), ord=2)
-
-    # Normalize vectors
-    n_vec1 = {w : e / vec1_norm for w, e in vec1.items()}
-    n_vec2 = {w : e / vec2_norm for w, e in vec2.items()}
+    # Normalize vectors with L2-norm
+    n_vec1 = normalize_term_vec(vec1, ord_=2)
+    n_vec2 = normalize_term_vec(vec2, ord_=2)
 
     # sum the similarity
     ret = 0.0
@@ -69,7 +75,6 @@ def aggregate_term_vecs(term_vecs, weigths):
                 if term not in ret:
                     ret[term] = 0
                 ret[term] += w*t_vec[term]
-    print(len(ret))
     return ret
 
 def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
