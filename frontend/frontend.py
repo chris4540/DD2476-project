@@ -158,32 +158,36 @@ def search():
     results_from = data["results_from"]
     email = data["email"]
 
-    # get the query as term vector
-    query_term_vec = fetch_query_term_vec(es, query, Config.index)
+    if not query:
+        return json.dumps({
+            "status": "failed",
+            "reason": "Empty query",
+            "n_results": 0,
+            'results': [],
+        })
 
-    # log the user query
+   # log the user query
     with UserProfileLogger(email) as profile_logger:
         profile_logger.log_search(
             query=query, query_type="Unknown", ranking_type=None)
-        profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
 
     query_body = {
         "query": {
             "bool": {
-                "should": [
-                    {
-                        "match": {
-                            "title": {
-                                "query": query,
-                                "boost": 5,
-                            }
+                "must": {
+                    "match": {
+                        "title": {
+                            "query": query,
+                            "boost": Config.boost['title'],
                         }
-                    },
+                    }
+                },
+                "should": [
                     {
                         "match": {
                             "text": {
                                 "query": query,
-                                "boost": 2,
+                                "boost": Config.boost['text'],
                             }
                         }
                     },
@@ -216,17 +220,23 @@ def search():
             "term":{
                 "text": {
                     "value": k,
-                    "boost": v,
+                    "boost": v*Config.feedback_weight,
                 }
             }
         }
         query_body["query"]["bool"]["should"].append(term_boost_dict)
     # ======================================================
-
-
     # search with the query body
     el_res = es.search(index=Config.index, body=query_body)
 
+    # log the query to profile if success
+    if el_res["hits"]["total"] > 0:
+         # get the query as term vector
+        query_term_vec = fetch_query_term_vec(es, query, Config.index)
+        with UserProfileLogger(email) as profile_logger:
+            profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
+
+    # build up the response
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
     for pe in el_res["hits"]["hits"]:
@@ -237,6 +247,7 @@ def search():
         obj["synopsys"] = pe["_source"]["text"][:400]
         res["results"].append(obj)
 
+    print(res)
     # time_end = time() - time_start
     # print("Search used: ", time_end)
     return json.dumps(res)
