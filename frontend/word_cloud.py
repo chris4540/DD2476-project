@@ -1,5 +1,6 @@
 from algorithm import calcuate_term_vec_now
 from algorithm import aggregate_term_vecs
+from algorithm import filter_term_vec
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 from config import Config
 import matplotlib.pyplot as plt
@@ -22,6 +23,7 @@ if __name__ == "__main__":
 
     # agg differnet kind of term vector into one
     term_vec = aggregate_term_vecs(term_vecs_now, Config.weights)
+    term_vec = filter_term_vec(term_vec)
     # ===========================================================================
     wcloud = WordCloud(background_color="white",width=1000, height=860, margin=2)
     wcloud.generate_from_frequencies(term_vec)

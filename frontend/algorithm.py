@@ -7,6 +7,7 @@ from math import sqrt
 from math import exp
 from math import log
 import time
+import re
 
 def normalize_term_vec(term_vec, ord_=2):
     elements = list(term_vec.values())
@@ -121,4 +122,18 @@ def calcuate_term_vec_now(term_vec_t, half_life):
         time_decay_factor = exp(-decay_rate*(t_now-time_past))
         ret[term] = time_decay_factor*term_vec_t[term]['score']
 
+    return ret
+
+def filter_term_vec(term_vec):
+    """
+    Filter a term vector
+
+    TODO: get filtering rule from config
+    """
+    ret = dict()
+    pattern = re.compile(r"^\d+[,.]?\d*$")  # match if number
+    for t in term_vec.keys():
+        if not pattern.fullmatch(t):
+            # term_vec.pop(t, None)
+            ret[t] = term_vec[t]
     return ret
