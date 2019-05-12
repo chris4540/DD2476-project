@@ -165,7 +165,8 @@ class UserProfileLogger:
                     'japan': 10.0,
                     ...
                 }
-            field (str): the field of the term vector. E.g. 'text', 'title', 'catagory'
+            field (str): the field of the term vector.
+                E.g. 'text', 'title', 'catagory'
         """
         col_key = ('userid', 'posix_time', 'is_static',
                    'field_', 'term', 'score',)
@@ -174,7 +175,6 @@ class UserProfileLogger:
         term_vec_now = aggregate_time_term_vecs(
             term_vec, term_vec_t, half_life=Config.half_life[field])
 
-
         # perpare some common values
         user_id = str(self.user_id)
         posix_time = str(int(time.time()))
@@ -182,7 +182,8 @@ class UserProfileLogger:
 
         # perpate column values
         col_vals = list()
-        for term in term_vec_now:
+        # only insert the updated components to reduce the cost of transcation
+        for term in term_vec:
             score = term_vec_now[term]
             col_vals.append(
                 (user_id, posix_time, is_static, field, term, score)
@@ -225,8 +226,7 @@ if __name__ == "__main__":
         # print(rows)
 
         vec = profile_logger.get_user_dynamic_profile_vec(field="title")
-        print(vec)
-        profile_logger.log_term_vec_to_profile(
-            {'japan': 2.0}, field="title")
+        # print(vec)
+        # profile_logger.log_term_vec_to_profile(
+        #     {'japan': 2.0}, field="title")
         vec = profile_logger.get_user_dynamic_profile_vec(field="title")
-        print(vec)

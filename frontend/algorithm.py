@@ -63,18 +63,30 @@ def get_tfidf_weight(term_vec, doc_count):
 def aggregate_term_vecs(term_vecs, weigths):
     """
     Args:
-        term_vecs from fetcher.fetch_term_vecs
+        term_vecs:
+        {
+            "title": {
+                'sweden': 1.0,
+                ...
+            }
+            "text": {
+                'sweden': 1.0,
+                ...
+            }
+            ...,
+        }
     """
     ret = dict()
 
     for cat in weigths.keys():
         w = weigths[cat]
-        t_vecs = term_vecs[cat]
-        for t_vec in t_vecs:
-            for term in t_vec.keys():
-                if term not in ret:
-                    ret[term] = 0
-                ret[term] += w*t_vec[term]
+        t_vec = term_vecs[cat]
+        n_t_vec = normalize_term_vec(t_vec)
+        for term in n_t_vec.keys():
+            if term not in ret:
+                ret[term] = 0
+            ret[term] += w*t_vec[term]
+
     return ret
 
 def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
@@ -96,5 +108,17 @@ def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
         time_decay_factor = exp(-decay_rate*(t_now-t_past))
         val = ret.get(term, 0) + time_decay_factor*term_vec_t[term]['score']
         ret[term] = val
+    return ret
+
+def calcuate_term_vec_now(term_vec_t, half_life):
+    # calculate the decay rate lambda
+    decay_rate = log(2) / half_life
+    t_now = int(time.time())
+
+    ret = dict()
+    for term in term_vec_t.keys():
+        time_past = term_vec_t[term]['posix_time']
+        time_decay_factor = exp(-decay_rate*(t_now-time_past))
+        ret[term] = time_decay_factor*term_vec_t[term]['score']
 
     return ret
