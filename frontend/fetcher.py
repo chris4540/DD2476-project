@@ -78,7 +78,31 @@ def fetch_term_vecs(es, doc_id, index, doc_type="page", weight_scheme="tfidf"):
             ret[k] = term_vector_to_weight(resp["term_vectors"][k], weight_scheme)
     return ret
 
+def fetch_query_term_vec(es, query, index, doc_type="page", weight_scheme="tfidf"):
+    """
+    TODO: documentation
+    """
+    field = "title"
+    body = {
+        "fields" : [field],
+        "doc": {
+            field: query
+        },
+        "positions": False,
+        "offsets" : False,
+        "payloads" : False,
+        "term_statistics" : True
+    }
+    resp = es.termvectors(index=index, doc_type=doc_type, body=body)
+
+    if 'term_vectors' in resp:
+        ret = term_vector_to_weight(resp['term_vectors'][field], weight_scheme)
+    else:
+        ret = dict()
+    return ret
+
 if __name__ == "__main__":
     es = Elasticsearch("elastic.haochen.lu", port="9200", timeout=1000)
     term_vecs = fetch_term_vecs(es, "25609", "enwiki")
-
+    query_term_vec = fetch_query_term_vec(es, "Stockholm University", "enwiki")
+    print(query_term_vec)
