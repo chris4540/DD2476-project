@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
 if __name__ == "__main__":
+    # https://github.com/googlefonts/noto-cjk/blob/master/NotoSansCJK-Regular.ttc
+    font = r'NotoSansCJK-Regular.ttc'  # need to download it
     usr_email = "chlin3@kth.se"
     term_vecs_t = dict()
     with UserProfileLogger(usr_email) as profile_logger:
-        for f in ['text', 'title', 'category']:
+        for f in Config.weights.keys():
             vec_t = profile_logger.get_user_dynamic_profile_vec(field=f)
             term_vecs_t[f] = vec_t
 
@@ -25,10 +27,11 @@ if __name__ == "__main__":
     term_vec = aggregate_term_vecs(term_vecs_now, Config.weights)
     term_vec = filter_term_vec(term_vec)
     # ===========================================================================
-    wcloud = WordCloud(background_color="white",width=1000, height=860, margin=2)
+    wcloud = WordCloud(font_path=font,
+        background_color="white", width=1000, height=860, margin=2)
     wcloud.generate_from_frequencies(term_vec)
-    plt.imshow(wcloud)
-    plt.axis("off")
-    plt.show()
-    wcloud.to_file('test.png')
+    # plt.imshow(wcloud)
+    # plt.axis("off")
+    # plt.show()
+    wcloud.to_file('profile_word_cloud.png')
 

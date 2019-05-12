@@ -2,15 +2,17 @@ class Config:
     index = "enwiki"
     # weightings / relative importance between term vector
     weights = {
-        "title": 1.0,
-        "category": 0.5,
-        "text": 0.1,
+        "title": 3.0,
+        "category": 2,
+        "text": 0.5,
+        "query": 10,
     }
-    # decaying factor / half life
+    # decaying factor / half life (in second)
     half_life = {
-        "title": 12*3600,       # 12 hrs
-        "category": 24*3600,    # 24 hrs
-        "text": 3600            # 1 hr
+        "title": 2*3600,
+        "category": 3600,
+        "text": 600,
+        "query": 12*3600
     }
 
     elastic_host = "elastic.haochen.lu"
