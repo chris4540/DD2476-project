@@ -165,9 +165,25 @@ def search():
 
     query_body = {
         "query": {
-            "multi_match" : {
-                "query" : query,
-                "fields" : [ "title", "text"]
+            "bool": {
+                "should": [
+                    {
+                        "match": {
+                            "title": {
+                                "query": query,
+                                "boost": 5,
+                            }
+                        }
+                    },
+                    {
+                        "match": {
+                            "text": {
+                                "query": query,
+                                "boost": 2,
+                            }
+                        }
+                    },
+                ]
             }
         },
         "from": results_from,
