@@ -8,6 +8,7 @@ from math import exp
 from math import log
 import time
 import re
+from collections import OrderedDict
 
 def normalize_term_vec(term_vec, ord_=2):
     elements = list(term_vec.values())
@@ -134,6 +135,18 @@ def filter_term_vec(term_vec):
     pattern = re.compile(r"^\d+[,.]?\d*$")  # match if number
     for t in term_vec.keys():
         if not pattern.fullmatch(t):
-            # term_vec.pop(t, None)
             ret[t] = term_vec[t]
     return ret
+
+def get_sorted_term_vec(term_vec, limit=None):
+    # if limit is not None and limit > 0:
+    #     pass
+
+    sorted_items = sorted(term_vec.items(), key=lambda kv: kv[1], reverse=True)
+    if isinstance(limit, int) and limit > 0:
+        # make it have a limit
+        sorted_items = sorted_items[:limit]
+
+    sorted_vec = OrderedDict(sorted_items)
+    return sorted_vec
+

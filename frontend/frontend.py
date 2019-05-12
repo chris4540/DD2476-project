@@ -7,6 +7,9 @@ from usr_profile_lib.usr_profile_log import UserProfileLogger
 from algorithm import cosine_similarity as cos_sim
 from algorithm import aggregate_term_vecs
 from algorithm import filter_term_vec
+from algorithm import calcuate_term_vec_now
+from algorithm import get_sorted_term_vec
+from algorithm import normalize_term_vec
 from fetcher import fetch_term_vecs
 from fetcher import fetch_query_term_vec
 from config import Config
@@ -147,6 +150,7 @@ def log():
 
 @app.route("/search", methods=["POST"])
 def search():
+    # time_start = time()
     # Extracting information of post body
     data = request.get_json()
     query = data["query"]
@@ -165,14 +169,60 @@ def search():
 
     query_body = {
         "query": {
-            "multi_match" : {
-                "query" : query,
-                "fields" : [ "title", "text"]
+            "bool": {
+                "should": [
+                    {
+                        "match": {
+                            "title": {
+                                "query": query,
+                                "boost": 5,
+                            }
+                        }
+                    },
+                    {
+                        "match": {
+                            "text": {
+                                "query": query,
+                                "boost": 2,
+                            }
+                        }
+                    },
+                ]
             }
         },
         "from": results_from,
         "size": results_size
     }
+    # ======================================================
+    # query expansion
+    term_vecs_t = dict()
+    with UserProfileLogger(email) as profile_logger:
+        for f in Config.weights.keys():
+            vec_t = profile_logger.get_user_dynamic_profile_vec(field=f)
+            term_vecs_t[f] = vec_t
+
+    # calculate term vector now
+    term_vecs_now = dict()
+    for f in term_vecs_t.keys():
+        tvec_now = calcuate_term_vec_now(
+            term_vecs_t[f], half_life=Config.half_life[f])
+        term_vecs_now[f] = tvec_now
+    term_vec = aggregate_term_vecs(term_vecs_now, Config.weights)
+    expansion = get_sorted_term_vec(term_vec, limit=Config.expansion_size)
+    expansion = normalize_term_vec(expansion)
+    # TODO: consider expand title field
+    for k, v in expansion.items():  # the expansion is still a term vector
+        term_boost_dict = {
+            "term":{
+                "text": {
+                    "value": k,
+                    "boost": v,
+                }
+            }
+        }
+        query_body["query"]["bool"]["should"].append(term_boost_dict)
+    # ======================================================
+
 
     # search with the query body
     el_res = es.search(index=Config.index, body=query_body)
@@ -187,6 +237,8 @@ def search():
         obj["synopsys"] = pe["_source"]["text"][:400]
         res["results"].append(obj)
 
+    # time_end = time() - time_start
+    # print("Search used: ", time_end)
     return json.dumps(res)
 
 
