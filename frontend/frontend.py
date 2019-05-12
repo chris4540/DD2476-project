@@ -12,22 +12,8 @@ from usr_profile_lib.usr_profile_log import UserProfileLogger
 from algorithm import cosine_similarity as cos_sim
 from algorithm import aggregate_term_vecs
 from fetcher import fetch_term_vecs
+from config import Config
 
-#######################################################################
-class Config:
-    index = "svwiki"
-    # weightings / relative importance between term vector
-    weights = {
-        "title": 1.0,
-        "category": 0.5,
-        "text": 0.1,
-    }
-    # wiki_url_fmt = "http://en.wikipedia.org/wiki/{title}"
-    wiki_url_fmt = "http://sv.wikipedia.org/wiki/{title}"
-    elastic_host = "elastic.haochen.lu"
-    # elastic_host = "localhost"
-
-#######################################################################
 # the folder containing this script
 script_dir = os.path.dirname(__file__)
 
@@ -151,14 +137,16 @@ def log():
         profile_logger.log_retrieved(doc_id=retrieved_doc_id, index=Config.index)
     # --------------------------------------------------------------------------
     # fetch the term vector
-    ts = time()
     term_vectors = fetch_term_vecs(es, [retrieved_doc_id], Config.index)
-    fetch_time = time() - ts
-    print("Fetch Time used:", fetch_time)
-    ts = time()
+
+    # aggregate different kind of term vectors
     agg_term_vec = aggregate_term_vecs(term_vectors, Config.weights)
-    cal_time = time() - ts
-    print("Calculate time: ", cal_time)
+
+    # save them to db
+    # TODO: Fix logging repeating term vec
+    # with UserProfileLogger(email) as profile_logger:
+    #     profile_logger.log_term_vec_to_profile(agg_term_vec)
+    # ==========================================================================
     return "Ok"
 
 @app.route("/search", methods=["POST"])

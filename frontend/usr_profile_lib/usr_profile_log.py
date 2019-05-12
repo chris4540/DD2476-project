@@ -144,7 +144,7 @@ class UserProfileLogger:
 
     def log_term_vec_to_profile(self, term_vec):
         """
-        log the term vector to a user profile as a dynamic part of profile
+        log the term vector to a user profile as a dynamic part of the user profile
         Args:
             term_vec (dict): a term vector
             E.g.: {
