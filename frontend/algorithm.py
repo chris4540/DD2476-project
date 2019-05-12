@@ -58,8 +58,9 @@ def get_tfidf_weight(term_vec, doc_count):
     Return:
         tf-idf value
     """
-    tf = term_vec['term_freq']
-    idf = np.log(doc_count / term_vec['doc_freq'])  # natual log
+    tf = term_vec.get('term_freq', 0)
+    doc_freq = term_vec.get('doc_freq', 0)
+    idf = np.log(doc_count/(1+doc_freq))
     return tf*idf
 
 def aggregate_term_vecs(term_vecs, weigths):
