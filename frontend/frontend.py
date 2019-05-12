@@ -17,7 +17,8 @@ script_dir = os.path.dirname(__file__)
 es = Elasticsearch("elastic.haochen.lu", port="9200", timeout = 100)
 #es = Elasticsearch("localhost:9200", port="9200", timeout = 100)
 
-INDEX = 'enwiki'
+INDEX = 'svwiki'
+DOC_TYPE = 'page'
 app = Flask(__name__)
 #es = Elasticsearch("localhost:9200", port="9200")
 
@@ -32,8 +33,6 @@ else:
     UserProfileLogger.USER_PROFILE_DB = db_file
 
 # ===========================================================
-
-DOC_TYPE = 'page'
 
 # A test user that likes Adolf Hitler, Albert Speer and Java
 # programming.
@@ -111,6 +110,8 @@ def get_doc_vecs(doc):
 def fetch_docs_vecs(es, el_res):
     '''Fetches the documents' vectors for the result set.'''
     ids = [pe["_id"] for pe in el_res["hits"]["hits"]]
+    if not ids:
+        return []
     body = {
         'ids' : ids,
         'parameters' : {
@@ -150,10 +151,11 @@ def search():
     results_from = data["results_from"]
     email = data["email"]
 
+    # Commented out since I can't get it to run locally.
     # log the user query
-    with UserProfileLogger(email) as profile_logger:
-        profile_logger.log_search(
-            query=query, query_type="Unknown", ranking_type=None)
+    # with UserProfileLogger(email) as profile_logger:
+    #     profile_logger.log_search(
+    #         query=query, query_type="Unknown", ranking_type=None)
 
     q = {
         "query": {
@@ -166,15 +168,15 @@ def search():
         "size": results_size
     }
 
-    el_res = es.search(body=q)
+    el_res = es.search(index = INDEX, body=q)
 
     # Proof of concept code for fetching tf vectors:
-    # print('Fetching query vectors...')
-    # t0 = time()
-    # query_vec = fetch_query_vec(es, query)
-    # doc_vecs = fetch_docs_vecs(es, el_res)
-    # print('... took %.2f seconds.' % (time() - t0))
-    # score_docs(doc_vecs, TEST_USER, query_vec)
+    print('Fetching query vectors...')
+    t0 = time()
+    query_vec = fetch_query_vec(es, query)
+    doc_vecs = fetch_docs_vecs(es, el_res)
+    print('... took %.2f seconds.' % (time() - t0))
+    score_docs(doc_vecs, TEST_USER, query_vec)
 
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
