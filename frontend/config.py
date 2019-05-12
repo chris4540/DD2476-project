@@ -1,5 +1,5 @@
 class Config:
-    index = "svwiki"
+    index = "enwiki"
     # weightings / relative importance between term vector
     weights = {
         "title": 1.0,
@@ -13,9 +13,14 @@ class Config:
         "text": 3600            # 1 hr
     }
 
-    # wiki_url_fmt = "http://en.wikipedia.org/wiki/{title}"
-    wiki_url_fmt = "http://sv.wikipedia.org/wiki/{title}"
     elastic_host = "elastic.haochen.lu"
     # elastic_host = "localhost"
 
     doc_type = "page"  # TODO: add code comment for it
+
+    if index == "enwiki":
+        wiki_url_fmt = "http://en.wikipedia.org/wiki/{title}"
+    elif index == "svwiki":
+        wiki_url_fmt = "http://sv.wikipedia.org/wiki/{title}"
+
+    doc_count = None     # place to store the doc count

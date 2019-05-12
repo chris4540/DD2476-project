@@ -5,6 +5,7 @@ json structure.
 import numpy as np
 from elasticsearch import Elasticsearch
 from algorithm import get_tfidf_weight
+from config import Config
 
 def term_vector_to_weight(term_vecs, weight_scheme):
     """
@@ -38,8 +39,7 @@ def term_vector_to_weight(term_vecs, weight_scheme):
     if weight_scheme == "tf":
         weight_fun = lambda term_vec: term_vec['term_freq']
     elif weight_scheme == "tfidf":
-        doc_count = term_vecs['field_statistics']['doc_count']
-        weight_fun = lambda term_vec: get_tfidf_weight(term_vec, doc_count)
+        weight_fun = lambda term_vec: get_tfidf_weight(term_vec, Config.doc_count)
     else:
         raise ValueError("Unknown weighting scheme")
 
@@ -91,4 +91,5 @@ def fetch_term_vecs(es, ids, index, doc_type="page", weight_scheme="tfidf"):
 
 if __name__ == "__main__":
     es = Elasticsearch("elastic.haochen.lu", port="9200", timeout=1000)
-    term_vecs = fetch_term_vecs(es, ["25609", "15545269"], "enwiki")
+    term_vecs = fetch_term_vecs(es, ["25609"], "enwiki")
+    # print(term_vecs)
