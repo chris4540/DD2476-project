@@ -1,15 +1,14 @@
-from elasticsearch import Elasticsearch
-from flask import Flask, render_template, request
-from math import sqrt
-from time import time
-import json
 import os.path
 import json
+from time import time
+from elasticsearch import Elasticsearch
 from flask import Flask, render_template, request
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 from algorithm import cosine_similarity as cos_sim
 from algorithm import aggregate_term_vecs
+from algorithm import filter_term_vec
 from fetcher import fetch_term_vecs
+from fetcher import fetch_query_term_vec
 from config import Config
 
 # the folder containing this script
@@ -134,12 +133,15 @@ def log():
     # ==========================================================================
     # fetch the term vector
     term_vectors = fetch_term_vecs(
-        es, [retrieved_doc_id], Config.index, doc_type=Config.doc_type)
+        es, retrieved_doc_id, Config.index, doc_type=Config.doc_type)
     # save them to db
     with UserProfileLogger(email) as profile_logger:
         # since we only fetch one doc
         for k in term_vectors.keys():
-            profile_logger.log_term_vec_to_profile(term_vectors[k], field=k)
+            vec = term_vectors[k]
+            # filter the term vector
+            vec = filter_term_vec(vec)
+            profile_logger.log_term_vec_to_profile(vec, field=k)
     # ==========================================================================
     return "Ok"
 
@@ -152,10 +154,14 @@ def search():
     results_from = data["results_from"]
     email = data["email"]
 
+    # get the query as term vector
+    query_term_vec = fetch_query_term_vec(es, query, Config.index)
+
     # log the user query
     with UserProfileLogger(email) as profile_logger:
         profile_logger.log_search(
             query=query, query_type="Unknown", ranking_type=None)
+        profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
 
     query_body = {
         "query": {
