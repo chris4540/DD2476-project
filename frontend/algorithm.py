@@ -134,6 +134,5 @@ def filter_term_vec(term_vec):
     pattern = re.compile(r"^\d+[,.]?\d*$")  # match if number
     for t in term_vec.keys():
         if not pattern.fullmatch(t):
-            # term_vec.pop(t, None)
             ret[t] = term_vec[t]
     return ret
