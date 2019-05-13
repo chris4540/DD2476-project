@@ -3,7 +3,7 @@
 # (https://stedolan.github.io/jq/)
 set -e -o xtrace
 index_url="http://localhost:9200/data"
-wiki_dump="enwikiquote-20190422-cirrussearch-content"
+wiki_dump="svwiki-20190422-cirrussearch-content"
 
 # Delete index
 http DELETE $index_url
@@ -21,7 +21,7 @@ gunzip ${wiki_dump}.json.gz
 rm -rf chunks
 
 # Remove something ES whines about
-jq -c '. |= del(.defaultsort)' enwikiquote-20190422-cirrussearch-content.json > fixed.json
+jq -c '. |= del(.defaultsort)' ${wiki_dump}.json > fixed.json
 
 # Split into chunks
 mkdir -p chunks
