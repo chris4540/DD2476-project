@@ -24,13 +24,14 @@
     <!-- Modal Trigger -->
 
     <!-- Modal Structure -->
-    <div id="modal1" class="modal">
+    <div class="modal" id="modal1">
         <div class="modal-content">
             <h4>Static user profile settings</h4>
-            <input class="validate" id="email" type="email" placeholder="Enter your email" v-model="email" />
+            <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="email" />
+            <div class="chips chips-placeholder"></div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            <a class="modal-close waves-effect waves-green btn-flat" href="#!">Agree</a>
         </div>
     </div>
 
@@ -42,14 +43,14 @@
         </div>
     </div>
 
-    <form v-on:submit.prevent="search(query, 0)" class="valign-wrapper">
+    <form class="valign-wrapper" v-on:submit.prevent="search(query, 0)">
         <div class="container">
             <div class="row valign-wrapper">
                 <div class="col s1">
                     <i class="material-icons">search</i>
                 </div>
                 <div class="col input-field s10">
-                    <input id="search" type="search" v-model="query" required />
+                    <input id="search" required type="search" v-model="query" />
                 </div>
                 <div class="col offset-s1 s1">
                     <button class="btn-floating btn-large waves-effect waves-light grey" type="submit"><i
@@ -117,12 +118,6 @@
 <script src="./static/js/materialize.js"></script>
 <script src="./static/js/init.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('.modal').modal();
-    });
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.5.13/vue-cookies.min.js"></script>
 <script>
     var app = new Vue({
@@ -183,17 +178,32 @@
                 }, failed_response => {
 
                 })
+            },
+            new_static_query_term: function (query_term) {
+                this.$http.post("/static_profile", {
+                    "query_term": query_term
+                })
             }
         },
         created: function () {
-            // $(document).ready(function () {
-            //     $('.collapsible').collapsible();
-            // });
+            $(document).ready(function() {
+                $('.modal').modal();
+            });
         },
         mounted: function () {
             if (this.$cookies.isKey("prev_email") === true) {
                 this.email = this.$cookies.get("prev_email");
             }
+
+            $(document).ready(function() {
+                $('.chips-placeholder').chips({
+                    placeholder: 'Query terms',
+                    secondaryPlaceholder: '+Term',
+                    onChipAdd: function() {
+                        window.app.new_static_query_term(this.chipsData[this.chipsData.length - 1].tag)
+                    }
+                });
+            });
         }
     })
 </script>
