@@ -189,9 +189,12 @@ def search():
     # build up the response
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
-    for pe in el_res["hits"]["hits"]:
+    for i, pe in enumerate(el_res["hits"]["hits"]):
         obj = {}
         obj["id"] = pe["_id"]
+        obj["pos"] = i + results_from + 1
+        obj["score"] = pe["_score"]
+        obj["modified_score"] = obj["score"]  # TODO: change this, Chris
         obj["string"] = pe["_source"]["title"]
         obj["url"] = Config.wiki_url_fmt.format(title=pe["_source"]["title"])
         obj["synopsys"] = pe["_source"]["text"][:400]
