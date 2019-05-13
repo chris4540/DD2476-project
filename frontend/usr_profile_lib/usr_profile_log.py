@@ -55,6 +55,16 @@ class UserProfileLogger:
             ret = row["id"]
         return ret
 
+    def get_user_info(self):
+        if self.user_id is None:
+            return dict()
+
+        sql = "SELECT * FROM users WHERE id={};".format(self.user_id)
+        cur = self.conn.cursor()
+        cur.execute(sql)
+        row = cur.fetchone()
+        return row
+
     @staticmethod
     def _insert_col_val_to_db_table(db_conn, table_name, col_val):
 
@@ -112,6 +122,10 @@ class UserProfileLogger:
         self._insert_col_val_to_db_table(self.conn, "user_retrieved_log", col_val)
 
     def _get_user_profile_rows(self, is_static=True, field=None):
+        if self.user_id is None:
+            rows = []
+            return rows
+
         tbl = "user_profile_vector"
         cols = ','.join(['posix_time', 'term', 'score'])
 
@@ -159,6 +173,17 @@ class UserProfileLogger:
         ret = dict()
         for r in rows:
             ret[r['term']] = r['score']
+
+        # Adding the user basic profile to the static profile dictionary
+        info = self.get_user_info()
+        for k in Config.static_info_to_profile.keys():
+            if k not in info:
+                continue
+            val = Config.static_info_to_profile[k]
+            terms = info[k].split(" ")
+            for term in terms:
+                ret[term.lower()] = val
+
         return ret
 
     def log_term_vec_to_profile(self, term_vec, field):
@@ -174,6 +199,9 @@ class UserProfileLogger:
             field (str): the field of the term vector.
                 E.g. 'text', 'title', 'catagory'
         """
+        if self.user_id is None:
+            return
+
         col_key = ('userid', 'posix_time', 'is_static',
                    'field_', 'term', 'score',)
         # agg the dynamic profile to the term vec
@@ -209,3 +237,5 @@ if __name__ == "__main__":
         # vec = profile_logger.get_user_dynamic_profile_vec(field="title")
         vec = profile_logger.get_user_static_profile_vec()
         print(vec)
+        # info = profile_logger.get_user_info()
+        # print(info)
