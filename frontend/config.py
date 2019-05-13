@@ -3,16 +3,16 @@ class Config:
     # index = "svwiki"
     # weightings / relative importance between term vector
     weights = {
-        "title": 5.0,
-        "category": 3,
+        "title": 2.0,
+        "category": 1.5,
         "text": 1.0,
         "query": 0.05,
     }
     # decaying factor / half life (in second)
     half_life = {
-        "query": 5*3600,
-        "title": 2*3600,
-        "category": 3600,
+        "query": 7*3600,
+        "title": 1*3600,
+        "category": 2*3600,
         "text": 600,
     }
 
@@ -29,13 +29,13 @@ class Config:
     expansion_size = 100
     feedback_weight = 1.0
     boost = {
-        "title": 2.0,
+        "title": 1.0,
         "text": 1.0
     }
 
     profile_weights = {
-        "static": 0.2,
-        "dynamic": 0.8,
+        "static": 0.5,
+        "dynamic": 0.5,
     }
 
     static_info_to_profile = {

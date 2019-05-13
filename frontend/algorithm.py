@@ -81,8 +81,12 @@ def aggregate_term_vecs(term_vecs, weigths):
     """
     ret = dict()
 
+    weight_sum = 0
     for cat in weigths.keys():
-        w = weigths[cat]
+        weight_sum += weigths[cat]
+
+    for cat in weigths.keys():
+        w = weigths[cat] / weight_sum
         t_vec = term_vecs[cat]
         n_t_vec = normalize_term_vec(t_vec)
         for term in n_t_vec.keys():

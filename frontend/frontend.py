@@ -127,9 +127,16 @@ def search():
     for f in term_vecs_t.keys():
         tvec_now = calcuate_term_vec_now(
             term_vecs_t[f], half_life=Config.half_life[f])
+        # normalization
+        tvec_now = normalize_term_vec(tvec_now)
+        # save it
         term_vecs_now[f] = tvec_now
+
+    # weighted average
     term_vec = aggregate_term_vecs(term_vecs_now, Config.weights)
+    # removing unwanted terms
     term_vec = filter_term_vec(term_vec)
+
     dyn_profile_vec = get_sorted_term_vec(term_vec, limit=Config.expansion_size)
     dyn_profile_vec = normalize_term_vec(dyn_profile_vec)
     # End calculate the dynamic profiling
@@ -153,7 +160,6 @@ def search():
     for field in ["title", "text"]:
         for k, v in expansion.items():  # the expansion is still a term vector
             boost_val = v*Config.feedback_weight*Config.boost[field]
-            print(k, ":", boost_val)
             term_boost_dict = {
                 "term":{
                     field: {
@@ -171,7 +177,8 @@ def search():
     if el_res["hits"]["total"] > 0:
         with UserProfileLogger(email) as profile_logger:
             profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
-
+    # ==========================================================================
+    # print(len(el_res["hits"]["hits"]))
     # build up the response
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
