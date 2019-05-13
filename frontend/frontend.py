@@ -2,7 +2,7 @@ import os.path
 import json
 from time import time
 from elasticsearch import Elasticsearch
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 from algorithm import cosine_similarity as cos_sim
 from algorithm import aggregate_term_vecs
@@ -202,6 +202,19 @@ def search():
     # time_end = time() - time_start
     # print("Search used: ", time_end)
     return json.dumps(res)
+
+
+@app.route("/static_profile", methods=["GET", "POST", "DELETE"])
+def static_profile():
+    data = request.get_json()
+    email = request.form["email"]
+    if request.method == 'GET':
+        with UserProfileLogger(email) as profile_logger:
+            st_profile_vec = profile_logger.get_user_static_profile_vec()
+            return jsonify(st_profile_vec)
+    elif request.method == 'POST':
+        query_term = data["query_term"]
+
 
 
 if __name__ == "__main__":
