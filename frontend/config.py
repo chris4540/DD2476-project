@@ -1,6 +1,6 @@
 class Config:
-    index = "enwiki"
-    # index = "svwiki"
+    # index = "enwiki"
+    index = "svwiki"
     # weightings / relative importance between term vector
     weights = {
         "title": 2.0,
@@ -17,6 +17,8 @@ class Config:
     }
 
     elastic_host = "elastic.haochen.lu"
+    elastic_port = "9200"
+    timeout = 100
     # elastic_host = "localhost"
 
     doc_type = "page"  # TODO: add code comment for it
@@ -45,3 +47,6 @@ class Config:
     }
 
     weight_scheme = "tfidf"
+    # the alpah value for re-ranking
+    rerank_alpha = 0.5
+    is_reorder_search_results = True  # reordering is a bit slow, option to turn it off

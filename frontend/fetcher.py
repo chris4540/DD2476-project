@@ -78,6 +78,40 @@ def fetch_term_vecs(es, doc_id, index, doc_type="page"):
             ret[k] = term_vector_to_weight(resp["term_vectors"][k], Config.weight_scheme)
     return ret
 
+def fetch_mulitple_term_vecs(es, ids, index, doc_type="page"):
+    """
+    Fetch term vectors for multiple documents
+    Args:
+        es (elastic search instance): the connector of the elastic search
+        ids (list): list of document indices
+        index (str): the name of the index in the engine, e.g. "enwiki" or "svwiki"
+        doc_type (Optional [str]): the type of the docuement
+    Return:
+        a dictionary return:
+        {
+            <id1>:{
+                "title": term_vec_for_title,
+                "text": term_vec_for_text,
+                "category": term_vec_for_cat,
+            },
+            <id2>:{
+                ...
+            }
+        }
+    """
+    resp = es.mtermvectors(index=index, ids=ids, doc_type=doc_type, term_statistics=True)
+    # build up the return
+    ret = dict()
+
+    for d in resp['docs']:
+        if "term_vectors" in d:
+            doc_id = d['_id']
+            ret[doc_id] = dict()
+            for k in ["title", "text", "category"]:
+                term_vec = term_vector_to_weight(d["term_vectors"][k], Config.weight_scheme)
+                ret[doc_id][k] = term_vec
+    return ret
+
 def fetch_query_term_vec(es, query, index, doc_type="page"):
     """
     TODO: documentation

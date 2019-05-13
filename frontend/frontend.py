@@ -9,20 +9,19 @@ from algorithm import aggregate_term_vecs
 from algorithm import filter_term_vec
 from algorithm import calcuate_term_vec_now
 from algorithm import get_sorted_term_vec
+from algorithm import get_sorted_dict
 from algorithm import normalize_term_vec
 from algorithm import weight_mean_term_vecs
 from fetcher import fetch_term_vecs
 from fetcher import fetch_query_term_vec
+from fetcher import fetch_mulitple_term_vecs
 from config import Config
 
 # the folder containing this script
 script_dir = os.path.dirname(__file__)
 
-es = Elasticsearch("elastic.haochen.lu", port="9200", timeout = 100)
+es = Elasticsearch(Config.elastic_host, port=Config.elastic_port, timeout=Config.timeout)
 #es = Elasticsearch("localhost:9200", port="9200", timeout = 100)
-
-INDEX = 'svwiki'
-DOC_TYPE = 'page'
 
 app = Flask(__name__)
 # ===========================================================
@@ -155,20 +154,20 @@ def search():
         st_profile_vec = profile_logger.get_user_static_profile_vec()
 
     st_profile_vec = normalize_term_vec(st_profile_vec)
-    expansion = weight_mean_term_vecs(
+    profile_vec = weight_mean_term_vecs(
         st_profile_vec, dyn_profile_vec,
         Config.profile_weights["static"], Config.profile_weights["dynamic"])
 
-    # subtract the impact if the query already in the epansion
-    for k in query_term_vec:
-        if k in expansion:
-            expansion.pop(k)
+    # remove the impact if the query already in the epansion
+    expansion = dict()
+    for k in profile_vec:
+        if k not in query_term_vec:
+           expansion[k] = profile_vec[k]
 
     # normalize the expansion again
     expansion = normalize_term_vec(expansion)
     for field in ["text"]:
         for k, v in expansion.items():  # the expansion is still a term vector
-            boost_val = v*Config.feedback_weight*Config.boost[field]
             term_boost_dict = {
                 "term":{
                     field: {
@@ -187,7 +186,35 @@ def search():
         with UserProfileLogger(email) as profile_logger:
             profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
     # ==========================================================================
-    # print(len(el_res["hits"]["hits"]))
+    # Reordering
+    # get the similarity score of the docs and our profile
+    if Config.is_reorder_search_results and len(profile_vec) > 0:
+        docid_to_score = dict()
+        for s_rslt in el_res["hits"]["hits"]:
+            id_ = s_rslt["_id"]
+            match_score = s_rslt["_score"]
+            docid_to_score[id_] = match_score
+
+        # fetch doc term vectors
+        ts = time()
+        docs_term_vecs = fetch_mulitple_term_vecs(
+            es, list(docid_to_score.keys()), Config.index)
+        print("Time for fetch term vecs = ", time() - ts)
+
+        # for each document, aggregate one document term vector and calcuate
+        # the similary score and the adjusted score
+        adj_scores = dict()
+        for doc_id in docs_term_vecs:
+            doc_tvec = aggregate_term_vecs(docs_term_vecs[doc_id], Config.weights)
+            profile_dot_doc_tvec = cos_sim(doc_tvec, profile_vec)
+            adj_scores[doc_id] = (
+                Config.rerank_alpha*docid_to_score[doc_id]
+            + (1-Config.rerank_alpha)*profile_dot_doc_tvec)
+
+        d = get_sorted_dict(adj_scores)
+
+    # TODO: consider reordering
+    # =========================================================================
     # build up the response
     res = {"results": []}
     res["n_results"] = el_res["hits"]["total"]
