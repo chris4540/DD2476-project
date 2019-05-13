@@ -36,3 +36,9 @@ class Config:
         "static": 0.5,
         "dynamic": 0.5,
     }
+
+    static_info_to_profile = {
+        "lang": 1.0,
+        "city": 1.0,
+        "country": 1.0,
+    }

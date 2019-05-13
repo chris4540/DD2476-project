@@ -230,6 +230,8 @@ def search():
     expansion = weight_mean_term_vecs(
         st_profile_vec, dyn_profile_vec,
         Config.profile_weights["static"], Config.profile_weights["dynamic"])
+    # normalize the expansion again
+    expansion = normalize_term_vec(expansion)
     # TODO: consider expand title field
     for k, v in expansion.items():  # the expansion is still a term vector
         term_boost_dict = {
