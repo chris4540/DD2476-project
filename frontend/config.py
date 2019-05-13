@@ -1,6 +1,6 @@
 class Config:
-    # index = "enwiki"
-    index = "svwiki"
+    index = "enwiki"
+    # index = "svwiki"
     # weightings / relative importance between term vector
     weights = {
         "title": 2.0,
@@ -28,7 +28,7 @@ class Config:
     elif index == "svwiki":
         wiki_url_fmt = "http://sv.wikipedia.org/wiki/{title}"
 
-    expansion_size = 100
+    expansion_size = 50
     feedback_weight = 1.0
     boost = {
         "title": 1.0,

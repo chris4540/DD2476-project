@@ -6,6 +6,7 @@ import numpy as np
 from elasticsearch import Elasticsearch
 from algorithm import get_tfidf_weight
 from config import Config
+from time import time
 
 def term_vector_to_weight(term_vecs, weight_scheme):
     """
@@ -78,7 +79,7 @@ def fetch_term_vecs(es, doc_id, index, doc_type="page"):
             ret[k] = term_vector_to_weight(resp["term_vectors"][k], Config.weight_scheme)
     return ret
 
-def fetch_mulitple_term_vecs(es, ids, index, doc_type="page"):
+def fetch_mulitple_term_vecs(es, ids, index, fields, doc_type="page"):
     """
     Fetch term vectors for multiple documents
     Args:
@@ -99,7 +100,20 @@ def fetch_mulitple_term_vecs(es, ids, index, doc_type="page"):
             }
         }
     """
-    resp = es.mtermvectors(index=index, ids=ids, doc_type=doc_type, term_statistics=True)
+    body = {
+        "ids": ids,
+        "parameters": {
+            "fields" : fields,
+            "offsets" : False,
+            "payloads" : False,
+            "positions" : False,
+            "term_statistics" : True,
+            "field_statistics" : True,
+        }
+    }
+    ts = time()
+    resp = es.mtermvectors(index=index, doc_type=doc_type, body=body)
+    print("[Reordering] Time for fetch documents term vecs = ", time() - ts)
     # build up the return
     ret = dict()
 
@@ -107,7 +121,7 @@ def fetch_mulitple_term_vecs(es, ids, index, doc_type="page"):
         if "term_vectors" in d:
             doc_id = d['_id']
             ret[doc_id] = dict()
-            for k in ["title", "text", "category"]:
+            for k in fields:
                 term_vec = term_vector_to_weight(d["term_vectors"][k], Config.weight_scheme)
                 ret[doc_id][k] = term_vec
     return ret
