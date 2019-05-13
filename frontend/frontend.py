@@ -94,15 +94,17 @@ def search():
     query_body = {
         "query": {
             "bool": {
-                "must": {
-                    "match": {
-                        "title": {
-                            "query": query,
-                            "boost": Config.boost['title'],
-                        }
-                    }
-                },
+                # "must": {
+                # },
                 "should": [
+                    {
+                        "match": {
+                            "title": {
+                                "query": query,
+                                "boost": Config.boost['title'],
+                            }
+                        }
+                    },
                     {
                         "match": {
                             "text": {
@@ -164,7 +166,7 @@ def search():
 
     # normalize the expansion again
     expansion = normalize_term_vec(expansion)
-    for field in ["title", "text"]:
+    for field in ["text"]:
         for k, v in expansion.items():  # the expansion is still a term vector
             boost_val = v*Config.feedback_weight*Config.boost[field]
             term_boost_dict = {

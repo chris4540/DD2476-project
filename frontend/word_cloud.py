@@ -9,6 +9,7 @@ from config import Config
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 # https://github.com/googlefonts/noto-cjk/blob/master/NotoSansCJK-Regular.ttc
+# https://www.google.com/get/noto/help/cjk/
 font = r'NotoSansCJK-Regular.ttc'  # need to download it
 
 
@@ -52,11 +53,11 @@ def plot_usr_word_cloud(email):
 
 if __name__ == "__main__":
     emails = [
-        # "chlin3@kth.se",
+        "chlin3@kth.se",
         # "dfsafd@kth.se",
         # "antolu@kth.se",
         # "liberman@kth.se",
-        "testuser@kth.se"
+        # "testuser@kth.se"
     ]
 
     for email in emails:
