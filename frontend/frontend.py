@@ -198,7 +198,6 @@ def search():
             "synopsys": s_rslt["_source"]["text"][:400],
             "title": s_rslt["_source"]["title"]
         }
-
     # ==========================================================================
     # Reordering
     # get the similarity score of the docs and our profile
