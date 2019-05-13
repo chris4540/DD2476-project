@@ -3,6 +3,12 @@ INSERT INTO users(id, email, age, gender, lang, city, country)
 VALUES (1, 'chlin3@kth.se', 26, 'M', 'Chinese', 'Hong Kong', 'China');
 INSERT INTO users(id, email, age, gender, lang, city, country)
 VALUES (2, 'testuser@kth.se', 22, 'M', 'Swedish', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (3, 'dfsafd@kth.se', 22, 'M', 'Swedish', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (4, 'antolu@kth.se', 22, 'M', 'Swedish', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (5, 'liberman@kth.se', 22, 'M', 'Spanish', 'Stockholm', 'Sweden');
 
 -- Add the basic information of the user interest as the static user profile
 -- Start Chris Lin static profile
@@ -28,3 +34,15 @@ VALUES (2, "java", True, 0, 2.0); -- 'java' : 2,
 INSERT INTO user_profile_vector(userid, term, is_static, posix_time, score)
 VALUES (2, "programming", True, 0, 2.0); -- 'programming' : 2
 -- End Test user profile
+
+-- dfsafd@kth.se static profile
+INSERT INTO user_profile_vector(userid, term, is_static, posix_time, score)
+VALUES (3, "programming", True, 0, 1.0);
+
+-- antolu@kth.se static profile
+INSERT INTO user_profile_vector(userid, term, is_static, posix_time, score)
+VALUES (4, "physics", True, 0, 1.0);
+
+-- liberman@kth.se static profile
+INSERT INTO user_profile_vector(userid, term, is_static, posix_time, score)
+VALUES (5, "travel", True, 0, 1.0);
