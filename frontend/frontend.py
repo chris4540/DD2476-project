@@ -17,6 +17,13 @@ from config import Config
 
 # the folder containing this script
 script_dir = os.path.dirname(__file__)
+
+es = Elasticsearch("elastic.haochen.lu", port="9200", timeout = 100)
+#es = Elasticsearch("localhost:9200", port="9200", timeout = 100)
+
+INDEX = 'svwiki'
+DOC_TYPE = 'page'
+
 app = Flask(__name__)
 # ===========================================================
 # check the path of the user profile db
