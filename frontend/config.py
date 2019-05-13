@@ -43,3 +43,5 @@ class Config:
         "city": 1.0,
         "country": 1.0,
     }
+
+    weight_scheme = "tfidf"

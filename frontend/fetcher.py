@@ -51,7 +51,7 @@ def term_vector_to_weight(term_vecs, weight_scheme):
         ret[t] = weight_fun(term_vecs['terms'][t])
     return ret
 
-def fetch_term_vecs(es, doc_id, index, doc_type="page", weight_scheme="tfidf"):
+def fetch_term_vecs(es, doc_id, index, doc_type="page"):
     """
     Fetch term vectors for one documents
 
@@ -75,10 +75,10 @@ def fetch_term_vecs(es, doc_id, index, doc_type="page", weight_scheme="tfidf"):
 
     if "term_vectors" in resp:
         for k in ["title", "text", "category"]:
-            ret[k] = term_vector_to_weight(resp["term_vectors"][k], weight_scheme)
+            ret[k] = term_vector_to_weight(resp["term_vectors"][k], Config.weight_scheme)
     return ret
 
-def fetch_query_term_vec(es, query, index, doc_type="page", weight_scheme="tfidf"):
+def fetch_query_term_vec(es, query, index, doc_type="page"):
     """
     TODO: documentation
     """
@@ -96,7 +96,7 @@ def fetch_query_term_vec(es, query, index, doc_type="page", weight_scheme="tfidf
     resp = es.termvectors(index=index, doc_type=doc_type, body=body)
 
     if 'term_vectors' in resp:
-        ret = term_vector_to_weight(resp['term_vectors'][field], weight_scheme)
+        ret = term_vector_to_weight(resp['term_vectors'][field], Config.weight_scheme)
     else:
         ret = dict()
     return ret
