@@ -30,97 +30,6 @@ else:
 # ===========================================================
 es = Elasticsearch(Config.elastic_host, port="9200", timeout = 100)
 
-# DOC_TYPE = 'page'
-
-# A test user that likes Adolf Hitler, Albert Speer and Java programming.
-# TEST_USER = {
-#     'hitler' : 10,
-#     'albert' : 5,
-#     'speer' : 3,
-#     'java' : 2,
-#     'programming' : 2
-# }
-
-# def score_doc(doc_vec, u, q):
-#     '''For ease of typing:
-#         u: user vector
-#         q: query vector
-#         ti: document title vector
-#         tx: document text vector
-#         ct: document category vector
-#         s_X_Y: similarity between X and Y
-#     '''
-#     id, ti, tx, ct = doc_vec
-#     s_u_ti = cos_sim(u, ti)
-#     s_u_tx = cos_sim(u, tx)
-#     s_u_ct = cos_sim(u, ct)
-#     s_q_ti = cos_sim(q, ti)
-#     s_q_tx = cos_sim(q, tx)
-#     s_q_ct = cos_sim(q, ct)
-
-#     # Weigh the scores together
-#     score = 0.3 * (0.5 * s_u_ti + 0.2 * s_u_tx + 0.3 * s_u_ct) \
-#         + 0.7 * (0.5 * s_q_ti + 0.2 * s_q_tx + 0.3 * s_q_ct)
-
-#     fmt = '%-40s %.2f %.2f %.2f %.2f %.2f %.2f | %.3f'
-#     title_str = ' '.join(ti.keys())
-#     pretty_text = fmt % (title_str,
-#                          s_u_ti, s_u_tx, s_u_ct,
-#                          s_q_ti, s_q_tx, s_q_ct, score)
-#     return score, id, pretty_text
-
-# def score_docs(doc_vecs, u, q):
-#     scores = [score_doc(d, u, q) for d in doc_vecs]
-#     for score, id, pretty_text in sorted(scores):
-#         print(pretty_text)
-
-# def get_doc_vecs(doc):
-#     '''Get the document vectors for the document.'''
-#     id = doc['_id']
-#     vecs = doc['term_vectors']
-
-#     # Make a tf vector of the title field
-#     terms = vecs['title']['terms']
-#     title_vec = {w : d['term_freq'] for w, d in terms.items()}
-
-#     # Same for the text
-#     terms = vecs['text']['terms']
-#     text_vec = {w : d['term_freq'] for w, d in terms.items()}
-
-#     # And for categories
-#     terms = vecs['category']['terms']
-#     cat_vec = {w : d['term_freq'] for w, d in terms.items()}
-#     return id, title_vec, text_vec, cat_vec
-
-# def fetch_docs_vecs(es, el_res):
-#     '''Fetches the documents' vectors for the result set.'''
-#     ids = [pe["_id"] for pe in el_res["hits"]["hits"]]
-#     body = {
-#         'ids' : ids,
-#         'parameters' : {
-#             'term_statistics' : True
-#         }
-#     }
-#     res = es.mtermvectors(index=INDEX, doc_type=DOC_TYPE,
-#                           body=body)
-#     return [get_doc_vecs(d) for d in res['docs']]
-
-# def fetch_query_vec(es, query):
-#     """
-#     Fetches a term frequency vector from the query.
-
-#     Args:
-
-#     Returns:
-
-#     """
-#     res = es.termvectors(index=INDEX, doc_type=DOC_TYPE,
-#                          body={'doc' : {'text' : query}})
-#     vecs = res['term_vectors']
-#     terms = vecs['text']['terms']
-#     query_vec = {w : d['term_freq'] for w, d in terms.items()}
-#     return query_vec
-# ==============================================================================
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -220,9 +129,12 @@ def search():
             term_vecs_t[f], half_life=Config.half_life[f])
         term_vecs_now[f] = tvec_now
     term_vec = aggregate_term_vecs(term_vecs_now, Config.weights)
+    term_vec = filter_term_vec(term_vec)
     dyn_profile_vec = get_sorted_term_vec(term_vec, limit=Config.expansion_size)
     dyn_profile_vec = normalize_term_vec(dyn_profile_vec)
     # End calculate the dynamic profiling
+
+    # calculate the static profile
     with UserProfileLogger(email) as profile_logger:
         st_profile_vec = profile_logger.get_user_static_profile_vec()
 

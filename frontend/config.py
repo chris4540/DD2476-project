@@ -25,7 +25,7 @@ class Config:
     elif index == "svwiki":
         wiki_url_fmt = "http://sv.wikipedia.org/wiki/{title}"
 
-    expansion_size = 20
+    expansion_size = 100
     feedback_weight = 1.0
     boost = {
         "title": 2.0,
@@ -33,8 +33,8 @@ class Config:
     }
 
     profile_weights = {
-        "static": 0.5,
-        "dynamic": 0.5,
+        "static": 0.2,
+        "dynamic": 0.8,
     }
 
     static_info_to_profile = {
