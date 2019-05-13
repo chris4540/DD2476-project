@@ -27,18 +27,20 @@ CREATE TABLE user_retrieved_log (
     id              INTEGER         PRIMARY KEY AUTOINCREMENT,
     userid          INTEGER         NOT NULL,
     posix_time      INTEGER         NOT NULL,
-    selected_doc    TEXT            NOT NULL,
+    doc_id          TEXT            NOT NULL,
+    index_          TEXT            NOT NULL,
     FOREIGN KEY(userid) REFERENCES users(id)
 );
 -- USER profile vector
 -- TODO: improve the search by adding index when we know how the application
 --       use the profile
-CREATE TABLE user_profile_vector_table (
+CREATE TABLE user_profile_vector (
     userid          INTEGER         NOT NULL,
-    keyword         TEXT            NOT NULL,
-    is_static       BOOLEAN         NOT NULL,
     posix_time      INTEGER         NOT NULL,
+    is_static       BOOLEAN         NOT NULL,
+    field_          TEXT            DEFAULT NULL,   -- E.g. title, query, text, cat etc.
+    term            TEXT            NOT NULL,
     score           FLOAT           NOT NULL,
-    PRIMARY KEY (userid, keyword, is_static),
+    PRIMARY KEY (userid, term, is_static, field_),
     FOREIGN KEY(userid) REFERENCES users(id)
 );
