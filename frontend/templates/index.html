@@ -60,18 +60,18 @@
     </form>
 
     <div class="container">
-        <ul class="collapsible popout with-header">
+        <ul class="collection with-header">
             <li style="padding: 5px;"><h4>Search results <span v-if="searching == false && n_results > 0">( [[ current_page * results_per_page + 1]]-[[ Math.min((current_page + 1) * results_per_page, n_results)]] / [[ n_results ]] )</span><span
                     v-else>(0)</span></h4></li>
             <div class="progress" v-if="searching">
                 <div class="indeterminate"></div>
             </div>
             <li v-else v-for="item in results">
-                <div class="collapsible-header" style="display: block"><span
+                <div class="collection-header" style="display: block"><span
                         style="padding-right: 20px;">[[ item.id ]]</span>[[ item.string ]]<span
                         class="secondary-content" style="cursor: pointer" v-on:click="click_link(item.id, item.url)"><i
                         class="material-icons blue-text" class="right">send</i></span></div>
-                <div class="collapsible-body">[[ item.synopsys ]]...</div>
+                <div class="collection-item">[[ item.synopsys ]]...</div>
             </li>
         </ul>
 
@@ -185,9 +185,9 @@
             }
         },
         created: function () {
-            $(document).ready(function () {
-                $('.collapsible').collapsible();
-            });
+            // $(document).ready(function () {
+            //     $('.collapsible').collapsible();
+            // });
         },
         mounted: function () {
             if (this.$cookies.isKey("prev_email") === true) {
