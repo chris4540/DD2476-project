@@ -154,6 +154,12 @@ class UserProfileLogger:
             ret[r['term']] = row_dict
         return ret
 
+    def get_user_static_profile_vec(self):
+        rows = self._get_user_profile_rows(is_static=True)
+        ret = dict()
+        for r in rows:
+            ret[r['term']] = r['score']
+        return ret
 
     def log_term_vec_to_profile(self, term_vec, field):
         """
@@ -200,34 +206,6 @@ if __name__ == "__main__":
     # UserProfileLogger.USER_PROFILE_DB = "myfoler/userprofile.db"
     # ========================================================================
     with UserProfileLogger(usr_email) as profile_logger:
-        # # log search
-        # profile_logger.log_search(
-        #     query="zombie", query_type="intersection", ranking_type=None)
-        # profile_logger.log_search(
-        #     query="zombie attack", query_type="phase", ranking_type=None)
-        # profile_logger.log_search(
-        #     query="zombie attack", query_type="ranking", ranking_type="tf-idf")
-
-        # # log retrieved
-        # profile_logger.log_retrieved(doc_id="25609", index="enwiki")
-
-        # log term vector
-        profile_logger.log_term_vec_to_profile(
-            {
-                'computer': 10.0,
-                'japan': 1.0
-            }, field="title"
-        )
-
-
-        # fetch profile as term vector
-        rows = profile_logger._get_user_profile_rows(is_static=True)
-        rows = profile_logger.get_user_dynamic_profile_vec(field="title")
-        # rows = profile_logger._get_user_profile_rows(is_static=False)
-        # print(rows)
-
-        vec = profile_logger.get_user_dynamic_profile_vec(field="title")
-        # print(vec)
-        # profile_logger.log_term_vec_to_profile(
-        #     {'japan': 2.0}, field="title")
-        vec = profile_logger.get_user_dynamic_profile_vec(field="title")
+        # vec = profile_logger.get_user_dynamic_profile_vec(field="title")
+        vec = profile_logger.get_user_static_profile_vec()
+        print(vec)

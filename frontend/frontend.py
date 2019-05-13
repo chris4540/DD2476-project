@@ -10,6 +10,7 @@ from algorithm import filter_term_vec
 from algorithm import calcuate_term_vec_now
 from algorithm import get_sorted_term_vec
 from algorithm import normalize_term_vec
+from algorithm import weight_mean_term_vecs
 from fetcher import fetch_term_vecs
 from fetcher import fetch_query_term_vec
 from config import Config
@@ -144,6 +145,9 @@ def log():
             vec = term_vectors[k]
             # filter the term vector
             vec = filter_term_vec(vec)
+            # normalize the term vector
+            vec = normalize_term_vec(vec)
+            # log it to the database
             profile_logger.log_term_vec_to_profile(vec, field=k)
     # ==========================================================================
     return "Ok"
@@ -201,6 +205,8 @@ def search():
     # query expansion
     # TODO: add switch to off query expansion
     # TODO: add using static profile
+
+    # calculate the dynamic profile vector
     term_vecs_t = dict()
     with UserProfileLogger(email) as profile_logger:
         for f in Config.weights.keys():
@@ -214,8 +220,16 @@ def search():
             term_vecs_t[f], half_life=Config.half_life[f])
         term_vecs_now[f] = tvec_now
     term_vec = aggregate_term_vecs(term_vecs_now, Config.weights)
-    expansion = get_sorted_term_vec(term_vec, limit=Config.expansion_size)
-    expansion = normalize_term_vec(expansion)
+    dyn_profile_vec = get_sorted_term_vec(term_vec, limit=Config.expansion_size)
+    dyn_profile_vec = normalize_term_vec(dyn_profile_vec)
+    # End calculate the dynamic profiling
+    with UserProfileLogger(email) as profile_logger:
+        st_profile_vec = profile_logger.get_user_static_profile_vec()
+
+    st_profile_vec = normalize_term_vec(st_profile_vec)
+    expansion = weight_mean_term_vecs(
+        st_profile_vec, dyn_profile_vec,
+        Config.profile_weights["static"], Config.profile_weights["dynamic"])
     # TODO: consider expand title field
     for k, v in expansion.items():  # the expansion is still a term vector
         term_boost_dict = {

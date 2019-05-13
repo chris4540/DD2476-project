@@ -31,3 +31,8 @@ class Config:
         "title": 2.0,
         "text": 1.0
     }
+
+    profile_weights = {
+        "static": 0.5,
+        "dynamic": 0.5,
+    }

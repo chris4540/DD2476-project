@@ -92,13 +92,24 @@ def aggregate_term_vecs(term_vecs, weigths):
 
     return ret
 
-def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
+def weight_mean_term_vecs(vec1, vec2, weight1, weight2):
+    alpha = weight1 / (weight1 + weight2)
+    beta = (1 - alpha)
+
+    terms = set(vec1.keys()).union(set(vec2.keys()))
+
+    ret = dict()
+    for t in terms:
+        ret[t] = alpha*vec1.get(t, 0) + beta*vec2.get(t, 0)
+    return ret
+
+# def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
+def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life):
     """
     Aggregate term vector at centain time t to current term vec
 
     Args:
         half_life (float): the half life in exponential decay.
-            Default is one day
     """
     # calculate the decay rate lambda
     decay_rate = log(2) / half_life
@@ -123,7 +134,6 @@ def calcuate_term_vec_now(term_vec_t, half_life):
         time_past = term_vec_t[term]['posix_time']
         time_decay_factor = exp(-decay_rate*(t_now-time_past))
         ret[term] = time_decay_factor*term_vec_t[term]['score']
-
     return ret
 
 def filter_term_vec(term_vec):
