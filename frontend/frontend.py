@@ -112,8 +112,8 @@ def search():
     }
     # ======================================================
     # query expansion
-    # TODO: add switch to off query expansion
-    # TODO: add using static profile
+    # get the query term vector
+    query_term_vec = fetch_query_term_vec(es, query, Config.index)
 
     # calculate the dynamic profile vector
     term_vecs_t = dict()
@@ -142,27 +142,33 @@ def search():
     expansion = weight_mean_term_vecs(
         st_profile_vec, dyn_profile_vec,
         Config.profile_weights["static"], Config.profile_weights["dynamic"])
+
+    # subtract the impact if the query already in the epansion
+    for k in query_term_vec:
+        if k in expansion:
+            expansion.pop(k)
+
     # normalize the expansion again
     expansion = normalize_term_vec(expansion)
-    # TODO: consider expand title field
-    for k, v in expansion.items():  # the expansion is still a term vector
-        term_boost_dict = {
-            "term":{
-                "text": {
-                    "value": k,
-                    "boost": v*Config.feedback_weight,
+    for field in ["title", "text"]:
+        for k, v in expansion.items():  # the expansion is still a term vector
+            boost_val = v*Config.feedback_weight*Config.boost[field]
+            print(k, ":", boost_val)
+            term_boost_dict = {
+                "term":{
+                    field: {
+                        "value": k,
+                        "boost": v*Config.feedback_weight*Config.boost[field],
+                    }
                 }
             }
-        }
-        query_body["query"]["bool"]["should"].append(term_boost_dict)
+            query_body["query"]["bool"]["should"].append(term_boost_dict)
     # ======================================================
     # search with the query body
     el_res = es.search(index=Config.index, body=query_body)
 
     # log the query to profile if success
     if el_res["hits"]["total"] > 0:
-         # get the query as term vector
-        query_term_vec = fetch_query_term_vec(es, query, Config.index)
         with UserProfileLogger(email) as profile_logger:
             profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
 

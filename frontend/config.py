@@ -1,11 +1,12 @@
 class Config:
     index = "enwiki"
+    # index = "svwiki"
     # weightings / relative importance between term vector
     weights = {
-        "query": 10.0,
         "title": 5.0,
         "category": 3,
         "text": 1.0,
+        "query": 0.05,
     }
     # decaying factor / half life (in second)
     half_life = {
