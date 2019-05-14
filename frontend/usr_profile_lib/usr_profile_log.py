@@ -273,6 +273,42 @@ class UserProfileLogger:
         self._write_many_col_vals_to_db_table(
             self.conn, "user_profile_vector", col_key, col_vals)
 
+    def modify_user_profile(self, new_profile):
+        col_key = ("id", "email", "age", "gender", "lang", "city", "country",)
+        col_vals = [(self.user_id, new_profile["email"], new_profile["age"], new_profile["gender"], new_profile["lang"], new_profile["city"], new_profile["country"],)]
+        self._write_many_col_vals_to_db_table(self.conn, "users", col_key, col_vals)
+
+    def get_user_profile(self):
+        tbl = "users"
+        cols = ','.join(("email", "age", "gender", "lang", "city", "country",))
+
+        sql = ("SELECT {cols} FROM {tbl} WHERE id=:uid ".format(cols=cols, tbl=tbl))
+        filter_val = {
+            "uid": self.user_id,
+        }
+        # ======================================================================
+
+        cur = self.conn.cursor()
+        cur.execute(sql, filter_val)
+        rows = cur.fetchall()
+        return rows[0]
+
+    @staticmethod
+    def create_user_if_not_exists(email):
+        if UserProfileLogger(email).user_id is None:
+            conn = sqlite3.connect(UserProfileLogger.USER_PROFILE_DB)
+            conn.row_factory = row_factory
+            logger.debug("Using the profile database: %s", UserProfileLogger.USER_PROFILE_DB)
+            col_val = {
+                "email": email,
+                "age": 20,
+                "gender": "M",
+                "lang": "English",
+                "city": "Stockholm",
+                "country": "Sweden",
+            }
+            UserProfileLogger._insert_col_val_to_db_table(conn, "users", col_val)
+
 
 if __name__ == "__main__":
     import sqlite3

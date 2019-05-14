@@ -204,10 +204,26 @@ def search():
     return json.dumps(res)
 
 
-@app.route("/static_profile", methods=["GET", "POST", "DELETE"])
+@app.route("/user_profile", methods=["GET", "POST"])
+def user_profile():
+    email = request.args['email']
+    if request.method == 'GET':
+        UserProfileLogger.create_user_if_not_exists(email)
+        with UserProfileLogger(email) as profile_logger:
+            profile = profile_logger.get_user_profile()
+            return jsonify(profile)
+    elif request.method == 'POST':
+        data = request.get_json()
+        with UserProfileLogger(email) as profile_logger:
+            profile_logger.modify_user_profile(data)
+        return "Ok"
+
+
+@app.route("/static_profile", methods=["GET", "POST"])
 def static_profile():
     email = request.args['email']
     if request.method == 'GET':
+        UserProfileLogger.create_user_if_not_exists(email)
         with UserProfileLogger(email) as profile_logger:
             st_profile_vec = profile_logger.get_user_key_terms()
             return jsonify(st_profile_vec)
@@ -217,7 +233,7 @@ def static_profile():
         vec = {a: b for (a, b) in zip(terms, [1.0]*len(terms))}
         with UserProfileLogger(email) as profile_logger:
             profile_logger.modify_user_static_profile_vec(vec)
-        return ""
+        return "Ok"
 
 
 
