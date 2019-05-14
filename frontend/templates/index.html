@@ -292,7 +292,7 @@
         },
         mounted: function () {
             if (this.$cookies.isKey("prev_email") === true) {
-                this.email = this.$cookies.get("prev_email");
+                this.modal_email = this.email = this.$cookies.get("prev_email");
                 this.get_user_profile(this.email);
             }
         }
