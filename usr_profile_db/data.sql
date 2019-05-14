@@ -9,6 +9,19 @@ INSERT INTO users(id, email, age, gender, lang, city, country)
 VALUES (4, 'antolu@kth.se', 22, 'M', 'Swedish', 'Stockholm', 'Sweden');
 INSERT INTO users(id, email, age, gender, lang, city, country)
 VALUES (5, 'liberman@kth.se', 22, 'M', 'Spanish', 'Stockholm', 'Sweden');
+-- Test user info. Their languages are not specified
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (6, 'userA@kth.se', 22, '', '', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (7, 'userB@kth.se', 22, '', '', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (8, 'userC@kth.se', 22, '', '', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (9, 'userD@kth.se', 22, '', '', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (10, 'userE@kth.se', 22, '', '', 'Stockholm', 'Sweden');
+INSERT INTO users(id, email, age, gender, lang, city, country)
+VALUES (11, 'userF@kth.se', 22, '', '', 'Stockholm', 'Sweden');
 
 -- Add the basic information of the user interest as the static user profile
 -- Start Chris Lin static profile
@@ -46,3 +59,5 @@ VALUES (4, "physics", 1, 0, 1.0);
 -- liberman@kth.se static profile
 INSERT INTO user_profile_vector(userid, term, is_static, posix_time, score)
 VALUES (5, "travel", 1, 0, 1.0);
+
+-- Test user profile TODO: fill by who perform the experiement
