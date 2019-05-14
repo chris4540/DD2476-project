@@ -29,7 +29,7 @@
             <h4>Static user profile settings</h4>
             <div class="row">
                 <div class="col s10">
-                    <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="email" v-on:keyPress="mail_changed_true" />
+                    <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="modal_email" v-on:keyup="mail_changed_true" />
                 </div>
                 <div class="col s2">
                     <button class="right btn" v-on:click="refresh_email"><i class="material-icons">refresh</i></button>
@@ -163,6 +163,7 @@
         data: {
             results: [],
             query: "",
+            modal_email: "",
             email: "",
             age: 0,
             gender: "",
@@ -268,12 +269,11 @@
                 )
             },
             refresh_email: function () {
-                if (this.email.length > 0) {
-                    this.$cookies.set("prev_email", this.email, "30d");
-                    this.get_static_query_terms(this.email);
-                    this.get_user_profile();
-                    this.mail_changed = false;
-                }
+                this.email = this.modal_email;
+                this.$cookies.set("prev_email", this.email, "30d");
+                this.get_static_query_terms(this.email);
+                this.get_user_profile();
+                this.mail_changed = false;
             },
             mail_changed_true: function () {
                 this.mail_changed = true;
