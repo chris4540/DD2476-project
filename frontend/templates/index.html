@@ -271,7 +271,7 @@
             refresh_email: function () {
                 this.email = this.modal_email;
                 this.$cookies.set("prev_email", this.email, "30d");
-                this.get_static_query_terms(this.email);
+                this.get_static_query_terms();
                 this.get_user_profile();
                 this.mail_changed = false;
             },
