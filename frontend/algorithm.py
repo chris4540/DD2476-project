@@ -81,8 +81,14 @@ def aggregate_term_vecs(term_vecs, weigths):
     """
     ret = dict()
 
+    weight_sum = 0
     for cat in weigths.keys():
-        w = weigths[cat]
+        weight_sum += weigths[cat]
+
+    for cat in weigths.keys():
+        if cat not in term_vecs:
+            continue
+        w = weigths[cat] / weight_sum
         t_vec = term_vecs[cat]
         n_t_vec = normalize_term_vec(t_vec)
         for term in n_t_vec.keys():
@@ -92,13 +98,24 @@ def aggregate_term_vecs(term_vecs, weigths):
 
     return ret
 
-def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
+def weight_mean_term_vecs(vec1, vec2, weight1, weight2):
+    alpha = weight1 / (weight1 + weight2)
+    beta = (1 - alpha)
+
+    terms = set(vec1.keys()).union(set(vec2.keys()))
+
+    ret = dict()
+    for t in terms:
+        ret[t] = alpha*vec1.get(t, 0) + beta*vec2.get(t, 0)
+    return ret
+
+# def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life=86400):
+def aggregate_time_term_vecs(term_vec_now, term_vec_t, half_life):
     """
     Aggregate term vector at centain time t to current term vec
 
     Args:
         half_life (float): the half life in exponential decay.
-            Default is one day
     """
     # calculate the decay rate lambda
     decay_rate = log(2) / half_life
@@ -123,7 +140,6 @@ def calcuate_term_vec_now(term_vec_t, half_life):
         time_past = term_vec_t[term]['posix_time']
         time_decay_factor = exp(-decay_rate*(t_now-time_past))
         ret[term] = time_decay_factor*term_vec_t[term]['score']
-
     return ret
 
 def filter_term_vec(term_vec):
@@ -139,11 +155,8 @@ def filter_term_vec(term_vec):
             ret[t] = term_vec[t]
     return ret
 
-def get_sorted_term_vec(term_vec, limit=None):
-    # if limit is not None and limit > 0:
-    #     pass
-
-    sorted_items = sorted(term_vec.items(), key=lambda kv: kv[1], reverse=True)
+def get_sorted_dict(dict_, limit=None):
+    sorted_items = sorted(dict_.items(), key=lambda kv: kv[1], reverse=True)
     if isinstance(limit, int) and limit > 0:
         # make it have a limit
         sorted_items = sorted_items[:limit]
@@ -151,3 +164,5 @@ def get_sorted_term_vec(term_vec, limit=None):
     sorted_vec = OrderedDict(sorted_items)
     return sorted_vec
 
+def get_sorted_term_vec(term_vec, limit=None):
+    return get_sorted_dict(term_vec, limit)

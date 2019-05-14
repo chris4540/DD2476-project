@@ -6,6 +6,7 @@ import numpy as np
 from elasticsearch import Elasticsearch
 from algorithm import get_tfidf_weight
 from config import Config
+from time import time
 
 def term_vector_to_weight(term_vecs, weight_scheme):
     """
@@ -51,7 +52,7 @@ def term_vector_to_weight(term_vecs, weight_scheme):
         ret[t] = weight_fun(term_vecs['terms'][t])
     return ret
 
-def fetch_term_vecs(es, doc_id, index, doc_type="page", weight_scheme="tfidf"):
+def fetch_term_vecs(es, doc_id, index, doc_type="page"):
     """
     Fetch term vectors for one documents
 
@@ -68,17 +69,68 @@ def fetch_term_vecs(es, doc_id, index, doc_type="page", weight_scheme="tfidf"):
             "category": <term vectors for category field only>
         }
     """
-    resp = es.termvectors(index=index, id=doc_id, doc_type=doc_type, term_statistics=True)
+
+    resp = es.termvectors(
+        index=index, id=doc_id, doc_type=doc_type, term_statistics=True,
+        field_statistics=(Config.weight_scheme == "tfidf"))
 
     # build up the return
     ret = dict()
 
     if "term_vectors" in resp:
         for k in ["title", "text", "category"]:
-            ret[k] = term_vector_to_weight(resp["term_vectors"][k], weight_scheme)
+            ret[k] = term_vector_to_weight(resp["term_vectors"][k], Config.weight_scheme)
     return ret
 
-def fetch_query_term_vec(es, query, index, doc_type="page", weight_scheme="tfidf"):
+def fetch_mulitple_term_vecs(es, ids, index, fields, doc_type="page"):
+    """
+    Fetch term vectors for multiple documents
+    Args:
+        es (elastic search instance): the connector of the elastic search
+        ids (list): list of document indices
+        index (str): the name of the index in the engine, e.g. "enwiki" or "svwiki"
+        doc_type (Optional [str]): the type of the docuement
+    Return:
+        a dictionary return:
+        {
+            <id1>:{
+                "title": term_vec_for_title,
+                "text": term_vec_for_text,
+                "category": term_vec_for_cat,
+            },
+            <id2>:{
+                ...
+            }
+        }
+    """
+    body = {
+        "ids": ids,
+        "parameters": {
+            "fields" : fields,
+            "offsets" : False,
+            "payloads" : False,
+            "positions" : False,
+            "term_statistics" : True,
+            "field_statistics": (Config.weight_scheme == "tfidf"),
+        }
+    }
+
+    ts = time()
+    resp = es.mtermvectors(index=index, doc_type=doc_type, body=body)
+    print("[Reordering] Time for fetch documents term vecs = ", time() - ts)
+    # build up the return
+    ret = dict()
+
+    for d in resp['docs']:
+        if "term_vectors" in d:
+            doc_id = d['_id']
+            ret[doc_id] = dict()
+            for k in fields:
+                term_vec = term_vector_to_weight(d["term_vectors"][k], Config.weight_scheme)
+                ret[doc_id][k] = term_vec
+    return ret
+
+def fetch_query_term_vec(es, query, index, doc_type="page"):
     """
     TODO: documentation
     """
@@ -96,7 +148,7 @@ def fetch_query_term_vec(es, query, index, doc_type="page", weight_scheme="tfidf
     resp = es.termvectors(index=index, doc_type=doc_type, body=body)
 
     if 'term_vectors' in resp:
-        ret = term_vector_to_weight(resp['term_vectors'][field], weight_scheme)
+        ret = term_vector_to_weight(resp['term_vectors'][field], Config.weight_scheme)
     else:
         ret = dict()
     return ret

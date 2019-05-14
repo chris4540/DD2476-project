@@ -1,6 +1,7 @@
 import os.path
 import json
 from time import time
+from collections import OrderedDict
 from elasticsearch import Elasticsearch
 from flask import Flask, render_template, request
 from usr_profile_lib.usr_profile_log import UserProfileLogger
@@ -9,13 +10,20 @@ from algorithm import aggregate_term_vecs
 from algorithm import filter_term_vec
 from algorithm import calcuate_term_vec_now
 from algorithm import get_sorted_term_vec
+from algorithm import get_sorted_dict
 from algorithm import normalize_term_vec
+from algorithm import weight_mean_term_vecs
 from fetcher import fetch_term_vecs
 from fetcher import fetch_query_term_vec
+from fetcher import fetch_mulitple_term_vecs
 from config import Config
 
 # the folder containing this script
 script_dir = os.path.dirname(__file__)
+
+es = Elasticsearch(Config.elastic_host, port=Config.elastic_port, timeout=Config.timeout)
+#es = Elasticsearch("localhost:9200", port="9200", timeout = 100)
+
 app = Flask(__name__)
 # ===========================================================
 # check the path of the user profile db
@@ -29,97 +37,6 @@ else:
 # ===========================================================
 es = Elasticsearch(Config.elastic_host, port="9200", timeout = 100)
 
-# DOC_TYPE = 'page'
-
-# A test user that likes Adolf Hitler, Albert Speer and Java programming.
-# TEST_USER = {
-#     'hitler' : 10,
-#     'albert' : 5,
-#     'speer' : 3,
-#     'java' : 2,
-#     'programming' : 2
-# }
-
-# def score_doc(doc_vec, u, q):
-#     '''For ease of typing:
-#         u: user vector
-#         q: query vector
-#         ti: document title vector
-#         tx: document text vector
-#         ct: document category vector
-#         s_X_Y: similarity between X and Y
-#     '''
-#     id, ti, tx, ct = doc_vec
-#     s_u_ti = cos_sim(u, ti)
-#     s_u_tx = cos_sim(u, tx)
-#     s_u_ct = cos_sim(u, ct)
-#     s_q_ti = cos_sim(q, ti)
-#     s_q_tx = cos_sim(q, tx)
-#     s_q_ct = cos_sim(q, ct)
-
-#     # Weigh the scores together
-#     score = 0.3 * (0.5 * s_u_ti + 0.2 * s_u_tx + 0.3 * s_u_ct) \
-#         + 0.7 * (0.5 * s_q_ti + 0.2 * s_q_tx + 0.3 * s_q_ct)
-
-#     fmt = '%-40s %.2f %.2f %.2f %.2f %.2f %.2f | %.3f'
-#     title_str = ' '.join(ti.keys())
-#     pretty_text = fmt % (title_str,
-#                          s_u_ti, s_u_tx, s_u_ct,
-#                          s_q_ti, s_q_tx, s_q_ct, score)
-#     return score, id, pretty_text
-
-# def score_docs(doc_vecs, u, q):
-#     scores = [score_doc(d, u, q) for d in doc_vecs]
-#     for score, id, pretty_text in sorted(scores):
-#         print(pretty_text)
-
-# def get_doc_vecs(doc):
-#     '''Get the document vectors for the document.'''
-#     id = doc['_id']
-#     vecs = doc['term_vectors']
-
-#     # Make a tf vector of the title field
-#     terms = vecs['title']['terms']
-#     title_vec = {w : d['term_freq'] for w, d in terms.items()}
-
-#     # Same for the text
-#     terms = vecs['text']['terms']
-#     text_vec = {w : d['term_freq'] for w, d in terms.items()}
-
-#     # And for categories
-#     terms = vecs['category']['terms']
-#     cat_vec = {w : d['term_freq'] for w, d in terms.items()}
-#     return id, title_vec, text_vec, cat_vec
-
-# def fetch_docs_vecs(es, el_res):
-#     '''Fetches the documents' vectors for the result set.'''
-#     ids = [pe["_id"] for pe in el_res["hits"]["hits"]]
-#     body = {
-#         'ids' : ids,
-#         'parameters' : {
-#             'term_statistics' : True
-#         }
-#     }
-#     res = es.mtermvectors(index=INDEX, doc_type=DOC_TYPE,
-#                           body=body)
-#     return [get_doc_vecs(d) for d in res['docs']]
-
-# def fetch_query_vec(es, query):
-#     """
-#     Fetches a term frequency vector from the query.
-
-#     Args:
-
-#     Returns:
-
-#     """
-#     res = es.termvectors(index=INDEX, doc_type=DOC_TYPE,
-#                          body={'doc' : {'text' : query}})
-#     vecs = res['term_vectors']
-#     terms = vecs['text']['terms']
-#     query_vec = {w : d['term_freq'] for w, d in terms.items()}
-#     return query_vec
-# ==============================================================================
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -144,13 +61,16 @@ def log():
             vec = term_vectors[k]
             # filter the term vector
             vec = filter_term_vec(vec)
+            # normalize the term vector
+            vec = normalize_term_vec(vec)
+            # log it to the database
             profile_logger.log_term_vec_to_profile(vec, field=k)
     # ==========================================================================
     return "Ok"
 
 @app.route("/search", methods=["POST"])
 def search():
-    # time_start = time()
+    time_start = time()
     # Extracting information of post body
     data = request.get_json()
     query = data["query"]
@@ -174,15 +94,17 @@ def search():
     query_body = {
         "query": {
             "bool": {
-                "must": {
-                    "match": {
-                        "title": {
-                            "query": query,
-                            "boost": Config.boost['title'],
-                        }
-                    }
-                },
+                # "must": {
+                # },
                 "should": [
+                    {
+                        "match": {
+                            "title": {
+                                "query": query,
+                                "boost": Config.boost['title'],
+                            }
+                        }
+                    },
                     {
                         "match": {
                             "text": {
@@ -199,6 +121,10 @@ def search():
     }
     # ======================================================
     # query expansion
+    # get the query term vector
+    query_term_vec = fetch_query_term_vec(es, query, Config.index)
+
+    # calculate the dynamic profile vector
     term_vecs_t = dict()
     with UserProfileLogger(email) as profile_logger:
         for f in Config.weights.keys():
@@ -210,46 +136,111 @@ def search():
     for f in term_vecs_t.keys():
         tvec_now = calcuate_term_vec_now(
             term_vecs_t[f], half_life=Config.half_life[f])
+        # normalization
+        tvec_now = normalize_term_vec(tvec_now)
+        # save it
         term_vecs_now[f] = tvec_now
+
+    # weighted average
     term_vec = aggregate_term_vecs(term_vecs_now, Config.weights)
-    expansion = get_sorted_term_vec(term_vec, limit=Config.expansion_size)
+    # removing unwanted terms
+    term_vec = filter_term_vec(term_vec)
+
+    dyn_profile_vec = get_sorted_term_vec(term_vec, limit=Config.expansion_size)
+    dyn_profile_vec = normalize_term_vec(dyn_profile_vec)
+    # End calculate the dynamic profiling
+
+    # calculate the static profile
+    with UserProfileLogger(email) as profile_logger:
+        st_profile_vec = profile_logger.get_user_static_profile_vec()
+
+    st_profile_vec = normalize_term_vec(st_profile_vec)
+    profile_vec = weight_mean_term_vecs(
+        st_profile_vec, dyn_profile_vec,
+        Config.profile_weights["static"], Config.profile_weights["dynamic"])
+
+    # remove the impact if the query already in the epansion
+    expansion = dict()
+    for k in profile_vec:
+        if k not in query_term_vec:
+           expansion[k] = profile_vec[k]
+
+    # normalize the expansion again
     expansion = normalize_term_vec(expansion)
-    # TODO: consider expand title field
-    for k, v in expansion.items():  # the expansion is still a term vector
-        term_boost_dict = {
-            "term":{
-                "text": {
-                    "value": k,
-                    "boost": v*Config.feedback_weight,
+    for field in ["text"]:
+        for k, v in expansion.items():  # the expansion is still a term vector
+            term_boost_dict = {
+                "term":{
+                    field: {
+                        "value": k,
+                        "boost": v*Config.feedback_weight*Config.boost[field],
+                    }
                 }
             }
-        }
-        query_body["query"]["bool"]["should"].append(term_boost_dict)
+            query_body["query"]["bool"]["should"].append(term_boost_dict)
     # ======================================================
     # search with the query body
     el_res = es.search(index=Config.index, body=query_body)
 
     # log the query to profile if success
     if el_res["hits"]["total"] > 0:
-         # get the query as term vector
-        query_term_vec = fetch_query_term_vec(es, query, Config.index)
         with UserProfileLogger(email) as profile_logger:
             profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
+    # ==========================================================================
+    # Perpare the well formated results
+    docid_to_score = OrderedDict()  #  doc_id -> score
+    docid_to_desc = dict()  # doc_id -> simple description of doc
+    for s_rslt in el_res["hits"]["hits"]:
+        id_ = s_rslt["_id"]
+        match_score = s_rslt["_score"]
+        docid_to_score[id_] = match_score
+        docid_to_desc[id_] = {
+            "synopsys": s_rslt["_source"]["text"][:400],
+            "title": s_rslt["_source"]["title"]
+        }
+    # ==========================================================================
+    # Reordering
+    # get the similarity score of the docs and our profile
+    if Config.is_reorder_search_results and len(profile_vec) > 0:
+        # fetch doc term vectors
+        docs_term_vecs = fetch_mulitple_term_vecs(
+            es, list(docid_to_score.keys()), Config.index, fields=["text", "category", "text"])
 
+        # for each document, aggregate one document term vector and calcuate
+        # the similary score and the adjusted score
+        adj_scores = dict()
+        for doc_id in docs_term_vecs:
+            doc_tvec = aggregate_term_vecs(docs_term_vecs[doc_id], Config.weights)
+            profile_dot_doc_tvec = cos_sim(doc_tvec, profile_vec)
+            adj_scores[doc_id] = (
+                Config.rerank_alpha*docid_to_score[doc_id]
+            + (1-Config.rerank_alpha)*profile_dot_doc_tvec)
+
+        docid_to_adjscore = get_sorted_dict(adj_scores)
+    else:
+        # no sorting
+        docid_to_adjscore = docid_to_score
+
+    # =========================================================================
     # build up the response
-    res = {"results": []}
-    res["n_results"] = el_res["hits"]["total"]
-    for pe in el_res["hits"]["hits"]:
-        obj = {}
-        obj["id"] = pe["_id"]
-        obj["string"] = pe["_source"]["title"]
-        obj["url"] = Config.wiki_url_fmt.format(title=pe["_source"]["title"])
-        obj["synopsys"] = pe["_source"]["text"][:400]
-        res["results"].append(obj)
+    res = {
+        "results": [],
+        "n_results": el_res["hits"]["total"]
+    }
+    for i, docid in enumerate(docid_to_adjscore.keys()):
+        result = {
+            "id": docid,
+            "pos": i + results_from + 1,
+            "score": docid_to_score[docid],
+            "modified_score": docid_to_adjscore[docid],
+            "string": docid_to_desc[docid]["title"],
+            "synopsys": docid_to_desc[docid]["synopsys"],
+            "url": Config.wiki_url_fmt.format(title=docid_to_desc[docid]["title"]),
+        }
+        res["results"].append(result)
 
-    print(res)
-    # time_end = time() - time_start
-    # print("Search used: ", time_end)
+    time_end = time() - time_start
+    print("Search used: ", time_end)
     return json.dumps(res)
 
 
