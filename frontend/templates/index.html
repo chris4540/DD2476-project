@@ -183,7 +183,7 @@
                 this.searching = true
 
                 this.$http.post(this.search_url, {
-                    email: this.email.value,
+                    email: this.email,
                     results_size: this.results_per_page,
                     query: query,
                     results_from: page * this.results_per_page
