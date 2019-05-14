@@ -248,11 +248,22 @@ def search():
 def user_profile():
     email = request.args['email']
     if request.method == 'GET':
+        if len(email) == 0:
+            return jsonify({
+                "email": "",
+                "age": 0,
+                "city": "",
+                "country": "",
+                "lang": "",
+                "gender": ""
+            })
         UserProfileLogger.create_user_if_not_exists(email)
         with UserProfileLogger(email) as profile_logger:
             profile = profile_logger.get_user_profile()
             return jsonify(profile)
     elif request.method == 'POST':
+        if len(email) == 0:
+            return "Ok"
         data = request.get_json()
         with UserProfileLogger(email) as profile_logger:
             profile_logger.modify_user_profile(data)

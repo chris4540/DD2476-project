@@ -1,0 +1,519 @@
+CLICK#01: Lista över kvarter i Gamla stan
+ 45.4914 Lista över kvarter i Gamla stan
+ 34.7638 Gamla stan
+ 32.9343 Stadsplanering i Gamla stan
+ 31.5397 Gamla stan, Kalmar
+ 30.8918 Gator och torg i Gamla stan
+ 28.5708 Gamla stan, Motala
+ 28.4800 Gamla stan, Dubrovnik
+ 27.9318 Maria-Gamla stans stadsdelsområde
+ 27.7743 Möt mig i Gamla stan
+ 27.5841 Gamle stan
+ 27.1841 Gamla stan (tunnelbanestation)
+ 26.6805 Gamla stan (film)
+ 26.5227 Gamla Stan (musikgrupp)
+ 25.9266 Gamla stan, Falkenberg
+ 25.4748 Teatern i Gamla stan
+ 25.3698 Väst på stan
+ 24.3966 Melodin från Gamla Stan
+ 24.3293 Kvarteret Rådstugan
+ 24.3108 Gamla staden
+ 24.2158 Kvarteret Eurydice
+ 23.7110 Kvarteret Pan
+ 23.6483 Kvarteret Cassiopea
+ 23.5357 Kvarteret Argus
+ 23.4533 Lista över offentlig konst i Gamla stan i Stockholm
+ 23.2621 Kvarteret Castor
+ 23.0978 Kvarteret Ganymedes
+ 22.9264 Apoteket Kronan (Gamla stan)
+ 22.7797 Kvarteret Cepheus
+ 22.7777 Kvarteret Milon
+ 22.6258 Kvarteret Python
+ 22.6220 Kvarteret Galatea
+ 22.4676 Kvarteret Cephalus
+ 22.4449 Kvarteret Diana
+ 22.2706 Sankt Göran och draken, Gamla stan
+ 22.2243 Kvarteret Æolus
+ 21.6607 Kvarteret Bacchus
+ 21.4626 Kvarteret Bootes
+ 21.4248 Gamla Stockholm
+ 21.2086 Kvarteret Neptunus
+ 21.0378 Kvarteret Erisichton
+ 21.0017 Öst på stan
+ 20.9828 Kvarteret Ajax
+ 20.9417 Kvarteret Neptunus större
+ 20.8625 Kvarteret Amphitryon
+ 20.8530 Mälartorget
+ 20.7954 Kvarteret Typhon
+ 20.7421 Glaucus
+ 20.6824 Kvarteret Iphigenia
+ 20.6617 Marsyas (olika betydelser)
+ 20.5705 Ryningska palatset
+
+CLICK#02: Gamla stan (tunnelbanestation)
+ 43.3651 Gamla stan (tunnelbanestation)
+ 39.1795 Lista över kvarter i Gamla stan
+ 34.1451 Gamla stan
+ 31.9076 Stadsplanering i Gamla stan
+ 30.8557 Gamla stan, Kalmar
+ 30.7464 Gator och torg i Gamla stan
+ 28.5408 Gamla stan, Motala
+ 28.3837 Maria-Gamla stans stadsdelsområde
+ 28.3570 Gamla stan, Dubrovnik
+ 27.8436 Möt mig i Gamla stan
+ 27.5270 Gamle stan
+ 26.9579 Gamla stan (film)
+ 26.8412 Gamla staden
+ 26.7230 Gamla Stan (musikgrupp)
+ 26.2891 Teatern i Gamla stan
+ 25.8734 Gamla stan, Falkenberg
+ 24.5957 Melodin från Gamla Stan
+ 24.2721 Väst på stan
+ 24.1913 Lista över offentlig konst i Gamla stan i Stockholm
+ 22.9153 Sankt Göran och draken, Gamla stan
+ 22.9019 Apoteket Kronan (Gamla stan)
+ 22.7441 Kvarteret Rådstugan
+ 22.7021 Mälartorget
+ 22.4239 Öst på stan
+ 22.0566 Gamla Stockholm
+ 21.7510 Munkbrohamnen
+ 21.7249 Kvarteret Cassiopea
+ 21.3993 Kvarteret Eurydice
+ 21.2966 Kvarteret Argus
+ 21.2626 Kvarteret Pan
+ 21.1539 Kvarteret Cepheus
+ 21.0388 Kvarteret Milon
+ 20.8427 Kvarteret Castor
+ 20.6033 Kvarteret Python
+ 20.5863 Kvarteret Ganymedes
+ 20.4615 Kvarteret Cephalus
+ 20.3923 Kvarteret Diana
+ 20.2329 Munkbrogatan
+ 20.1468 Kvarteret Æolus
+ 20.1212 Kvarteret Galatea
+ 20.0852 Hebbes bro
+ 20.0422 Stans
+ 20.0005 Vera Siöcrona
+ 19.8112 Kvarteret Bacchus
+ 19.7575 Kvarteret Bootes
+ 19.7559 Kvarteret Neptunus
+ 19.5752 Glaucus
+ 19.5138 Marsyas (olika betydelser)
+ 19.4566 Stan
+ 19.2993 Kvarteret Neptunus större
+
+CLICK#03: Munkbrohamnen
+ 46.8075 Gamla stan (tunnelbanestation)
+ 35.0440 Munkbrohamnen
+ 34.9465 Lista över kvarter i Gamla stan
+ 33.2389 Gamla stan
+ 30.5936 Stadsplanering i Gamla stan
+ 30.1434 Gamla stan, Kalmar
+ 29.3605 Gator och torg i Gamla stan
+ 28.4844 Gamla stan, Motala
+ 28.4130 Maria-Gamla stans stadsdelsområde
+ 28.2600 Gamla stan, Dubrovnik
+ 27.8460 Möt mig i Gamla stan
+ 27.3828 Gamle stan
+ 27.1671 Hebbes bro
+ 26.6745 Gamla stan (film)
+ 26.4261 Gamla Stan (musikgrupp)
+ 26.1634 Gamla staden
+ 25.7425 Teatern i Gamla stan
+ 25.7350 Gamla stan, Falkenberg
+ 24.4422 Melodin från Gamla Stan
+ 23.9105 Lista över offentlig konst i Gamla stan i Stockholm
+ 23.7890 Väst på stan
+ 22.4792 Apoteket Kronan (Gamla stan)
+ 22.3096 Sankt Göran och draken, Gamla stan
+ 21.8758 Öst på stan
+ 21.6354 Gamla Stockholm
+ 20.7359 Kvarteret Rådstugan
+ 20.4611 Mälartorget
+ 20.0160 Kvarteret Cassiopea
+ 19.8561 Stans
+ 19.7485 Kvarteret Cepheus
+ 19.5033 Kvarteret Eurydice
+ 19.4560 Stan
+ 19.4350 Kvarteret Pan
+ 19.3892 Kvarteret Milon
+ 19.1508 Munkbrogatan
+ 19.1082 Kvarteret Argus
+ 19.0787 Stana
+ 19.0299 Kvarteret Castor
+ 18.9150 Vera Siöcrona
+ 18.8476 Kvarteret Python
+ 18.8125 Kvarteret Diana
+ 18.6248 Kvarteret Ganymedes
+ 18.5961 Kvarteret Cephalus
+ 18.4090 Kvarteret Æolus
+ 18.2217 Gamla porten
+ 18.1964 Från utställningsområdet "Gamla Stockholm" (film)
+ 18.1930 Glaucus
+ 18.1636 Gamle furutrær
+ 18.1602 Marsyas (olika betydelser)
+ 18.1564 Kvarteret Bacchus
+
+CLICK#04: Gröna linjen
+46.4836 Gamla stan (tunnelbanestation)
+ 33.3151 Lista över kvarter i Gamla stan
+ 32.7110 Gamla stan
+ 31.1283 Munkbrohamnen
+ 29.8722 Stadsplanering i Gamla stan
+ 29.7381 Gamla stan, Kalmar
+ 28.7546 Gator och torg i Gamla stan
+ 28.4322 Gamla stan, Motala
+ 28.1817 Maria-Gamla stans stadsdelsområde
+ 28.1766 Gamla stan, Dubrovnik
+ 27.8283 Möt mig i Gamla stan
+ 27.3347 Gamle stan
+ 26.5625 Gamla stan (film)
+ 26.3094 Gamla Stan (musikgrupp)
+ 25.7499 Gamla staden
+ 25.6882 Gamla stan, Falkenberg
+ 25.5215 Teatern i Gamla stan
+ 24.8517 Hebbes bro
+ 24.3808 Melodin från Gamla Stan
+ 23.6327 Lista över offentlig konst i Gamla stan i Stockholm
+ 23.3358 Väst på stan
+ 22.2776 Apoteket Kronan (Gamla stan)
+ 22.0256 Sankt Göran och draken, Gamla stan
+ 21.5998 Öst på stan
+ 21.4687 Gamla Stockholm
+ 19.7268 Stans
+ 19.6661 Kvarteret Rådstugan
+ 19.4710 Stan
+ 19.0742 Stana
+ 19.0220 Kvarteret Cassiopea
+ 19.0176 Mälartorget
+ 18.9329 Kvarteret Cepheus
+ 18.6383 Röda stan
+ 18.5348 Kvarteret Eurydice
+ 18.4821 Kvarteret Milon
+ 18.4224 Kvarteret Pan
+ 18.3605 Vera Siöcrona
+ 18.2616 Munkbrogatan
+ 18.1490 Gamle furutrær
+ 18.1195 Gamla porten
+ 18.0471 Kvarteret Castor
+ 18.0160 Kvarteret Argus
+ 17.9897 Från utställningsområdet "Gamla Stockholm" (film)
+ 17.8511 Kvarteret Diana
+ 17.8505 Kvarteret Python
+ 17.8408 Gamla Stockholm (kulisstad)
+ 17.7573 Gamla riksdagshuset
+ 17.6815 Kvarteret Cephalus
+ 17.6336 Rastislav Staňa
+ 17.6077 Kvarteret Ganymedes
+
+CLICK#05: Stadsplanering i Gamla stan
+ 44.0222 Gamla stan (tunnelbanestation)
+ 35.1247 Lista över kvarter i Gamla stan
+ 34.9331 Gamla stan
+ 32.5929 Stadsplanering i Gamla stan
+ 30.9248 Gator och torg i Gamla stan
+ 30.1145 Gamla stan, Kalmar
+ 29.1231 Gamla stan, Motala
+ 29.1198 Munkbrohamnen
+ 28.8058 Maria-Gamla stans stadsdelsområde
+ 28.7211 Gamla stan, Dubrovnik
+ 27.8376 Möt mig i Gamla stan
+ 27.5406 Gamle stan
+ 27.1228 Gamla stan (film)
+ 26.6578 Gamla Stan (musikgrupp)
+ 26.5687 Gamla staden
+ 25.9830 Teatern i Gamla stan
+ 25.7770 Gamla stan, Falkenberg
+ 24.6926 Melodin från Gamla Stan
+ 24.1581 Hebbes bro
+ 24.0613 Lista över offentlig konst i Gamla stan i Stockholm
+ 23.4992 Väst på stan
+ 23.3086 Apoteket Kronan (Gamla stan)
+ 22.5024 Sankt Göran och draken, Gamla stan
+ 22.0624 Öst på stan
+ 21.9260 Gamla Stockholm
+ 21.0547 Munkbrogatan
+ 21.0269 Kvarteret Cepheus
+ 20.0180 Stans
+ 19.8561 Kvarteret Rådstugan
+ 19.6929 Kvarteret Diana
+ 19.6883 Röda stan
+ 19.6665 Mälartorget
+ 19.4822 Kvarteret Cassiopea
+ 19.4568 Stan
+ 19.4413 Kvarteret Eurydice
+ 19.4166 Kvarteret Pan
+ 19.2947 Kvarteret Galatea
+ 19.0799 Stana
+ 18.9911 Kvarteret Milon
+ 18.8248 Kvarteret Cephalus
+ 18.8169 Vera Siöcrona
+ 18.7894 Gamla riksdagshuset
+ 18.7745 Gamla Stockholm (kulisstad)
+ 18.7347 Kvarteret Iphigenia
+ 18.6985 Kvarteret Castor
+ 18.6958 Kvarteret Python
+ 18.6824 Från utställningsområdet "Gamla Stockholm" (film)
+ 18.6581 Kvarteret Argus
+ 18.6217 Kvarteret Ganymedes
+ 18.5095 Kvarteret Æolus
+
+CLICK#06: Akalla
+ 41.1817 Gamla stan (tunnelbanestation)
+ 34.8906 Gamla stan
+ 33.9645 Lista över kvarter i Gamla stan
+ 31.8637 Stadsplanering i Gamla stan
+ 30.3802 Gator och torg i Gamla stan
+ 29.9630 Gamla stan, Kalmar
+ 29.6740 Gamla stan, Motala
+ 29.4223 Maria-Gamla stans stadsdelsområde
+ 29.0087 Gamla stan, Dubrovnik
+ 28.1543 Gamle stan
+ 27.8299 Möt mig i Gamla stan
+ 27.2583 Munkbrohamnen
+ 27.1939 Gamla stan (film)
+ 27.0138 Gamla Stan (musikgrupp)
+ 26.7917 Gamla staden
+ 25.8600 Teatern i Gamla stan
+ 25.7389 Gamla stan, Falkenberg
+ 24.7709 Melodin från Gamla Stan
+ 24.2251 Lista över offentlig konst i Gamla stan i Stockholm
+ 23.5842 Väst på stan
+ 23.3858 Apoteket Kronan (Gamla stan)
+ 23.1071 Hebbes bro
+ 22.4661 Sankt Göran och draken, Gamla stan
+ 22.3274 Öst på stan
+ 21.9506 Gamla Stockholm
+ 20.8384 Kvarteret Cepheus
+ 20.2973 Munkbrogatan
+ 19.9601 Stans
+ 19.7021 Röda stan
+ 19.4496 Stan
+ 19.3353 Kvarteret Rådstugan
+ 19.1873 Gamla riksdagshuset
+ 19.0758 Stana
+ 19.0460 Kvarteret Diana
+ 19.0169 Kvarteret Cassiopea
+ 19.0152 Kvarteret Pan
+ 18.9294 Mälartorget
+ 18.8719 Gamla Stockholm (kulisstad)
+ 18.7318 Kvarteret Eurydice
+ 18.7258 Vera Siöcrona
+ 18.7054 Från utställningsområdet "Gamla Stockholm" (film)
+ 18.6205 Kvarteret Cephalus
+ 18.6051 Kvarteret Galatea
+ 18.4857 Kvarteret Milon
+ 18.3643 Kvarteret Castor
+ 18.2941 Kvarteret Python
+ 18.2387 Gamla porten
+ 18.1682 Gamle furutrær
+ 18.1642 Kvarteret Iphigenia
+ 18.0942 Kvarteret Argus
+
+CLICK#07: Riksdagen
+ 41.1817 Gamla stan (tunnelbanestation)
+ 34.8906 Gamla stan
+ 33.9645 Lista över kvarter i Gamla stan
+ 31.8637 Stadsplanering i Gamla stan
+ 30.3802 Gator och torg i Gamla stan
+ 29.9630 Gamla stan, Kalmar
+ 29.6740 Gamla stan, Motala
+ 29.4223 Maria-Gamla stans stadsdelsområde
+ 29.0087 Gamla stan, Dubrovnik
+ 28.1543 Gamle stan
+ 27.8299 Möt mig i Gamla stan
+ 27.2583 Munkbrohamnen
+ 27.1939 Gamla stan (film)
+ 27.0138 Gamla Stan (musikgrupp)
+ 26.7917 Gamla staden
+ 25.8600 Teatern i Gamla stan
+ 25.7389 Gamla stan, Falkenberg
+ 24.7709 Melodin från Gamla Stan
+ 24.2251 Lista över offentlig konst i Gamla stan i Stockholm
+ 23.5842 Väst på stan
+ 23.3858 Apoteket Kronan (Gamla stan)
+ 23.1071 Hebbes bro
+ 22.4661 Sankt Göran och draken, Gamla stan
+ 22.3274 Öst på stan
+ 21.9506 Gamla Stockholm
+ 20.8384 Kvarteret Cepheus
+ 20.2973 Munkbrogatan
+ 19.9601 Stans
+ 19.7021 Röda stan
+ 19.4496 Stan
+ 19.3353 Kvarteret Rådstugan
+ 19.1873 Gamla riksdagshuset
+ 19.0758 Stana
+ 19.0460 Kvarteret Diana
+ 19.0169 Kvarteret Cassiopea
+ 19.0152 Kvarteret Pan
+ 18.9294 Mälartorget
+ 18.8719 Gamla Stockholm (kulisstad)
+ 18.7318 Kvarteret Eurydice
+ 18.7258 Vera Siöcrona
+ 18.7054 Från utställningsområdet "Gamla Stockholm" (film)
+ 18.6205 Kvarteret Cephalus
+ 18.6051 Kvarteret Galatea
+ 18.4857 Kvarteret Milon
+ 18.3643 Kvarteret Castor
+ 18.2941 Kvarteret Python
+ 18.2387 Gamla porten
+ 18.1682 Gamle furutrær
+ 18.1642 Kvarteret Iphigenia
+ 18.0942 Kvarteret Argus
+
+CLICK#08: Gamla riksdagshuset
+ 40.2541 Gamla stan (tunnelbanestation)
+ 35.4977 Gamla stan
+ 33.4750 Lista över kvarter i Gamla stan
+ 32.0879 Stadsplanering i Gamla stan
+ 30.1109 Maria-Gamla stans stadsdelsområde
+ 30.0105 Gator och torg i Gamla stan
+ 29.9025 Gamla stan, Kalmar
+ 29.7631 Gamla stan, Motala
+ 29.6420 Gamla stan, Dubrovnik
+ 28.9099 Munkbrohamnen
+ 28.1060 Gamle stan
+ 27.8693 Möt mig i Gamla stan
+ 27.4073 Gamla stan (film)
+ 27.0768 Gamla Stan (musikgrupp)
+ 26.8718 Gamla riksdagshuset
+ 26.7988 Gamla staden
+ 26.1738 Teatern i Gamla stan
+ 25.7244 Gamla stan, Falkenberg
+ 24.7594 Melodin från Gamla Stan
+ 24.6920 Lista över offentlig konst i Gamla stan i Stockholm
+ 24.4022 Apoteket Kronan (Gamla stan)
+ 23.9018 Väst på stan
+ 23.3931 Hebbes bro
+ 23.3768 Öst på stan
+ 22.8056 Sankt Göran och draken, Gamla stan
+ 22.1815 Gamla Stockholm
+ 21.2841 Kvarteret Cepheus
+ 20.3228 Mälartorget
+ 20.0170 Munkbrogatan
+ 19.9658 Kvarteret Pan
+ 19.9353 Stans
+ 19.7987 Röda stan
+ 19.7814 Kvarteret Diana
+ 19.6661 Gamla Stockholm (kulisstad)
+ 19.4903 Gamla Norrbro
+ 19.4624 Kvarteret Cassiopea
+ 19.4579 Kvarteret Cephalus
+ 19.4365 Stan
+ 19.2897 Kvarteret Rådstugan
+ 19.2785 Vera Siöcrona
+ 19.1755 Från utställningsområdet "Gamla Stockholm" (film)
+ 19.0961 Gamla Jernkontoret
+ 19.0683 Stana
+ 18.9025 Kvarteret Iphigenia
+ 18.8699 Kanslihuset
+ 18.7860 Kvarteret Eurydice
+ 18.7671 Kvarteret Castor
+ 18.6677 Kvarteret Python
+ 18.5982 Kvarteret Argus
+ 18.5519 Sammanbindningsbanan
+
+CLICK#09: Sammanbindningsbanan
+ 41.2443 Gamla stan (tunnelbanestation)
+ 34.9165 Gamla stan
+ 32.5150 Lista över kvarter i Gamla stan
+ 32.0679 Stadsplanering i Gamla stan
+ 29.6847 Maria-Gamla stans stadsdelsområde
+ 29.6836 Gamla stan, Kalmar
+ 29.5896 Gator och torg i Gamla stan
+ 29.5609 Gamla stan, Motala
+ 29.4584 Gamla stan, Dubrovnik
+ 27.9669 Gamle stan
+ 27.8670 Möt mig i Gamla stan
+ 27.6682 Munkbrohamnen
+ 27.2874 Gamla stan (film)
+ 26.9548 Gamla Stan (musikgrupp)
+ 26.4816 Gamla staden
+ 26.1128 Gamla riksdagshuset
+ 26.0584 Teatern i Gamla stan
+ 25.6849 Gamla stan, Falkenberg
+ 24.7472 Melodin från Gamla Stan
+ 24.4644 Lista över offentlig konst i Gamla stan i Stockholm
+ 24.4630 Sammanbindningsbanan
+ 24.0439 Apoteket Kronan (Gamla stan)
+ 23.6841 Väst på stan
+ 23.1156 Öst på stan
+ 22.6578 Sankt Göran och draken, Gamla stan
+ 22.5677 Hebbes bro
+ 22.0859 Gamla Stockholm
+ 20.6356 Kvarteret Cepheus
+ 19.8485 Stans
+ 19.7029 Sammanbindningsbanan (järnväg)
+ 19.4493 Mälartorget
+ 19.4467 Gamla Stockholm (kulisstad)
+ 19.4312 Stan
+ 19.4079 Munkbrogatan
+ 19.3932 Röda stan
+ 19.1451 Kvarteret Pan
+ 19.0775 Kvarteret Diana
+ 19.0659 Stana
+ 19.0050 Från utställningsområdet "Gamla Stockholm" (film)
+ 18.9862 Vera Siöcrona
+ 18.9312 Kvarteret Cephalus
+ 18.9128 Gamla Norrbro
+ 18.8701 Kvarteret Cassiopea
+ 18.8279 Gamla Jernkontoret
+ 18.7117 Kvarteret Rådstugan
+ 18.3528 Kanslihuset
+ 18.2976 Slagsmål i Gamla Stockholm
+ 18.2831 Gamle furutrær
+ 18.2421 Gustav Fredrik Norling
+ 18.1982 Gamla porten
+
+CLICK#10: Gamla stan
+ 40.6614 Gamla stan (tunnelbanestation)
+ 36.7333 Gamla stan
+ 32.8323 Stadsplanering i Gamla stan
+ 32.7588 Lista över kvarter i Gamla stan
+ 30.3433 Maria-Gamla stans stadsdelsområde
+ 30.1394 Gator och torg i Gamla stan
+ 30.0927 Gamla stan, Dubrovnik
+ 30.0622 Gamla stan, Motala
+ 29.9166 Gamla stan, Kalmar
+ 28.3279 Gamle stan
+ 27.8734 Möt mig i Gamla stan
+ 27.7053 Gamla stan (film)
+ 27.3067 Gamla Stan (musikgrupp)
+ 27.1247 Gamla staden
+ 27.0999 Munkbrohamnen
+ 26.5629 Teatern i Gamla stan
+ 26.3828 Gamla riksdagshuset
+ 25.7934 Gamla stan, Falkenberg
+ 25.0875 Lista över offentlig konst i Gamla stan i Stockholm
+ 24.9928 Melodin från Gamla Stan
+ 24.8385 Apoteket Kronan (Gamla stan)
+ 24.4399 Sammanbindningsbanan
+ 23.9986 Väst på stan
+ 23.6120 Öst på stan
+ 23.2649 Sankt Göran och draken, Gamla stan
+ 22.5626 Gamla Stockholm
+ 22.3438 Hebbes bro
+ 21.5426 Kvarteret Cepheus
+ 20.3409 Gamla Stockholm (kulisstad)
+ 20.0581 Röda stan
+ 19.9398 Stans
+ 19.8010 Sammanbindningsbanan (järnväg)
+ 19.7745 Mälartorget
+ 19.6491 Munkbrogatan
+ 19.6010 Kvarteret Pan
+ 19.5851 Från utställningsområdet "Gamla Stockholm" (film)
+ 19.5795 Gamla Norrbro
+ 19.4659 Kvarteret Diana
+ 19.4652 Kvarteret Cephalus
+ 19.4637 Vera Siöcrona
+ 19.4454 Stan
+ 19.4156 Gamla Jernkontoret
+ 19.2086 Kvarteret Cassiopea
+ 19.1336 Slagsmål i Gamla Stockholm
+ 19.1106 Kvarteret Rådstugan
+ 19.0738 Stana
+ 18.7529 Kvarteret Castor
+ 18.7037 Gustav Fredrik Norling
+ 18.6803 Kvarteret Python
+ 18.6790 Kanslihuset
