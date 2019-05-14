@@ -233,7 +233,6 @@
                 })
             },
             submit_user_profile: function () {
-                this.refresh_email();
                 instance = M.Chips.getInstance($('.chips'));
                 terms = [];
                 for (i = instance.chipsData.length - 1; i >= 0; i--) {
@@ -252,7 +251,8 @@
                 this.$http.post("/static_profile?email=" + this.email, {
                     terms: terms
                 }).then(response => {
-                    this.get_static_query_terms()
+                    this.get_static_query_terms();
+                    this.get_user_profile();
                 }, failed_response => {
 
                 })
