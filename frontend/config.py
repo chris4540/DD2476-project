@@ -36,8 +36,8 @@ class Config:
     }
 
     profile_weights = {
-        "static": 0.5,
-        "dynamic": 0.5,
+        "static": 0.3,
+        "dynamic": 0.7,
     }
 
     static_info_to_profile = {
@@ -48,5 +48,5 @@ class Config:
 
     weight_scheme = "tfidf"
     # the alpah value for re-ranking
-    rerank_alpha = 0.5
+    rerank_alpha = 0.7
     is_reorder_search_results = True  # reordering is a bit slow, option to turn it off

@@ -239,18 +239,6 @@ def search():
         }
         res["results"].append(result)
 
-    # for i, pe in enumerate(el_res["hits"]["hits"]):
-    #     obj = {}
-    #     obj["id"] = pe["_id"]
-    #     obj["pos"] = i + results_from + 1
-    #     obj["score"] = pe["_score"]
-    #     obj["modified_score"] = obj["score"]  # TODO: change this, Chris
-
-    #     obj["string"] = pe["_source"]["title"]
-    #     obj["url"] = Config.wiki_url_fmt.format(title=pe["_source"]["title"])
-    #     obj["synopsys"] = pe["_source"]["text"][:400]
-
-    #     res["results"].append(obj)
     time_end = time() - time_start
     print("Search used: ", time_end)
     return json.dumps(res)

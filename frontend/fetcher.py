@@ -69,7 +69,10 @@ def fetch_term_vecs(es, doc_id, index, doc_type="page"):
             "category": <term vectors for category field only>
         }
     """
-    resp = es.termvectors(index=index, id=doc_id, doc_type=doc_type, term_statistics=True)
+
+    resp = es.termvectors(
+        index=index, id=doc_id, doc_type=doc_type, term_statistics=True,
+        field_statistics=(Config.weight_scheme == "tfidf"))
 
     # build up the return
     ret = dict()
@@ -108,9 +111,10 @@ def fetch_mulitple_term_vecs(es, ids, index, fields, doc_type="page"):
             "payloads" : False,
             "positions" : False,
             "term_statistics" : True,
-            "field_statistics" : True,
+            "field_statistics": (Config.weight_scheme == "tfidf"),
         }
     }
+
     ts = time()
     resp = es.mtermvectors(index=index, doc_type=doc_type, body=body)
     print("[Reordering] Time for fetch documents term vecs = ", time() - ts)
