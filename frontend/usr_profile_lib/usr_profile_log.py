@@ -103,7 +103,15 @@ class UserProfileLogger:
                     col_key (list / tuple):
                     col_vals (list of tuples):
                 """
-        placeholders = ["{} = {}".format(a, b if type(b) is not str else '"{}"'.format(b)) for a, b in
+        def preprocess(value):
+            if type(value) is str:
+                return '"{}"'.format(value)
+            elif type(value) is bool:
+                return 1 if value is True else False
+            else:
+                return value
+
+        placeholders = ["{} = {}".format(a, preprocess(b)) for a, b in
                         zip(col_key, col_vals)]
         cond = " AND ".join(placeholders)
         sql = "DELETE FROM {} WHERE {};".format(table_name, cond)
