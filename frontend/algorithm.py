@@ -86,6 +86,8 @@ def aggregate_term_vecs(term_vecs, weigths):
         weight_sum += weigths[cat]
 
     for cat in weigths.keys():
+        if cat not in term_vecs:
+            continue
         w = weigths[cat] / weight_sum
         t_vec = term_vecs[cat]
         n_t_vec = normalize_term_vec(t_vec)
@@ -153,11 +155,8 @@ def filter_term_vec(term_vec):
             ret[t] = term_vec[t]
     return ret
 
-def get_sorted_term_vec(term_vec, limit=None):
-    # if limit is not None and limit > 0:
-    #     pass
-
-    sorted_items = sorted(term_vec.items(), key=lambda kv: kv[1], reverse=True)
+def get_sorted_dict(dict_, limit=None):
+    sorted_items = sorted(dict_.items(), key=lambda kv: kv[1], reverse=True)
     if isinstance(limit, int) and limit > 0:
         # make it have a limit
         sorted_items = sorted_items[:limit]
@@ -165,3 +164,5 @@ def get_sorted_term_vec(term_vec, limit=None):
     sorted_vec = OrderedDict(sorted_items)
     return sorted_vec
 
+def get_sorted_term_vec(term_vec, limit=None):
+    return get_sorted_dict(term_vec, limit)

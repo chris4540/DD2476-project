@@ -8,8 +8,9 @@ from usr_profile_lib.usr_profile_log import UserProfileLogger
 from config import Config
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-# https://github.com/googlefonts/noto-cjk/blob/master/NotoSansCJK-Regular.ttc
-font = r'NotoSansCJK-Regular.ttc'  # need to download it
+
+# font = r'NotoSansCJK-Regular.ttc'  # need to download it
+font = None
 
 
 def plot_usr_word_cloud(email):
@@ -43,8 +44,16 @@ def plot_usr_word_cloud(email):
     # normalize the expansion again
     expansion = normalize_term_vec(expansion)
     # ===========================================================================
-    wcloud = WordCloud(font_path=font,
-        background_color="white", width=1000, height=860, margin=2)
+    kwargs = {
+        "background_color": "white",
+        "width": 1000,
+        "height": 860,
+        "margin": 2,
+    }
+    if font:
+        kwargs["font_path"] = font
+    wcloud = WordCloud(**kwargs)
+
     wcloud.generate_from_frequencies(expansion)
 
     user_name = email.split("@")[0]
@@ -56,7 +65,13 @@ if __name__ == "__main__":
         # "dfsafd@kth.se",
         # "antolu@kth.se",
         # "liberman@kth.se",
-        "testuser@kth.se"
+        # "testuser@kth.se"
+        "userA@kth.se",
+        "userB@kth.se",
+        "userC@kth.se",
+        "userD@kth.se",
+        "userE@kth.se",
+        "userF@kth.se",
     ]
 
     for email in emails:

@@ -1,6 +1,7 @@
 import os.path
 import json
 from time import time
+from collections import OrderedDict
 from elasticsearch import Elasticsearch
 from flask import Flask, render_template, request, jsonify
 from usr_profile_lib.usr_profile_log import UserProfileLogger
@@ -9,20 +10,19 @@ from algorithm import aggregate_term_vecs
 from algorithm import filter_term_vec
 from algorithm import calcuate_term_vec_now
 from algorithm import get_sorted_term_vec
+from algorithm import get_sorted_dict
 from algorithm import normalize_term_vec
 from algorithm import weight_mean_term_vecs
 from fetcher import fetch_term_vecs
 from fetcher import fetch_query_term_vec
+from fetcher import fetch_mulitple_term_vecs
 from config import Config
 
 # the folder containing this script
 script_dir = os.path.dirname(__file__)
 
-es = Elasticsearch("elastic.haochen.lu", port="9200", timeout = 100)
+es = Elasticsearch(Config.elastic_host, port=Config.elastic_port, timeout=Config.timeout)
 #es = Elasticsearch("localhost:9200", port="9200", timeout = 100)
-
-INDEX = 'svwiki'
-DOC_TYPE = 'page'
 
 app = Flask(__name__)
 # ===========================================================
@@ -70,7 +70,7 @@ def log():
 
 @app.route("/search", methods=["POST"])
 def search():
-    # time_start = time()
+    time_start = time()
     # Extracting information of post body
     data = request.get_json()
     query = data["query"]
@@ -94,15 +94,17 @@ def search():
     query_body = {
         "query": {
             "bool": {
-                "must": {
-                    "match": {
-                        "title": {
-                            "query": query,
-                            "boost": Config.boost['title'],
-                        }
-                    }
-                },
+                # "must": {
+                # },
                 "should": [
+                    {
+                        "match": {
+                            "title": {
+                                "query": query,
+                                "boost": Config.boost['title'],
+                            }
+                        }
+                    },
                     {
                         "match": {
                             "text": {
@@ -153,20 +155,20 @@ def search():
         st_profile_vec = profile_logger.get_user_static_profile_vec()
 
     st_profile_vec = normalize_term_vec(st_profile_vec)
-    expansion = weight_mean_term_vecs(
+    profile_vec = weight_mean_term_vecs(
         st_profile_vec, dyn_profile_vec,
         Config.profile_weights["static"], Config.profile_weights["dynamic"])
 
-    # subtract the impact if the query already in the epansion
-    for k in query_term_vec:
-        if k in expansion:
-            expansion.pop(k)
+    # remove the impact if the query already in the epansion
+    expansion = dict()
+    for k in profile_vec:
+        if k not in query_term_vec:
+           expansion[k] = profile_vec[k]
 
     # normalize the expansion again
     expansion = normalize_term_vec(expansion)
-    for field in ["title", "text"]:
+    for field in ["text"]:
         for k, v in expansion.items():  # the expansion is still a term vector
-            boost_val = v*Config.feedback_weight*Config.boost[field]
             term_boost_dict = {
                 "term":{
                     field: {
@@ -185,22 +187,60 @@ def search():
         with UserProfileLogger(email) as profile_logger:
             profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
     # ==========================================================================
-    # print(len(el_res["hits"]["hits"]))
+    # Perpare the well formated results
+    docid_to_score = OrderedDict()  #  doc_id -> score
+    docid_to_desc = dict()  # doc_id -> simple description of doc
+    for s_rslt in el_res["hits"]["hits"]:
+        id_ = s_rslt["_id"]
+        match_score = s_rslt["_score"]
+        docid_to_score[id_] = match_score
+        docid_to_desc[id_] = {
+            "synopsys": s_rslt["_source"]["text"][:400],
+            "title": s_rslt["_source"]["title"]
+        }
+    # ==========================================================================
+    # Reordering
+    # get the similarity score of the docs and our profile
+    if Config.is_reorder_search_results and len(profile_vec) > 0:
+        # fetch doc term vectors
+        docs_term_vecs = fetch_mulitple_term_vecs(
+            es, list(docid_to_score.keys()), Config.index, fields=["text", "category", "text"])
+
+        # for each document, aggregate one document term vector and calcuate
+        # the similary score and the adjusted score
+        adj_scores = dict()
+        for doc_id in docs_term_vecs:
+            doc_tvec = aggregate_term_vecs(docs_term_vecs[doc_id], Config.weights)
+            profile_dot_doc_tvec = cos_sim(doc_tvec, profile_vec)
+            adj_scores[doc_id] = (
+                Config.rerank_alpha*docid_to_score[doc_id]
+            + (1-Config.rerank_alpha)*profile_dot_doc_tvec)
+
+        docid_to_adjscore = get_sorted_dict(adj_scores)
+    else:
+        # no sorting
+        docid_to_adjscore = docid_to_score
+
+    # =========================================================================
     # build up the response
-    res = {"results": []}
-    res["n_results"] = el_res["hits"]["total"]
-    for i, pe in enumerate(el_res["hits"]["hits"]):
-        obj = {}
-        obj["id"] = pe["_id"]
-        obj["pos"] = i + results_from + 1
-        obj["score"] = pe["_score"]
-        obj["modified_score"] = obj["score"]  # TODO: change this, Chris
-        obj["string"] = pe["_source"]["title"]
-        obj["url"] = Config.wiki_url_fmt.format(title=pe["_source"]["title"])
-        obj["synopsys"] = pe["_source"]["text"][:400]
-        res["results"].append(obj)
-    # time_end = time() - time_start
-    # print("Search used: ", time_end)
+    res = {
+        "results": [],
+        "n_results": el_res["hits"]["total"]
+    }
+    for i, docid in enumerate(docid_to_adjscore.keys()):
+        result = {
+            "id": docid,
+            "pos": i + results_from + 1,
+            "score": docid_to_score[docid],
+            "modified_score": docid_to_adjscore[docid],
+            "string": docid_to_desc[docid]["title"],
+            "synopsys": docid_to_desc[docid]["synopsys"],
+            "url": Config.wiki_url_fmt.format(title=docid_to_desc[docid]["title"]),
+        }
+        res["results"].append(result)
+
+    time_end = time() - time_start
+    print("Search used: ", time_end)
     return json.dumps(res)
 
 
