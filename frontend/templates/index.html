@@ -29,7 +29,7 @@
             <h4>Static user profile settings</h4>
             <div class="row">
                 <div class="col s10">
-                    <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="modal_email" />
+                    <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="email" v-on:keyPress="mail_changed_true" />
                 </div>
                 <div class="col s2">
                     <button class="right btn" v-on:click="refresh_email"><i class="material-icons">refresh</i></button>
@@ -37,30 +37,30 @@
             </div>
             <div class="row">
                 <div class="col s6">
-                    <input type="number" id="age" v-model="age">
+                    <input type="number" id="age" v-model="age" v-bind:disabled="mail_changed">
                     <label for="age">Age:</label>
                 </div>
                 <div class="col s6">
-                    <input type="text" id="gender" v-model="gender">
+                    <input type="text" id="gender" v-model="gender" v-bind:disabled="mail_changed">
                     <label for="gender">Gender:</label>
                 </div>
             </div>
             <div class="row">
-                <input type="text" id="lang" v-model="lang">
+                <input type="text" id="lang" v-model="lang" v-bind:disabled="mail_changed">
                 <label for="lang">Language:</label>
             </div>
             <div class="row">
                 <div class="col s6">
-                    <input type="text" id="city" v-model="city">
+                    <input type="text" id="city" v-model="city" v-bind:disabled="mail_changed">
                     <label for="city">City:</label>
                 </div>
                 <div class="col s6">
-                    <input type="text" id="country" v-model="country">
+                    <input type="text" id="country" v-model="country" v-bind:disabled="mail_changed">
                     <label for="country">Country:</label>
                 </div>
             </div>
 
-            <div class="chips"></div>
+            <div class="chips" v-bind:disabled="mail_changed"></div>
         </div>
         <div class="modal-footer">
             <a class="modal-close waves-effect waves-green btn" href="#!" v-on:click="submit_user_profile"><i class="material-icons">check</i></a>
@@ -163,7 +163,6 @@
         data: {
             results: [],
             query: "",
-            modal_email: "",
             email: "",
             age: 0,
             gender: "",
@@ -175,14 +174,15 @@
             n_results: 0,
             results_per_page: 50,
             search_url: "/search",
-            log_url: "/log"
+            log_url: "/log",
+            mail_changed: false
         },
         methods: {
             search: function (query, page) {
                 this.searching = true
 
                 this.$http.post(this.search_url, {
-                    email: email.value,
+                    email: this.email.value,
                     results_size: this.results_per_page,
                     query: query,
                     results_from: page * this.results_per_page
@@ -210,7 +210,7 @@
             click_link: function (element_id, url) {
                 window.open(url)
                 this.$http.post(this.log_url + "/click", {
-                    "email": email.value,
+                    "email": this.email.value,
                     "doc_id": element_id
                 }).then(success_response => {
 
@@ -218,14 +218,8 @@
 
                 })
             },
-            new_static_query_term: function (query_term) {
-                this.$http.post("/static_profile", {
-                    "query_term": query_term,
-                    "email": this.email
-                })
-            },
             get_static_query_terms: function () {
-                this.$http.get("/static_profile?email=" + this.modal_email).then(response => {
+                this.$http.get("/static_profile?email=" + this.email).then(response => {
                     instance = M.Chips.getInstance($('.chips'));
                     for (i = instance.chipsData.length - 1; i >= 0; i--) {
                         instance.deleteChip(i)
@@ -238,6 +232,7 @@
                 })
             },
             submit_user_profile: function () {
+                this.refresh_email();
                 instance = M.Chips.getInstance($('.chips'));
                 terms = [];
                 for (i = instance.chipsData.length - 1; i >= 0; i--) {
@@ -245,15 +240,15 @@
                 }
 
                 var profile = {
-                    email: this.modal_email,
+                    email: this.email,
                     age: this.age,
                     gender: this.gender,
                     lang: this.lang,
                     city: this.city,
                     country: this.country
                 };
-                this.$http.post("/user_profile?email=" + this.modal_email, profile).then(response => {});
-                this.$http.post("/static_profile?email=" + this.modal_email, {
+                this.$http.post("/user_profile?email=" + this.email, profile).then(response => {});
+                this.$http.post("/static_profile?email=" + this.email, {
                     terms: terms
                 }).then(response => {
                     this.get_static_query_terms()
@@ -261,8 +256,8 @@
 
                 })
             },
-            get_user_profile: function (email) {
-                this.$http.get("/user_profile?email=" + email).then(
+            get_user_profile: function () {
+                this.$http.get("/user_profile?email=" + this.email).then(
                     request => {
                         this.age = request.body.age,
                         this.gender = request.body.gender,
@@ -272,13 +267,16 @@
                     }
                 )
             },
-            refresh_email: function (email) {
+            refresh_email: function () {
                 if (this.email.length > 0) {
-                    self.email = self.modal_email;
                     this.$cookies.set("prev_email", this.email, "30d");
-                    this.get_static_query_terms();
+                    this.get_static_query_terms(this.email);
                     this.get_user_profile();
+                    this.mail_changed = false;
                 }
+            },
+            mail_changed_true: function () {
+                this.mail_changed = true;
             }
         },
         created: function () {
@@ -292,7 +290,7 @@
         },
         mounted: function () {
             if (this.$cookies.isKey("prev_email") === true) {
-                this.modal_email = this.email = this.$cookies.get("prev_email");
+                this.email = this.$cookies.get("prev_email");
                 this.get_user_profile(this.email);
             }
         }
