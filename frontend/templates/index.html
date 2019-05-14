@@ -14,7 +14,7 @@
 <div id="app">
     <nav class="blue darken-4">
         <div class="nav-wrapper">
-            <a class="modal-trigger brand-logo" href="#modal1" v-on:click="get_static_query_terms"><i class="material-icons">perm_identity</i>
+            <a class="modal-trigger brand-logo" href="#modal1"><i class="material-icons">perm_identity</i>
                 <span v-if="email.length === 0">Identify yourself for a user profile search</span>
                 <span v-else>You are [[ email ]]</span>
             </a>
@@ -60,7 +60,9 @@
                 </div>
             </div>
 
-            <div class="chips" v-bind:disabled="mail_changed"></div>
+            <div class="chips">
+                <input v-bind:disabled="mail_changed">
+            </div>
         </div>
         <div class="modal-footer">
             <button class="modal-close waves-effect waves-green btn" v-bind:disabled="mail_changed" v-on:click="submit_user_profile"><i class="material-icons">check</i></button>
@@ -176,7 +178,7 @@
             results_per_page: 50,
             search_url: "/search",
             log_url: "/log",
-            mail_changed: false
+            mail_changed: true
         },
         methods: {
             search: function (query, page) {
@@ -236,7 +238,7 @@
                 instance = M.Chips.getInstance($('.chips'));
                 terms = [];
                 for (i = instance.chipsData.length - 1; i >= 0; i--) {
-                        terms.push(instance.chipsData[i].tag);
+                    terms.push(instance.chipsData[i].tag);
                 }
 
                 var profile = {
@@ -248,14 +250,7 @@
                     country: this.country
                 };
                 this.$http.post("/user_profile?email=" + this.email, profile).then(response => {});
-                this.$http.post("/static_profile?email=" + this.email, {
-                    terms: terms
-                }).then(response => {
-                    this.get_static_query_terms();
-                    this.get_user_profile();
-                }, failed_response => {
-
-                })
+                this.$http.post("/static_profile?email=" + this.email, {terms: terms})
             },
             get_user_profile: function () {
                 this.$http.get("/user_profile?email=" + this.email).then(
