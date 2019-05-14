@@ -1,77 +1,77 @@
-2 30.6505 Apoteket Kronan (Gamla stan)
-3 43.0724 Gamla stan
-0 40.1646 Gamla stan, Motala
-0 39.8948 Gamla stan, Kalmar
-0 39.8587 Gamla stan, Dubrovnik
-0 38.6520 Gamle stan
-1 18.6790 Kanslihuset
-1 99.9999 Kvarteret Æolus
-1 99.9999 Kvarteret Ajax
-1 99.9999 Kvarteret Amphitryon
-1 99.9999 Kvarteret Argus
-1 99.9999 Kvarteret Bacchus
-1 99.9999 Kvarteret Bootes
-1 99.9999 Kvarteret Cassiopea
-1 99.9999 Kvarteret Castor
-1 99.9999 Kvarteret Cephalus
-1 99.9999 Kvarteret Cepheus
-1 99.9999 Kvarteret Diana
-1 99.9999 Kvarteret Erisichton
-1 99.9999 Kvarteret Eurydice
-1 99.9999 Kvarteret Galatea
-1 99.9999 Kvarteret Ganymedes
-1 99.9999 Kvarteret Iphigenia
-1 99.9999 Kvarteret Milon
-1 99.9999 Kvarteret Neptunus
-1 99.9999 Kvarteret Neptunus större
-1 99.9999 Kvarteret Pan
-1 99.9999 Kvarteret Rådstugan
-1 99.9999 Kvarteret Python
-1 99.9999 Kvarteret Typhon
-1 99.9999 Hebbes bro
-2 38.6526 Maria-Gamla stans stadsdelsområde
-1 20.8530 Mälartorget
-0 39.5711 Möt mig i Gamla stan
-1 99.9999 Sammanbindningsbanan (järnväg)
-2 37.4497 Stadsplanering i Gamla stan
-1 37.4289 Lista över kvarter i Gamla stan
-1 37.2398 Gator och torg i Gamla stan
-0 37.1059 Gamla stan (film)
-3 37.1059 Gamla stan (tunnelbanestation)
-0 36.7421 Gamla Stan (musikgrupp)
-0 36.3040 Gamla stan, Falkenberg
-0 34.9465 Teatern i Gamla stan
-0 34.3607 Melodin från Gamla Stan
-0 33.5398 Gamla staden
-1 31.8206 Lista över offentlig konst i Gamla stan i Stockholm
-0 30.2322 Väst på stan
-0 29.6734 Sankt Göran och draken, Gamla stan
-0 29.4154 Gamla Stockholm
-0 28.9255 Öst på stan
-0 27.5816 Stan
-0 27.4223 Stans
-0 27.1340 Stana
-0 25.8049 Gamle furutrær
-0 25.4793 Gamla porten
-0 24.9323 Maurice Stans
-0 24.9022 Rastislav Staňa
-0 24.8753 Stan Lake
-0 24.6407 Lac Stan
-0 24.5159 Från utställningsområdet "Gamla Stockholm" (film)
-0 24.4731 Stan Sakai
-0 24.2696 Stan Dragoti
-0 24.2608 Stans Dam
-0 24.2006 Staṉ
-0 24.1757 Sebastian Stan
-0 24.1680 Koroljov Stan
-0 24.1092 Stan Lynde
-0 24.1092 Stan (bergstopp)
-0 24.1084 Singel i stan
-0 24.0450 Gamla riksdagshuset
-0 24.0325 Stan Smyl
-0 23.9893 Gamla Stockholm (kulisstad)
-0 23.9542 Stan (Eminem)
-0 23.8039 Stan Marsh
-0 23.7356 Varning på stan
-0 23.7246 Stan Douglas
-0 23.7077 Stana Katic
+2 Apoteket Kronan (Gamla stan)
+3 Gamla stan
+0 Gamla stan, Motala
+0 Gamla stan, Kalmar
+0 Gamla stan, Dubrovnik
+0 Gamle stan
+1 Kanslihuset
+1 Kvarteret Æolus
+1 Kvarteret Ajax
+1 Kvarteret Amphitryon
+1 Kvarteret Argus
+1 Kvarteret Bacchus
+1 Kvarteret Bootes
+1 Kvarteret Cassiopea
+1 Kvarteret Castor
+1 Kvarteret Cephalus
+1 Kvarteret Cepheus
+1 Kvarteret Diana
+1 Kvarteret Erisichton
+1 Kvarteret Eurydice
+1 Kvarteret Galatea
+1 Kvarteret Ganymedes
+1 Kvarteret Iphigenia
+1 Kvarteret Milon
+1 Kvarteret Neptunus
+1 Kvarteret Neptunus större
+1 Kvarteret Pan
+1 Kvarteret Rådstugan
+1 Kvarteret Python
+1 Kvarteret Typhon
+1 Hebbes bro
+2 Maria-Gamla stans stadsdelsområde
+1 Mälartorget
+0 Möt mig i Gamla stan
+1 Sammanbindningsbanan (järnväg)
+2 Stadsplanering i Gamla stan
+1 Lista över kvarter i Gamla stan
+1 Gator och torg i Gamla stan
+0 Gamla stan (film)
+3 Gamla stan (tunnelbanestation)
+0 Gamla Stan (musikgrupp)
+0 Gamla stan, Falkenberg
+0 Teatern i Gamla stan
+0 Melodin från Gamla Stan
+0 Gamla staden
+1 Lista över offentlig konst i Gamla stan i Stockholm
+0 Väst på stan
+0 Sankt Göran och draken, Gamla stan
+0 Gamla Stockholm
+0 Öst på stan
+0 Stan
+0 Stans
+0 Stana
+0 Gamle furutrær
+0 Gamla porten
+0 Maurice Stans
+0 Rastislav Staňa
+0 Stan Lake
+0 Lac Stan
+0 Från utställningsområdet "Gamla Stockholm" (film)
+0 Stan Sakai
+0 Stan Dragoti
+0 Stans Dam
+0 Staṉ
+0 Sebastian Stan
+0 Koroljov Stan
+0 Stan Lynde
+0 Stan (bergstopp)
+0 Singel i stan
+0 Gamla riksdagshuset
+0 Stan Smyl
+0 Gamla Stockholm (kulisstad)
+0 Stan (Eminem)
+0 Stan Marsh
+0 Varning på stan
+0 Stan Douglas
+0 Stana Katic
