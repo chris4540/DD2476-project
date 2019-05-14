@@ -20,7 +20,7 @@ https://github.com/tejasadhav/pws-search
 
 ## Experiement
 1. base line exp: with/without user profiling
-2. compare different weigting of the static vs dynamic profile
+2. compare different weigting of the static vs dynamic profile (plus)
 
 
 ## How to use it for the experiment

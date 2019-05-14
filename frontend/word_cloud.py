@@ -61,7 +61,7 @@ def plot_usr_word_cloud(email):
 
 if __name__ == "__main__":
     emails = [
-        "chlin3@kth.se",
+        # "chlin3@kth.se",
         # "dfsafd@kth.se",
         # "antolu@kth.se",
         # "liberman@kth.se",

@@ -1,6 +1,6 @@
 class Config:
-    index = "enwiki"
-    # index = "svwiki"
+    # index = "enwiki"
+    index = "svwiki"
     # weightings / relative importance between term vector
     weights = {
         "title": 2.0,
