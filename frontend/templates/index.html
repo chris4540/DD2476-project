@@ -63,7 +63,7 @@
             <div class="chips" v-bind:disabled="mail_changed"></div>
         </div>
         <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn" href="#!" v-on:click="submit_user_profile"><i class="material-icons">check</i></a>
+            <button class="modal-close waves-effect waves-green btn" v-bind:disabled="mail_changed" v-on:click="submit_user_profile"><i class="material-icons">check</i></button>
         </div>
     </div>
 
@@ -281,7 +281,9 @@
         },
         created: function () {
             $(document).ready(function () {
-                $('.modal').modal();
+                $('.modal').modal({
+                    dismissible: false
+                });
                 $('.chips').chips({
                     placeholder: 'Query terms',
                     secondaryPlaceholder: '+Term'
