@@ -14,7 +14,7 @@
 <div id="app">
     <nav class="blue darken-4">
         <div class="nav-wrapper">
-            <a class="modal-trigger brand-logo" href="#modal1"><i class="material-icons">perm_identity</i>
+            <a class="modal-trigger brand-logo" href="#modal1" v-on:click="get_static_query_terms"><i class="material-icons">perm_identity</i>
                 <span v-if="email.length === 0">Identify yourself for a user profile search</span>
                 <span v-else>You are [[ email ]]</span>
             </a>
@@ -27,11 +27,15 @@
     <div class="modal" id="modal1">
         <div class="modal-content">
             <h4>Static user profile settings</h4>
-            <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="email" />
-            <div class="chips chips-placeholder"></div>
+            <div class="row">
+                <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="email" />
+                <button class="right btn" v-on:click="refresh_email"><i class="material-icons">refresh</i></button>
+            </div>
+
+            <div class="chips"></div>
         </div>
         <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn-flat" href="#!">Agree</a>
+            <a class="modal-close waves-effect waves-green btn" href="#!" v-on:click="submit_terms"><i class="material-icons">check</i></a>
         </div>
     </div>
 
@@ -50,7 +54,7 @@
                     <i class="material-icons">search</i>
                 </div>
                 <div class="col input-field s10">
-                    <input id="search" required type="search" v-model="query" />
+                    <input id="search" required type="search" v-model="query"/>
                 </div>
                 <div class="col offset-s1 s1">
                     <button class="btn-floating btn-large waves-effect waves-light grey" type="submit"><i
@@ -69,9 +73,13 @@
             </div>
             <li v-else v-for="item in results">
                 <div class="collection-header" style="display: block"><span
-                        style="padding-right: 20px;">[[ item.pos ]]</span>[[ item.string ]]<div class="right"><span class="green-text">Previous score: [[ item.score ]]</span> | <span class="blue-text">Modified score: [[ item.score ]]</span> | <span style="cursor: pointer" v-on:click="click_link(item.id, item.url)">Link: <span
-                        class="secondary-content"><i
-                        class="material-icons blue-text">send</i></span></span></div></div>
+                        style="padding-right: 20px;">[[ item.pos ]]</span>[[ item.string ]]
+                    <div class="right"><span class="green-text">Previous score: [[ item.score ]]</span> | <span
+                            class="blue-text">Modified score: [[ item.score ]]</span> | <span style="cursor: pointer"
+                                                                                              v-on:click="click_link(item.id, item.url)">Link: <span
+                            class="secondary-content"><i
+                            class="material-icons blue-text">send</i></span></span></div>
+                </div>
                 <div class="collection-item">[[ item.synopsys ]]...</div>
                 <br>
             </li>
@@ -119,6 +127,7 @@
 <script src="./static/js/init.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.5.13/vue-cookies.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -137,10 +146,6 @@
         methods: {
             search: function (query, page) {
                 this.searching = true
-
-                if (this.email.length > 0) {
-                    this.$cookies.set("prev_email", this.email, "30d");
-                }
 
                 this.$http.post(this.search_url, {
                     email: email.value,
@@ -181,29 +186,58 @@
             },
             new_static_query_term: function (query_term) {
                 this.$http.post("/static_profile", {
-                    "query_term": query_term
+                    "query_term": query_term,
+                    "email": this.email
+                })
+            },
+            get_static_query_terms: function () {
+                this.$http.get("/static_profile?email=" + this.email).then(response => {
+                    instance = M.Chips.getInstance($('.chips'));
+                    for (i = instance.chipsData.length - 1; i >= 0; i--) {
+                        instance.deleteChip(i)
+                    }
+                    Object.keys(response.body).forEach(i => {
+                        instance.addChip({"tag": i});
+                    })
+                }, failed_response => {
+
+                })
+            },
+            submit_terms: function () {
+                instance = M.Chips.getInstance($('.chips'));
+                terms = [];
+                for (i = instance.chipsData.length - 1; i >= 0; i--) {
+                        terms.push(instance.chipsData[i].tag);
+                }
+                this.$http.post("/static_profile?email=" + this.email, {
+                    terms: terms
+                }).then(response => {
+                    this.get_static_query_terms()
+                }, failed_response => {
+
                 })
             }
         },
         created: function () {
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('.modal').modal();
+                $('.chips').chips({
+                    placeholder: 'Query terms',
+                    secondaryPlaceholder: '+Term'
+                });
             });
+            this.refresh_email = _.debounce(() => {
+                    if (this.email.length > 0) {
+                        this.$cookies.set("prev_email", this.email, "30d");
+                        this.get_static_query_terms();
+                    }
+                }, 1000);
         },
         mounted: function () {
             if (this.$cookies.isKey("prev_email") === true) {
                 this.email = this.$cookies.get("prev_email");
             }
 
-            $(document).ready(function() {
-                $('.chips-placeholder').chips({
-                    placeholder: 'Query terms',
-                    secondaryPlaceholder: '+Term',
-                    onChipAdd: function() {
-                        window.app.new_static_query_term(this.chipsData[this.chipsData.length - 1].tag)
-                    }
-                });
-            });
         }
     })
 </script>

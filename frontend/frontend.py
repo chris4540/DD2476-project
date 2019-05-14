@@ -206,14 +206,18 @@ def search():
 
 @app.route("/static_profile", methods=["GET", "POST", "DELETE"])
 def static_profile():
-    data = request.get_json()
-    email = request.form["email"]
+    email = request.args['email']
     if request.method == 'GET':
         with UserProfileLogger(email) as profile_logger:
-            st_profile_vec = profile_logger.get_user_static_profile_vec()
+            st_profile_vec = profile_logger.get_user_key_terms()
             return jsonify(st_profile_vec)
     elif request.method == 'POST':
-        query_term = data["query_term"]
+        data = request.get_json()
+        terms = data['terms']
+        vec = {a: b for (a, b) in zip(terms, [1.0]*len(terms))}
+        with UserProfileLogger(email) as profile_logger:
+            profile_logger.modify_user_static_profile_vec(vec)
+        return ""
 
 
 
