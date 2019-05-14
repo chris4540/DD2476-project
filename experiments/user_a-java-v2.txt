@@ -1,0 +1,50 @@
+3 14.5237 J2EE
+0 14.4803 Javas
+0 14.4803 Jäven
+1 14.4512 Java (olika betydelser)
+0 14.1609 Javor
+3 14.0095 Java (programspråk)
+0 13.9202 Mali Javor
+0 13.9202 Veliki Javor
+0 13.9152 JAV
+0 13.9028 Lac Java
+1 13.8684 Java
+0 13.8636 Javea
+0 13.8406 Javor Brdo
+0 13.8129 Java Park
+0 13.8113 Jäv
+0 13.7064 Javatiger
+0 13.7064 Jävern
+2 13.7041 Realtidsjava
+0 13.6891 Jordbävningen utanför Java 2006
+2 13.6298 Java Development Kit
+2 13.5894 Java Servlet
+0 13.5213 Javor Planina
+2 13.4879 Java Runtime Environment
+2 13.4808 J Sharp
+0 13.4235 Javor (Lužické hory)
+1 13.3568 Sun Microsystems
+3 13.3568 Java Virtual Machine
+0 13.3091 Javor (källa i Montenegro)
+2 13.2759 Java Desktop System
+0 13.2283 Javea (ort)
+0 13.2171 Javor (bergspass i Bosnien och Hercegovina, Republika Srpska, lat 42,58, long 18,43)
+0 13.1999 Javor Brdo (kulle)
+0 13.1913 Javor (källa i Bosnien och Hercegovina, Federationen Bosnien och Hercegovina, lat 44,33, long 18,15)
+0 13.1782 Java Park (park i Australien)
+0 13.1758 Javor (bergstopp i Bosnien och Hercegovina, Republika Srpska, lat 44,06, long 19,32)
+0 13.1604 Javor (källa i Makedonien, Opsjtina Kičevo, lat 41,56, long 21,09)
+1 13.1225 Haxe (programspråk)
+0 13.1119 Javor (källa i Bosnien och Hercegovina, Federationen Bosnien och Hercegovina, lat 43,83, long 17,79)
+0 13.1100 Henrik Herman Israel Schierman
+0 13.0795 Javor (berg i Bosnien och Hercegovina, Federationen Bosnien och Hercegovina, lat 43,84, long 17,95)
+1 13.0592 PJIRC
+0 13.0443 Javor (bergstopp i Kroatien, Slavonien, lat 45,47, long 17,80)
+0 13.0265 Kungariket Medang
+0 13.0236 Javor (ort i Bosnien och Hercegovina, Federationen Bosnien och Hercegovina, lat 44,09, long 18,09)
+0 13.0236 Javor (kulle i Tjeckien)
+0 13.0236 Seyed Javad Miri
+0 13.0176 Javea (kommun)
+0 13.0061 Javad Kazemian
+0 13.0016 Javor (berg i Bosnien och Hercegovina, Republika Srpska, lat 43,29, long 18,33)
+0 13.0016 Javor (berg i Bosnien och Hercegovina, Federationen Bosnien och Hercegovina, lat 44,77, long 18,27)
