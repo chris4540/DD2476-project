@@ -5,7 +5,7 @@
 0 19.2763 Speers
 0 19.2387 Emory Speer
 0 19.1493 Speers, Pennsylvania
-0 18.9000 Legion Speer
+1 18.9000 Legion Speer
 0 18.8754 Vee Speers
 2 18.8002 Rudolf Wolters
 0 18.3606 Speers Creek (vattendrag i Australien)
