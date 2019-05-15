@@ -1,3 +1,55 @@
+CLICK#00: EMPTY PROFILE
+ 43.0724 Gamla stan
+ 40.1646 Gamla stan, Motala
+ 39.8948 Gamla stan, Kalmar
+ 39.8587 Gamla stan, Dubrovnik
+ 39.5711 Möt mig i Gamla stan
+ 38.6526 Maria-Gamla stans stadsdelsområde
+ 38.6520 Gamle stan
+ 37.4497 Stadsplanering i Gamla stan
+ 37.4289 Lista över kvarter i Gamla stan
+ 37.2398 Gator och torg i Gamla stan
+ 37.1059 Gamla stan (film)
+ 37.1059 Gamla stan (tunnelbanestation)
+ 36.7421 Gamla Stan (musikgrupp)
+ 36.3040 Gamla stan, Falkenberg
+ 34.9465 Teatern i Gamla stan
+ 34.3607 Melodin från Gamla Stan
+ 33.5398 Gamla staden
+ 31.8206 Lista över offentlig konst i Gamla stan i Stockholm
+ 30.6505 Apoteket Kronan (Gamla stan)
+ 30.2322 Väst på stan
+ 29.6734 Sankt Göran och draken, Gamla stan
+ 29.4154 Gamla Stockholm
+ 28.9255 Öst på stan
+ 27.5816 Stan
+ 27.4223 Stans
+ 27.1340 Stana
+ 25.8049 Gamle furutrær
+ 25.4793 Gamla porten
+ 24.9323 Maurice Stans
+ 24.9022 Rastislav Staňa
+ 24.8753 Stan Lake
+ 24.6407 Lac Stan
+ 24.5159 Från utställningsområdet "Gamla Stockholm" (film)
+ 24.4731 Stan Sakai
+ 24.2696 Stan Dragoti
+ 24.2608 Stans Dam
+ 24.2006 Staṉ
+ 24.1757 Sebastian Stan
+ 24.1680 Koroljov Stan
+ 24.1092 Stan Lynde
+ 24.1092 Stan (bergstopp)
+ 24.1084 Singel i stan
+ 24.0450 Gamla riksdagshuset
+ 24.0325 Stan Smyl
+ 23.9893 Gamla Stockholm (kulisstad)
+ 23.9542 Stan (Eminem)
+ 23.8039 Stan Marsh
+ 23.7356 Varning på stan
+ 23.7246 Stan Douglas
+ 23.7077 Stana Katic
+
 CLICK#01: Lista över kvarter i Gamla stan
  45.4914 Lista över kvarter i Gamla stan
  34.7638 Gamla stan

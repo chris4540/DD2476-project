@@ -1,3 +1,55 @@
+CLICK#00: EMPTY PROFILE
+ 35.1466 Speers
+ 33.2502 Speers Creek
+ 32.9221 Legion Speer
+ 32.8058 Blake Speers
+ 32.4409 Albert Speer
+ 32.3799 Emory Speer
+ 32.2997 Speers, Pennsylvania
+ 32.0165 Vee Speers
+ 31.6673 Albert Speer Jr.
+ 31.0841 Chli Speer
+ 30.9624 Speers Lake
+ 30.8277 Transportflotte Speer
+ 29.5671 Speers Island
+ 29.4234 Lophoblatta speerae
+ 29.0675 Albert Friedrich Speer
+ 28.9169 Speer (berg i Schweiz)
+ 28.6764 Speers Point Park
+ 28.6561 Speers Slough
+ 28.6561 Speer Island
+ 28.5200 Speers Creek (vattendrag i Australien)
+ 26.6528 Speers Creek (vattendrag i Kanada)
+ 18.8002 Rudolf Wolters
+ 17.9955 Posenkonferensen
+ 16.9118 Nationalsozialistisches Kraftfahrkorps
+ 16.6965 Polykrati
+ 16.4934 Gitta Sereny
+ 16.3821 Arkitektur i Nazityskland
+ 15.7412 Joachim Fest
+ 15.5912 Leo Löthman
+ 15.5778 Cirsosiopsis violacescens
+ 15.5129 Camaroglobulus resinae
+ 15.4335 Coccomyces araucariae
+ 15.4335 Cleistonium parasiticum
+ 15.2758 Xenomeris acicola
+ 14.8825 Macroallantina coccifera
+ 14.8189 Världsutställningen i Paris 1937
+ 14.7474 City Heat
+ 14.4078 Sidbena
+ 14.3610 Emory
+ 14.0675 David Edgar
+ 13.9181 Tiergarten (stadsdel)
+ 13.8502 Spandaufängelset
+ 13.7993 Sebastian Koch
+ 13.7680 Arkitektens mage
+ 13.7680 Reichsparteitagsgelände
+ 13.6312 P-1000
+ 13.5251 Hitlerjugends hedersutmärkelse
+ 13.4895 Suddenly (Ashley Tisdale sång)
+ 13.4342 Planet of Dinosaurs
+ 13.4342 André Hennicke
+
 CLICK#01: Legion Speer
  52.3461 Legion Speer
  31.8724 Transportflotte Speer
