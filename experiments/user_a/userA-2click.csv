@@ -1,50 +1,51 @@
-0,717568,Javatiger
-1,105830,Java
-2,5512346,Javas
-3,5006059,Javor
-4,52850,Jäv
-5,6485336,Javea
-6,3459288,Jäven
-7,494236,Java Servlet
-8,5809159,Lac Java
-9,15123,Java (programspråk)
-10,5509604,Mali Javor
-11,5509603,Veliki Javor
-12,5419123,Java Park
-13,5511222,Javor Brdo
-14,3425458,Eupelmus javae
-15,175371,Javad Kazemian
-16,5509180,Javor Planina
-17,3462219,Neobrachista javae
-18,6567647,Javea (ort)
-19,11490,Java (olika betydelser)
-20,3452704,Philotrypesis javae
-21,5021175,Javor (ravin)
-22,6588904,Javea (kommun)
-23,164887,JAV
-24,7012456,Oštri Javor
-25,5538018,Debeli Javor
-26,5535022,Žuti Javor
-27,1223679,Tehuset Java
-28,3512375,Gryon javense
-29,2978909,Belenois java
-30,3546783,Listrodromus javae
-31,7006948,Krivi Javor
-32,5884031,Croix de Javerne
-33,3114601,Cryptochironomus javae
-34,3044877,Culicoides javae
-35,2609290,Idiotrella javae
-36,7781649,Javor (källa i Montenegro)
-37,3436117,Thripobius javae
-38,5953093,Étang Java
-39,5542769,Javor Brdo (kulle)
-40,282842,Java Development Kit
-41,244542,Java Runtime Environment
-42,6349932,Javor (Lužické hory)
-43,6005622,Lac de Java
-44,380063,Java Virtual Machine
-45,369466,Javad Nekounam
-46,2627250,Mirollia javae
-47,8260166,Seyed Javad Miri
-48,217514,Java Desktop System
-49,8084380,Mohammad Javad Zarif
+0,name,rel
+0,Javatiger,2
+1,Java,3
+2,Javas,0
+3,Javor,0
+4,Jäv,0
+5,Javea,0
+6,Jäven,0
+7,Java Servlet,0
+8,Lac Java,0
+9,Java (programspråk),0
+10,Mali Javor,0
+11,Veliki Javor,0
+12,Java Park,0
+13,Javor Brdo,0
+14,Eupelmus javae,0
+15,Javad Kazemian,0
+16,Javor Planina,0
+17,Neobrachista javae,0
+18,Javea (ort),0
+19,Java (olika betydelser),1
+20,Philotrypesis javae,0
+21,Javor (ravin),0
+22,Javea (kommun),0
+23,JAV,0
+24,Oštri Javor,0
+25,Debeli Javor,0
+26,Žuti Javor,0
+27,Tehuset Java,0
+28,Gryon javense,0
+29,Belenois java,0
+30,Listrodromus javae,0
+31,Krivi Javor,0
+32,Croix de Javerne,0
+33,Cryptochironomus javae,0
+34,Culicoides javae,0
+35,Idiotrella javae,0
+36,Javor (källa i Montenegro),0
+37,Thripobius javae,0
+38,Étang Java,0
+39,Javor Brdo (kulle),0
+40,Java Development Kit,0
+41,Java Runtime Environment,0
+42,Javor (Lužické hory),0
+43,Lac de Java,0
+44,Java Virtual Machine,0
+45,Javad Nekounam,0
+46,Mirollia javae,0
+47,Seyed Javad Miri,0
+48,Java Desktop System,0
+49,Mohammad Javad Zarif,0
