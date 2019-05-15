@@ -3,7 +3,7 @@ import json
 from time import time
 from collections import OrderedDict
 from elasticsearch import Elasticsearch
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 from algorithm import cosine_similarity as cos_sim
 from algorithm import aggregate_term_vecs
@@ -242,6 +242,50 @@ def search():
     time_end = time() - time_start
     print("Search used: ", time_end)
     return json.dumps(res)
+
+
+@app.route("/user_profile", methods=["GET", "POST"])
+def user_profile():
+    email = request.args['email']
+    if request.method == 'GET':
+        if len(email) == 0:
+            return jsonify({
+                "email": "",
+                "age": 0,
+                "city": "",
+                "country": "",
+                "lang": "",
+                "gender": ""
+            })
+        UserProfileLogger.create_user_if_not_exists(email)
+        with UserProfileLogger(email) as profile_logger:
+            profile = profile_logger.get_user_profile()
+            return jsonify(profile)
+    elif request.method == 'POST':
+        if len(email) == 0:
+            return "Ok"
+        data = request.get_json()
+        with UserProfileLogger(email) as profile_logger:
+            profile_logger.modify_user_profile(data)
+        return "Ok"
+
+
+@app.route("/static_profile", methods=["GET", "POST"])
+def static_profile():
+    email = request.args['email']
+    if request.method == 'GET':
+        UserProfileLogger.create_user_if_not_exists(email)
+        with UserProfileLogger(email) as profile_logger:
+            st_profile_vec = profile_logger.get_user_key_terms()
+            return jsonify(st_profile_vec)
+    elif request.method == 'POST':
+        data = request.get_json()
+        terms = data['terms']
+        vec = {a: b for (a, b) in zip(terms, [1.0]*len(terms))}
+        with UserProfileLogger(email) as profile_logger:
+            profile_logger.modify_user_static_profile_vec(vec)
+        return "Ok"
+
 
 
 if __name__ == "__main__":

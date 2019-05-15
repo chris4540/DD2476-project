@@ -7,6 +7,7 @@ import sqlite3
 from algorithm import aggregate_time_term_vecs
 from config import Config
 
+
 def row_factory(cursor, row):
     """
     """
@@ -15,14 +16,16 @@ def row_factory(cursor, row):
         ret[col[0]] = row[idx]
     return ret
 
+
 # FOR DEBUG USE
 # logging.basicConfig(
 #         filename='/var/log/usr_prof.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',
 #         level=logging.DEBUG)
 
 logger = logging.getLogger('UserProfileLogger')
-class UserProfileLogger:
 
+
+class UserProfileLogger:
     USER_PROFILE_DB = "../usr_profile_db/user_profile.db"
 
     def __enter__(self):
@@ -70,7 +73,7 @@ class UserProfileLogger:
 
         # create a sql with placeholder
         col = ','.join(col_val.keys())
-        placeholders = ':'+', :'.join(col_val.keys())
+        placeholders = ':' + ', :'.join(col_val.keys())
         sql = "INSERT INTO {} ({}) VALUES({});".format(table_name, col, placeholders)
 
         # execute the command
@@ -91,6 +94,30 @@ class UserProfileLogger:
 
         cur = db_conn.cursor()
         cur.executemany(sql, col_vals)
+        db_conn.commit()
+
+    @staticmethod
+    def _delete_col_vals_from_db_table(db_conn, table_name, col_key, col_vals):
+        """
+                Args:
+                    col_key (list / tuple):
+                    col_vals (list of tuples):
+                """
+        def preprocess(value):
+            if type(value) is str:
+                return '"{}"'.format(value)
+            elif type(value) is bool:
+                return 1 if value is True else False
+            else:
+                return value
+
+        placeholders = ["{} = {}".format(a, preprocess(b)) for a, b in
+                        zip(col_key, col_vals)]
+        cond = " AND ".join(placeholders)
+        sql = "DELETE FROM {} WHERE {};".format(table_name, cond)
+
+        cur = db_conn.cursor()
+        cur.execute(sql)
         db_conn.commit()
 
     def log_search(self, query, query_type, ranking_type=None):
@@ -168,11 +195,15 @@ class UserProfileLogger:
             ret[r['term']] = row_dict
         return ret
 
-    def get_user_static_profile_vec(self):
+    def get_user_key_terms(self):
         rows = self._get_user_profile_rows(is_static=True)
         ret = dict()
         for r in rows:
             ret[r['term']] = r['score']
+        return ret
+
+    def get_user_static_profile_vec(self):
+        ret = self.get_user_key_terms()
 
         # Adding the user basic profile to the static profile dictionary
         info = self.get_user_info()
@@ -185,6 +216,30 @@ class UserProfileLogger:
                 ret[term.lower()] = val
 
         return ret
+
+    def modify_user_static_profile_vec(self, new_vec):
+        prev_vec = self.get_user_key_terms()
+
+        combined = {**prev_vec, **new_vec}
+
+        for k in combined.keys():
+            if k not in new_vec:
+                self._delete_col_vals_from_db_table(
+                    self.conn, "user_profile_vector", ('userid', 'is_static', 'term',),
+                    (self.user_id, True, k,)
+                )
+            elif k not in prev_vec:
+                col_val = {
+                    "userid": self.user_id,
+                    "posix_time": str(int(time.time())),
+                    "is_static": True,
+                    "field_": "text",
+                    "term": k,
+                    "score": combined[k]
+                }
+                self._insert_col_val_to_db_table(
+                    self.conn, "user_profile_vector", col_val)
+        return True
 
     def log_term_vec_to_profile(self, term_vec, field):
         """
@@ -226,8 +281,46 @@ class UserProfileLogger:
         self._write_many_col_vals_to_db_table(
             self.conn, "user_profile_vector", col_key, col_vals)
 
+    def modify_user_profile(self, new_profile):
+        col_key = ("id", "email", "age", "gender", "lang", "city", "country",)
+        col_vals = [(self.user_id, new_profile["email"], new_profile["age"], new_profile["gender"], new_profile["lang"], new_profile["city"], new_profile["country"],)]
+        self._write_many_col_vals_to_db_table(self.conn, "users", col_key, col_vals)
+
+    def get_user_profile(self):
+        tbl = "users"
+        cols = ','.join(("email", "age", "gender", "lang", "city", "country",))
+
+        sql = ("SELECT {cols} FROM {tbl} WHERE id=:uid ".format(cols=cols, tbl=tbl))
+        filter_val = {
+            "uid": self.user_id,
+        }
+        # ======================================================================
+
+        cur = self.conn.cursor()
+        cur.execute(sql, filter_val)
+        rows = cur.fetchall()
+        return rows[0]
+
+    @staticmethod
+    def create_user_if_not_exists(email):
+        if UserProfileLogger(email).user_id is None:
+            conn = sqlite3.connect(UserProfileLogger.USER_PROFILE_DB)
+            conn.row_factory = row_factory
+            logger.debug("Using the profile database: %s", UserProfileLogger.USER_PROFILE_DB)
+            col_val = {
+                "email": email,
+                "age": 20,
+                "gender": "M",
+                "lang": "English",
+                "city": "Stockholm",
+                "country": "Sweden",
+            }
+            UserProfileLogger._insert_col_val_to_db_table(conn, "users", col_val)
+
+
 if __name__ == "__main__":
     import sqlite3
+
     logging.basicConfig(level=logging.DEBUG)
     usr_email = "chlin3@kth.se"
     # Developers can alway change the profile db like this

@@ -1,0 +1,519 @@
+CLICK#01: Legion Speer
+ 52.3461 Legion Speer
+ 31.8724 Transportflotte Speer
+ 27.5223 Albert Speer
+ 24.7820 Speers
+ 23.7220 Albert Speer Jr.
+ 23.4674 Speers Creek
+ 23.1422 Nationalsozialistisches Kraftfahrkorps
+ 23.0596 Blake Speers
+ 22.7757 Emory Speer
+ 22.7253 Vee Speers
+ 22.7226 Speers, Pennsylvania
+ 21.8775 Chli Speer
+ 21.8073 Speers Lake
+ 20.8471 Speers Island
+ 20.7352 Albert Friedrich Speer
+ 20.6573 Lophoblatta speerae
+ 20.6249 Speer (berg i Schweiz)
+ 20.2039 Speers Point Park
+ 20.2022 Speer Island
+ 20.1775 Speers Slough
+ 20.1139 Speers Creek (vattendrag i Australien)
+ 18.8479 Speers Creek (vattendrag i Kanada)
+ 16.1403 Organisation Todt
+ 15.3726 Arkitektur i Nazityskland
+ 15.0506 Gitta Sereny
+ 14.7753 Polykrati
+ 14.3177 Posenkonferensen
+ 13.8469 Rudolf Wolters
+ 13.2502 Karl Saur
+ 12.9073 Joachim Fest
+ 12.3333 Världsutställningen i Paris 1937
+ 12.2138 Fritz Todt
+ 11.9646 Franz Xaver Dorsch
+ 11.7506 Siegesallee
+ 11.6733 Leo Löthman
+ 11.1117 Tiergarten (stadsdel)
+ 10.9477 Cirsosiopsis violacescens
+ 10.9038 Camaroglobulus resinae
+ 10.9006 Sebastian Koch
+ 10.8518 Coccomyces araucariae
+ 10.8478 Cleistonium parasiticum
+ 10.7366 Xenomeris acicola
+ 10.6303 Konst och kultur i Nazityskland
+ 10.5595 City Heat
+ 10.4765 Welthauptstadt Germania
+ 10.4513 Macroallantina coccifera
+ 10.4436 Sidbena
+ 10.3014 Spandaufängelset
+ 10.0736 Emory
+ 10.0554 P-1000
+
+CLICK#02: Nazism i Sverige
+ 38.3182 Legion Speer
+ 28.1014 Transportflotte Speer
+ 26.5055 Albert Speer
+ 24.7260 Speers
+ 24.1040 Albert Speer Jr.
+ 23.4299 Speers Creek
+ 23.0756 Blake Speers
+ 22.8190 Vee Speers
+ 22.7421 Emory Speer
+ 22.6874 Speers, Pennsylvania
+ 21.9281 Speers Lake
+ 21.8405 Chli Speer
+ 20.8002 Speers Island
+ 20.6383 Lophoblatta speerae
+ 20.5497 Speer (berg i Schweiz)
+ 20.5412 Albert Friedrich Speer
+ 20.2654 Speers Creek (vattendrag i Australien)
+ 20.1632 Speers Point Park
+ 20.1576 Speer Island
+ 20.1406 Speers Slough
+ 18.9224 Speers Creek (vattendrag i Kanada)
+ 18.8638 Nationalsozialistisches Kraftfahrkorps
+ 17.0760 Joachim Fest
+ 16.5816 Arkitektur i Nazityskland
+ 14.1241 Gitta Sereny
+ 13.9217 Polykrati
+ 13.8768 Posenkonferensen
+ 13.7444 Nazism i Sverige
+ 13.5287 Rudolf Wolters
+ 13.3344 Organisation Todt
+ 12.7673 Världsutställningen i Paris 1937
+ 11.8695 Karl Saur
+ 11.5325 Leo Löthman
+ 10.9342 Cirsosiopsis violacescens
+ 10.9245 Siegesallee
+ 10.8899 Camaroglobulus resinae
+ 10.8367 Coccomyces araucariae
+ 10.8339 Cleistonium parasiticum
+ 10.8093 Franz Xaver Dorsch
+ 10.7341 Tiergarten (stadsdel)
+ 10.7230 Xenomeris acicola
+ 10.7074 City Heat
+ 10.6796 Philip Zandén
+ 10.5828 Welthauptstadt Germania
+ 10.4970 Fritz Todt
+ 10.4857 Sidbena
+ 10.4524 Sebastian Koch
+ 10.4409 Macroallantina coccifera
+ 10.4018 Spandaufängelset
+ 10.2211 Religion i Nazityskland
+
+CLICK#03: Albert Speer Jr.
+ 36.7900 Legion Speer
+ 30.0866 Albert Speer Jr.
+ 29.0229 Albert Speer
+ 28.6169 Transportflotte Speer
+ 24.7827 Speers
+ 24.6277 Albert Friedrich Speer
+ 24.5056 Speers Creek
+ 23.2022 Blake Speers
+ 22.9628 Emory Speer
+ 22.9051 Vee Speers
+ 22.7775 Speers, Pennsylvania
+ 21.9930 Speers Lake
+ 21.9280 Chli Speer
+ 20.8981 Speers Island
+ 20.6575 Lophoblatta speerae
+ 20.6266 Speer (berg i Schweiz)
+ 20.3405 Speers Creek (vattendrag i Australien)
+ 20.2557 Speer Island
+ 20.2491 Speers Point Park
+ 20.2308 Speers Slough
+ 19.7049 Speers Creek (vattendrag i Kanada)
+ 18.3579 Arkitektur i Nazityskland
+ 18.1327 Joachim Fest
+ 17.9328 Nationalsozialistisches Kraftfahrkorps
+ 16.1040 Rudolf Wolters
+ 16.0230 Gitta Sereny
+ 15.3316 Posenkonferensen
+ 15.1813 Polykrati
+ 14.4782 Världsutställningen i Paris 1937
+ 13.4665 Organisation Todt
+ 13.3939 Karl Saur
+ 12.3744 Franz Xaver Dorsch
+ 12.1760 Sebastian Koch
+ 12.1646 Arkitektens mage
+ 12.0741 Fritz Todt
+ 11.9913 Nazism i Sverige
+ 11.9725 Fyraårsplanen
+ 11.8014 Tiergarten (stadsdel)
+ 11.7803 Spandaufängelset
+ 11.7037 Siegesallee
+ 11.6558 Welthauptstadt Germania
+ 11.5980 Philip Zandén
+ 11.5911 P-1000
+ 11.5781 Leo Löthman
+ 11.5454 Sidbena
+ 11.5128 Heinrich Tessenow
+ 11.3099 Volkshalle
+ 11.1875 David Edgar
+ 10.9976 Reichsparteitagsgelände
+ 10.9479 Cirsosiopsis violacescens
+
+CLICK#04: Albert Friedrich Speer
+ 34.2409 Legion Speer
+ 33.2944 Albert Speer Jr.
+ 31.5666 Albert Friedrich Speer
+ 30.8793 Albert Speer
+ 28.1128 Transportflotte Speer
+ 25.1663 Speers Creek
+ 24.7994 Speers
+ 23.3950 Blake Speers
+ 23.1697 Emory Speer
+ 23.1544 Vee Speers
+ 22.7783 Speers, Pennsylvania
+ 22.0277 Speers Lake
+ 22.0027 Chli Speer
+ 20.9760 Speers Island
+ 20.7245 Lophoblatta speerae
+ 20.6732 Speer (berg i Schweiz)
+ 20.3817 Speers Creek (vattendrag i Australien)
+ 20.3362 Speer Island
+ 20.3180 Speers Point Park
+ 20.3089 Speers Slough
+ 20.2879 Arkitektur i Nazityskland
+ 20.1990 Speers Creek (vattendrag i Kanada)
+ 18.5046 Rudolf Wolters
+ 18.4500 Joachim Fest
+ 17.0233 Nationalsozialistisches Kraftfahrkorps
+ 16.7232 Gitta Sereny
+ 15.9737 Polykrati
+ 15.6321 Posenkonferensen
+ 15.1522 Världsutställningen i Paris 1937
+ 15.0540 Heinrich Tessenow
+ 14.3899 Karl Saur
+ 14.2041 Arkitektens mage
+ 13.6280 Franz Xaver Dorsch
+ 13.2296 Volkshalle
+ 13.1720 Sebastian Koch
+ 13.1119 Organisation Todt
+ 12.9281 P-1000
+ 12.9068 Fritz Todt
+ 12.9045 Spandaufängelset
+ 12.8147 Fyraårsplanen
+ 12.6560 Welthauptstadt Germania
+ 12.3982 Tiergarten (stadsdel)
+ 12.2216 Albert Ganzenmüller
+ 12.1559 Philip Zandén
+ 12.1209 Sidbena
+ 12.0939 Siegesallee
+ 12.0342 David Edgar
+ 11.7032 Reichsparteitagsgelände
+ 11.6905 Konst och kultur i Nazityskland
+ 11.6812 Japans ambassad i Berlin
+
+CLICK#05: Adolf Hitler
+ 35.6399 Legion Speer
+ 32.7579 Albert Speer
+ 31.5213 Albert Speer Jr.
+ 29.7948 Albert Friedrich Speer
+ 27.7459 Transportflotte Speer
+ 24.8327 Speers Creek
+ 24.7806 Speers
+ 23.3343 Blake Speers
+ 23.2019 Emory Speer
+ 22.9600 Vee Speers
+ 22.7713 Arkitektur i Nazityskland
+ 22.7272 Speers, Pennsylvania
+ 22.6009 Joachim Fest
+ 21.9762 Speers Lake
+ 21.9731 Chli Speer
+ 20.9430 Speers Island
+ 20.6801 Lophoblatta speerae
+ 20.5850 Speer (berg i Schweiz)
+ 20.3528 Speers Creek (vattendrag i Australien)
+ 20.3031 Speer Island
+ 20.2890 Speers Point Park
+ 20.2785 Speers Slough
+ 19.9850 Speers Creek (vattendrag i Kanada)
+ 19.1494 Polykrati
+ 18.5555 Posenkonferensen
+ 17.8468 Rudolf Wolters
+ 17.7743 Karl Saur
+ 17.3740 Arkitektens mage
+ 17.0327 Nationalsozialistisches Kraftfahrkorps
+ 16.7580 Gitta Sereny
+ 16.6768 Volkshalle
+ 16.4130 Fritz Todt
+ 16.3637 Welthauptstadt Germania
+ 16.0314 Sidbena
+ 15.8879 Hitlerjugends hedersutmärkelse
+ 15.6671 P-1000
+ 15.0409 Albert Ganzenmüller
+ 14.8283 Axelmakternas ledare i andra världskriget
+ 14.7809 Arno Breker
+ 14.7558 Berghof
+ 14.5725 Världsutställningen i Paris 1937
+ 14.0525 Heinrich Tessenow
+ 13.9879 André Hennicke
+ 13.8904 Organisation Todt
+ 13.8645 Rikskansliet i Berlin
+ 13.7547 Sebastian Koch
+ 13.7522 Oberstgruppenführer
+ 13.3184 Korherr-rapporten
+ 13.1091 Franz Xaver Dorsch
+ 13.0517 Obersalzberg
+
+CLICK#06: Obersalzberg
+ 34.8947 Legion Speer
+ 32.5380 Albert Speer
+ 30.3165 Albert Speer Jr.
+ 28.5334 Albert Friedrich Speer
+ 27.4259 Transportflotte Speer
+ 24.7677 Speers
+ 24.6707 Speers Creek
+ 23.2827 Blake Speers
+ 23.1292 Emory Speer
+ 22.8887 Vee Speers
+ 22.7194 Arkitektur i Nazityskland
+ 22.7183 Speers, Pennsylvania
+ 22.0076 Joachim Fest
+ 21.9923 Chli Speer
+ 21.9418 Speers Lake
+ 20.9161 Speers Island
+ 20.6719 Lophoblatta speerae
+ 20.6051 Speer (berg i Schweiz)
+ 20.3084 Speers Creek (vattendrag i Australien)
+ 20.2759 Speer Island
+ 20.2653 Speers Point Park
+ 20.2530 Speers Slough
+ 19.8695 Berghof
+ 19.8491 Obersalzberg
+ 19.8404 Speers Creek (vattendrag i Kanada)
+ 18.9146 Polykrati
+ 18.5718 Posenkonferensen
+ 17.2278 Rudolf Wolters
+ 17.0236 Karl Saur
+ 16.8242 Gitta Sereny
+ 16.7845 Arkitektens mage
+ 16.7120 Nationalsozialistisches Kraftfahrkorps
+ 16.4838 Welthauptstadt Germania
+ 16.2600 Volkshalle
+ 15.8229 Fritz Todt
+ 15.7576 Sidbena
+ 15.7489 Hitlerjugends hedersutmärkelse
+ 15.3607 P-1000
+ 14.8377 Axelmakternas ledare i andra världskriget
+ 14.7001 Albert Ganzenmüller
+ 14.4798 Världsutställningen i Paris 1937
+ 14.2858 Arno Breker
+ 13.7506 André Hennicke
+ 13.6766 Organisation Todt
+ 13.5899 Rikskansliet i Berlin
+ 13.4865 Sebastian Koch
+ 13.4694 Oberstgruppenführer
+ 13.3988 Heinrich Tessenow
+ 12.9621 Korherr-rapporten
+ 12.6298 Spandaufängelset
+
+CLICK#07: Spandaufängelset
+ 34.0649 Albert Speer
+ 33.9486 Legion Speer
+ 29.7246 Albert Speer Jr.
+ 27.9859 Albert Friedrich Speer
+ 27.0651 Transportflotte Speer
+ 24.7629 Speers
+ 24.6276 Speers Creek
+ 23.2572 Blake Speers
+ 23.0954 Emory Speer
+ 22.8245 Vee Speers
+ 22.7217 Speers, Pennsylvania
+ 22.2389 Arkitektur i Nazityskland
+ 21.9765 Chli Speer
+ 21.9236 Speers Lake
+ 21.5123 Joachim Fest
+ 20.9039 Speers Island
+ 20.6683 Lophoblatta speerae
+ 20.5803 Speer (berg i Schweiz)
+ 20.2850 Speers Creek (vattendrag i Australien)
+ 20.2634 Speer Island
+ 20.2546 Speers Point Park
+ 20.2413 Speers Slough
+ 19.9821 Rudolf Wolters
+ 19.7917 Speers Creek (vattendrag i Kanada)
+ 19.0792 Obersalzberg
+ 18.8190 Berghof
+ 18.6306 Polykrati
+ 18.6100 Spandaufängelset
+ 18.2424 Posenkonferensen
+ 16.4870 Gitta Sereny
+ 16.4292 Karl Saur
+ 16.3339 Nationalsozialistisches Kraftfahrkorps
+ 16.2893 Arkitektens mage
+ 16.1399 Welthauptstadt Germania
+ 16.0448 Volkshalle
+ 15.4193 Sidbena
+ 15.3612 Hitlerjugends hedersutmärkelse
+ 15.1746 Fritz Todt
+ 14.9227 P-1000
+ 14.3811 Axelmakternas ledare i andra världskriget
+ 14.3466 Världsutställningen i Paris 1937
+ 14.2305 Albert Ganzenmüller
+ 13.7834 Arno Breker
+ 13.5198 Heinrich Tessenow
+ 13.4282 André Hennicke
+ 13.4041 Rikskansliet i Berlin
+ 13.3312 Sebastian Koch
+ 13.3024 Organisation Todt
+ 13.2656 Siegesallee
+ 13.2353 Baldur von Schirach
+
+CLICK#08: Albert Speer
+ 34.6450 Albert Speer
+ 33.5617 Legion Speer
+ 29.9596 Albert Speer Jr.
+ 28.3490 Albert Friedrich Speer
+ 27.1220 Transportflotte Speer
+ 25.0328 Speers Creek
+ 24.7870 Speers
+ 23.2747 Blake Speers
+ 23.1411 Emory Speer
+ 22.8381 Vee Speers
+ 22.7894 Arkitektur i Nazityskland
+ 22.7404 Speers, Pennsylvania
+ 21.9932 Chli Speer
+ 21.9391 Speers Lake
+ 21.1904 Joachim Fest
+ 20.9273 Speers Island
+ 20.6753 Lophoblatta speerae
+ 20.5968 Speer (berg i Schweiz)
+ 20.4488 Rudolf Wolters
+ 20.3295 Speers Creek (vattendrag i Australien)
+ 20.2861 Speer Island
+ 20.2750 Speers Point Park
+ 20.2606 Speers Slough
+ 20.0904 Speers Creek (vattendrag i Kanada)
+ 18.8583 Polykrati
+ 18.5733 Spandaufängelset
+ 18.4695 Posenkonferensen
+ 18.2456 Berghof
+ 18.2356 Obersalzberg
+ 17.2333 Gitta Sereny
+ 17.0619 Karl Saur
+ 16.2820 Arkitektens mage
+ 16.0813 Volkshalle
+ 16.0810 Welthauptstadt Germania
+ 15.9494 Nationalsozialistisches Kraftfahrkorps
+ 15.4126 Sidbena
+ 15.3557 Hitlerjugends hedersutmärkelse
+ 15.3322 P-1000
+ 15.1960 Fritz Todt
+ 14.6761 Världsutställningen i Paris 1937
+ 14.5799 Axelmakternas ledare i andra världskriget
+ 14.4508 Albert Ganzenmüller
+ 13.8521 Arno Breker
+ 13.8101 Heinrich Tessenow
+ 13.7602 Siegesallee
+ 13.5490 Sebastian Koch
+ 13.2864 Rikskansliet i Berlin
+ 13.2274 Oberstgruppenführer
+ 13.1989 André Hennicke
+ 13.1343 Fyraårsplanen
+
+CLICK#09: Arkitekturskolan
+ 34.0512 Albert Speer
+ 32.5976 Legion Speer
+ 29.5206 Albert Speer Jr.
+ 27.7260 Albert Friedrich Speer
+ 26.6655 Transportflotte Speer
+ 24.9454 Speers Creek
+ 24.7853 Speers
+ 23.2611 Blake Speers
+ 23.2019 Arkitektur i Nazityskland
+ 23.1199 Emory Speer
+ 22.7999 Vee Speers
+ 22.7364 Speers, Pennsylvania
+ 21.9839 Chli Speer
+ 21.9285 Speers Lake
+ 20.9188 Speers Island
+ 20.6726 Lophoblatta speerae
+ 20.6648 Joachim Fest
+ 20.5822 Speer (berg i Schweiz)
+ 20.3142 Speers Creek (vattendrag i Australien)
+ 20.2776 Speer Island
+ 20.2675 Speers Point Park
+ 20.2529 Speers Slough
+ 20.0423 Rudolf Wolters
+ 20.0195 Speers Creek (vattendrag i Kanada)
+ 18.5222 Polykrati
+ 18.2165 Posenkonferensen
+ 18.0288 Spandaufängelset
+ 17.6565 Berghof
+ 17.5291 Obersalzberg
+ 16.8815 Gitta Sereny
+ 16.6575 Karl Saur
+ 15.9377 Arkitektens mage
+ 15.7033 Volkshalle
+ 15.6733 Welthauptstadt Germania
+ 15.6733 Nationalsozialistisches Kraftfahrkorps
+ 15.1327 Sidbena
+ 15.0460 Hitlerjugends hedersutmärkelse
+ 15.0289 P-1000
+ 14.6853 Fritz Todt
+ 14.4552 Världsutställningen i Paris 1937
+ 14.0871 Axelmakternas ledare i andra världskriget
+ 14.0812 Albert Ganzenmüller
+ 13.5679 Arno Breker
+ 13.5078 Siegesallee
+ 13.4702 Heinrich Tessenow
+ 13.3513 Sebastian Koch
+ 13.0404 Oberstgruppenführer
+ 13.0009 André Hennicke
+ 12.9023 Rikskansliet i Berlin
+ 12.8755 Fyraårsplanen
+
+CLICK#10: P-1000
+ 34.1562 Albert Speer
+ 32.8044 Legion Speer
+ 29.9309 Albert Speer Jr.
+ 27.6901 Albert Friedrich Speer
+ 27.0571 Transportflotte Speer
+ 24.8669 Speers Creek
+ 24.7779 Speers
+ 23.2453 Blake Speers
+ 23.2073 Arkitektur i Nazityskland
+ 23.0947 Emory Speer
+ 22.8518 Vee Speers
+ 22.7313 Speers, Pennsylvania
+ 21.9720 Chli Speer
+ 21.9154 Speers Lake
+ 20.9079 Speers Island
+ 20.6546 Lophoblatta speerae
+ 20.5645 Speer (berg i Schweiz)
+ 20.3752 Joachim Fest
+ 20.3687 Speers Creek (vattendrag i Australien)
+ 20.3431 Rudolf Wolters
+ 20.2668 Speer Island
+ 20.2580 Speers Point Park
+ 20.2431 Speers Slough
+ 20.0132 Speers Creek (vattendrag i Kanada)
+ 18.2416 Polykrati
+ 18.0993 Spandaufängelset
+ 18.0414 Posenkonferensen
+ 17.7066 P-1000
+ 17.5402 Obersalzberg
+ 17.4754 Berghof
+ 17.1151 Gitta Sereny
+ 16.5789 Karl Saur
+ 15.8244 Nationalsozialistisches Kraftfahrkorps
+ 15.6787 Welthauptstadt Germania
+ 15.6650 Volkshalle
+ 15.5824 Arkitektens mage
+ 14.9519 Sidbena
+ 14.8563 Fritz Todt
+ 14.7382 Hitlerjugends hedersutmärkelse
+ 14.4669 Världsutställningen i Paris 1937
+ 14.3817 Albert Ganzenmüller
+ 14.3113 Axelmakternas ledare i andra världskriget
+ 13.8632 Arno Breker
+ 13.7592 Siegesallee
+ 13.6111 Sebastian Koch
+ 13.5793 Heinrich Tessenow
+ 13.4744 Fyraårsplanen
+ 13.0967 André Hennicke
+ 13.0059 Tiergarten (stadsdel)
+ 12.9888 Rikskansliet i Berlin

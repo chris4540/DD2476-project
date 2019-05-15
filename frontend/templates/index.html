@@ -24,13 +24,48 @@
     <!-- Modal Trigger -->
 
     <!-- Modal Structure -->
-    <div id="modal1" class="modal">
+    <div class="modal" id="modal1">
         <div class="modal-content">
             <h4>Static user profile settings</h4>
-            <input class="validate" id="email" type="email" placeholder="Enter your email" v-model="email" />
+            <div class="row">
+                <div class="col s10">
+                    <input class="validate" id="email" placeholder="Enter your email" type="email" v-model="modal_email" v-on:keyup="mail_changed_true" />
+                </div>
+                <div class="col s2">
+                    <button class="right btn" v-on:click="refresh_email"><i class="material-icons">refresh</i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <input type="number" id="age" v-model="age" v-bind:disabled="mail_changed">
+                    <label for="age">Age:</label>
+                </div>
+                <div class="col s6">
+                    <input type="text" id="gender" v-model="gender" v-bind:disabled="mail_changed">
+                    <label for="gender">Gender:</label>
+                </div>
+            </div>
+            <div class="row">
+                <input type="text" id="lang" v-model="lang" v-bind:disabled="mail_changed">
+                <label for="lang">Language:</label>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <input type="text" id="city" v-model="city" v-bind:disabled="mail_changed">
+                    <label for="city">City:</label>
+                </div>
+                <div class="col s6">
+                    <input type="text" id="country" v-model="country" v-bind:disabled="mail_changed">
+                    <label for="country">Country:</label>
+                </div>
+            </div>
+
+            <div class="chips">
+                <input v-bind:disabled="mail_changed">
+            </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            <button class="modal-close waves-effect waves-green btn" v-bind:disabled="mail_changed" v-on:click="submit_user_profile"><i class="material-icons">check</i></button>
         </div>
     </div>
 
@@ -42,14 +77,14 @@
         </div>
     </div>
 
-    <form v-on:submit.prevent="search(query, 0)" class="valign-wrapper">
+    <form class="valign-wrapper" v-on:submit.prevent="search(query, 0)">
         <div class="container">
             <div class="row valign-wrapper">
                 <div class="col s1">
                     <i class="material-icons">search</i>
                 </div>
                 <div class="col input-field s10">
-                    <input id="search" type="search" v-model="query" required />
+                    <input id="search" required type="search" v-model="query"/>
                 </div>
                 <div class="col offset-s1 s1">
                     <button class="btn-floating btn-large waves-effect waves-light grey" type="submit"><i
@@ -68,9 +103,13 @@
             </div>
             <li v-else v-for="item in results">
                 <div class="collection-header" style="display: block"><span
-                        style="padding-right: 20px;">[[ item.pos ]]</span>[[ item.string ]]<div class="right"><span class="green-text">Previous score: [[ item.score ]]</span> | <span class="blue-text">Modified score: [[ item.modified_score ]]</span> | <span style="cursor: pointer" v-on:click="click_link(item.id, item.url)">Link: <span
-                        class="secondary-content"><i
-                        class="material-icons blue-text">send</i></span></span></div></div>
+                        style="padding-right: 20px;">[[ item.pos ]]</span>[[ item.string ]]
+                    <div class="right"><span class="green-text">Previous score: [[ item.score ]]</span> | <span
+                            class="blue-text">Modified score: [[ item.score ]]</span> | <span style="cursor: pointer"
+                                                                                              v-on:click="click_link(item.id, item.url)">Link: <span
+                            class="secondary-content"><i
+                            class="material-icons blue-text">send</i></span></span></div>
+                </div>
                 <div class="collection-item">[[ item.synopsys ]]...</div>
                 <br>
             </li>
@@ -93,7 +132,7 @@
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Group 8</h5>
+                    <h5 class="white-text">Group 3</h5>
                     <ul>
                         <li>Sergio Liberman Bronfman</li>
                         <li>Chun Hung Lin</li>
@@ -117,13 +156,8 @@
 <script src="./static/js/materialize.js"></script>
 <script src="./static/js/init.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('.modal').modal();
-    });
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.5.13/vue-cookies.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -131,24 +165,27 @@
         data: {
             results: [],
             query: "",
+            modal_email: "",
             email: "",
+            age: 0,
+            gender: "",
+            lang: "",
+            city: "",
+            country: "",
             searching: false,
             current_page: 0,
             n_results: 0,
             results_per_page: 50,
             search_url: "/search",
-            log_url: "/log"
+            log_url: "/log",
+            mail_changed: true
         },
         methods: {
             search: function (query, page) {
                 this.searching = true
 
-                if (this.email.length > 0) {
-                    this.$cookies.set("prev_email", this.email, "30d");
-                }
-
                 this.$http.post(this.search_url, {
-                    email: email.value,
+                    email: this.email,
                     results_size: this.results_per_page,
                     query: query,
                     results_from: page * this.results_per_page
@@ -176,23 +213,82 @@
             click_link: function (element_id, url) {
                 window.open(url)
                 this.$http.post(this.log_url + "/click", {
-                    "email": email.value,
+                    "email": this.email.value,
                     "doc_id": element_id
                 }).then(success_response => {
 
                 }, failed_response => {
 
                 })
+            },
+            get_static_query_terms: function () {
+                this.$http.get("/static_profile?email=" + this.email).then(response => {
+                    instance = M.Chips.getInstance($('.chips'));
+                    for (i = instance.chipsData.length - 1; i >= 0; i--) {
+                        instance.deleteChip(i)
+                    }
+                    Object.keys(response.body).forEach(i => {
+                        instance.addChip({"tag": i});
+                    })
+                }, failed_response => {
+
+                })
+            },
+            submit_user_profile: function () {
+                instance = M.Chips.getInstance($('.chips'));
+                terms = [];
+                for (i = instance.chipsData.length - 1; i >= 0; i--) {
+                    terms.push(instance.chipsData[i].tag);
+                }
+
+                var profile = {
+                    email: this.email,
+                    age: this.age,
+                    gender: this.gender,
+                    lang: this.lang,
+                    city: this.city,
+                    country: this.country
+                };
+                this.$http.post("/user_profile?email=" + this.email, profile).then(response => {});
+                this.$http.post("/static_profile?email=" + this.email, {terms: terms})
+            },
+            get_user_profile: function () {
+                this.$http.get("/user_profile?email=" + this.email).then(
+                    request => {
+                        this.age = request.body.age,
+                        this.gender = request.body.gender,
+                        this.lang = request.body.lang,
+                        this.city = request.body.city,
+                        this.country = request.body.country
+                    }
+                )
+            },
+            refresh_email: function () {
+                this.email = this.modal_email;
+                this.$cookies.set("prev_email", this.email, "30d");
+                this.get_static_query_terms();
+                this.get_user_profile();
+                this.mail_changed = false;
+            },
+            mail_changed_true: function () {
+                this.mail_changed = true;
             }
         },
         created: function () {
-            // $(document).ready(function () {
-            //     $('.collapsible').collapsible();
-            // });
+            $(document).ready(function () {
+                $('.modal').modal({
+                    dismissible: false
+                });
+                $('.chips').chips({
+                    placeholder: 'Query terms',
+                    secondaryPlaceholder: '+Term'
+                });
+            });
         },
         mounted: function () {
             if (this.$cookies.isKey("prev_email") === true) {
-                this.email = this.$cookies.get("prev_email");
+                this.modal_email = this.email = this.$cookies.get("prev_email");
+                this.get_user_profile(this.email);
             }
         }
     })
