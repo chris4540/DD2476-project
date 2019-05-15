@@ -1,0 +1,571 @@
+CLICK#00: EMPTY PROFILE
+ 41.4654 Filip och Fredrik
+ 39.2906 Alla mot alla med Filip och Fredrik
+ 38.2244 Söndagsparty med Filip & Fredrik
+ 37.6481 Vem kan slå Filip och Fredrik
+ 36.9309 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 35.2731 Breaking News med Filip och Fredrik
+ 33.2694 Filip Hammar
+ 33.1369 The Filip and Fredrik podcast
+ 32.4848 Filip och Fredriks podcast
+ 30.9314 Fredrik Wikingsson
+ 30.5624 Filip Vilhelm av Brandenburg-Schwedt
+ 28.8791 Filip av Schwaben
+ 27.6143 Fredrik Hierta
+ 27.1409 Filip I
+ 26.6189 Filip
+ 26.5865 Fredrik Hammar
+ 26.4658 Filip VI
+ 26.3384 Filip den uppriktige av Pfalz
+ 25.5302 Filip Berg
+ 25.3219 Fredrik Ludvig av Schleswig-Holstein-Sonderburg-Beck
+ 25.0400 Fredrik Forsberg (ishockeyspelare född december 1996)
+ 24.9184 August Filip av Holstein-Beck
+ 24.6864 Filip V
+ 24.5244 Filip II
+ 24.4033 Filip av Burgund
+ 24.4033 Filip IV
+ 24.3878 Filip Månsson
+ 24.3813 Pavel Filip
+ 24.3043 Filipe
+ 24.2685 Svarte Filip
+ 24.2059 Filip III
+ 24.1133 Filip Hronek
+ 24.1108 Filip Chlapík
+ 24.1016 Fredrik von Krusenstjerna
+ 24.0745 Filip Augustson
+ 24.0360 Filip Chytil
+ 24.0242 Fredrik Ludvig av Mecklenburg-Schwerin
+ 23.9980 Filip Bradarić
+ 23.9276 Filip Knutsson
+ 23.9060 Filip Araben
+ 23.8467 Filip Larsson
+ 23.8467 Filip Ingebrigtsen
+ 23.7981 Filip Pivkovski
+ 23.7765 Filip Meirhaeghe
+ 23.7168 Filip av Sverige
+ 23.6827 Filip Dewinter
+ 23.6742 Filip Zubčić
+ 23.6515 Filip den sköne
+ 23.6470 Filip Ragvaldsson
+ 23.5962 Filip den djärve
+
+CLICK#01: Breaking News med Filip och Fredrik
+ 49.7482 Breaking News med Filip och Fredrik
+ 39.4422 Filip och Fredrik
+ 32.7870 Vem kan slå Filip och Fredrik
+ 32.7392 Alla mot alla med Filip och Fredrik
+ 32.0200 Söndagsparty med Filip & Fredrik
+ 30.1465 Filip Hammar
+ 28.6917 Fredrik Wikingsson
+ 28.4887 Anders Adali
+ 27.4728 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 24.4441 Filip och Fredriks podcast
+ 24.4398 The Filip and Fredrik podcast
+ 21.7794 Filip Vilhelm av Brandenburg-Schwedt
+ 21.2705 Jesper Eneroth
+ 20.8366 High Chaparall
+ 20.6438 Lite sällskap
+ 20.5846 Kristoffer Triumf
+ 20.3681 Filip av Schwaben
+ 20.1869 Racet till Vita huset
+ 19.9076 Fredrik Hammar
+ 19.8270 Filip Hronek
+ 19.7989 Filip Chytil
+ 19.7353 Filip Chlapík
+ 19.4429 Jorden runt på 6 steg
+ 19.4174 Fredrik Hierta
+ 19.3862 Filip Pivkovski
+ 19.3438 Ska vi göra slut?
+ 19.2975 Filip
+ 19.2643 Filip Eriksson
+ 19.2070 Filip Dagerstål
+ 19.1768 Filip Rogic
+ 19.1498 Filip I
+ 19.1438 Filip Berg
+ 19.1416 La Bamba (TV-program)
+ 18.9240 Tora Rydelius
+ 18.8255 Filip Korkes
+ 18.7682 Nexiko
+ 18.7500 Boston Tea Party (TV-program)
+ 18.7325 Filip Benković
+ 18.6964 Filip Benko
+ 18.6247 Filip VI
+ 18.5571 Nugammalt
+ 18.5208 Filipa Azevedo
+ 18.5126 Filip den uppriktige av Pfalz
+ 18.3882 Edwin Johnsson
+ 18.3324 Kristallen 2012
+ 18.1190 Fredrik af Trampe
+ 18.0852 Filip Forsberg
+ 17.9126 Filip Kostić
+ 17.8746 Filip Stiller
+ 17.7748 Fredrik Ludvig av Schleswig-Holstein-Sonderburg-Beck
+
+CLICK#02: High Chaparall
+ 45.9299 Breaking News med Filip och Fredrik
+ 43.9724 Filip och Fredrik
+ 35.9193 High Chaparall
+ 33.9032 Alla mot alla med Filip och Fredrik
+ 33.6289 Vem kan slå Filip och Fredrik
+ 33.5518 Filip Hammar
+ 32.8272 Söndagsparty med Filip & Fredrik
+ 32.7016 Fredrik Wikingsson
+ 28.1503 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 26.2550 Anders Adali
+ 24.2553 The Filip and Fredrik podcast
+ 24.2504 Filip och Fredriks podcast
+ 21.6898 Filip Vilhelm av Brandenburg-Schwedt
+ 21.5892 Lite sällskap
+ 21.4218 100 höjdare (säsong 1)
+ 20.8918 Ska vi göra slut?
+ 20.4756 La Bamba (TV-program)
+ 20.4674 Fredrik Hammar
+ 20.3591 Jorden runt på 6 steg
+ 20.3496 Filip av Schwaben
+ 19.9654 Racet till Vita huset
+ 19.8917 Boston Tea Party (TV-program)
+ 19.8214 Filip Berg
+ 19.8062 Nugammalt
+ 19.6645 Filip
+ 19.4571 Niclas Crammer
+ 19.4530 Fredrik Hierta
+ 19.4101 Öppna dagar
+ 19.4097 Kristoffer Triumf
+ 19.1497 Filip I
+ 19.1416 Nexiko
+ 19.0120 Filip Hronek
+ 19.0070 Filip Chytil
+ 18.9559 Fredrik af Trampe
+ 18.9469 Filip Chlapík
+ 18.9381 Filip Rogic
+ 18.7426 Filip Pivkovski
+ 18.7380 Edwin Johnsson
+ 18.7188 Filip Eriksson
+ 18.7180 Ursäkta röran (vi bygger om)
+ 18.6622 Filip Benko
+ 18.6247 Filip VI
+ 18.5523 Filip Dagerstål
+ 18.4941 Filip den uppriktige av Pfalz
+ 18.4592 Jesper Eneroth
+ 18.1207 Filip Benković
+ 18.0611 Filip Forsberg
+ 18.0437 Hissen
+ 17.9173 Filip Korkes
+ 17.7760 Filip Stiller
+
+CLICK#03: Kanal 5
+ 42.5001 Filip och Fredrik
+ 41.9581 Breaking News med Filip och Fredrik
+ 35.1037 Alla mot alla med Filip och Fredrik
+ 34.9580 Vem kan slå Filip och Fredrik
+ 34.4992 Söndagsparty med Filip & Fredrik
+ 32.0337 High Chaparall
+ 32.0058 Filip Hammar
+ 31.5937 Fredrik Wikingsson
+ 27.6080 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 25.5334 Anders Adali
+ 24.0453 The Filip and Fredrik podcast
+ 23.8408 Filip och Fredriks podcast
+ 23.4007 Lite sällskap
+ 22.6951 Ska vi göra slut?
+ 22.3241 La Bamba (TV-program)
+ 22.1399 Jorden runt på 6 steg
+ 22.1277 Nexiko
+ 21.8296 Filip Vilhelm av Brandenburg-Schwedt
+ 21.7647 Nugammalt
+ 21.4217 Boston Tea Party (TV-program)
+ 21.2109 Racet till Vita huset
+ 20.7920 Fredrik Hammar
+ 20.7334 100 höjdare (säsong 1)
+ 20.3404 Filip av Schwaben
+ 20.2110 Filip Berg
+ 19.9767 Hissen
+ 19.9604 Filip
+ 19.6349 Stockholm-Köpenhamn
+ 19.6311 Filip Stiller
+ 19.5598 Kristallen 2012
+ 19.4507 Fredrik Hierta
+ 19.4237 Alla mot alla
+ 19.3915 Kristallen 2009
+ 19.2334 Filip I
+ 19.1206 Filip Benko
+ 19.0822 Fredrik af Trampe
+ 18.7155 Filip Rogic
+ 18.6913 Grattis världen
+ 18.6803 Öppna dagar
+ 18.6028 Filip VI
+ 18.5941 Kristoffer Triumf
+ 18.4802 Claes Åkeson
+ 18.4796 Filip den uppriktige av Pfalz
+ 18.4482 Edwin Johnsson
+ 18.3794 Jan Myrehed
+ 18.3575 Henrik Bastin
+ 18.3503 Filip Hronek
+ 18.3347 Filip Chytil
+ 18.3047 Filip Chlapík
+ 18.3041 Fredrik Huldt
+
+CLICK#04: Nexiko
+ 43.4681 Filip och Fredrik
+ 39.6548 Breaking News med Filip och Fredrik
+ 35.1616 Alla mot alla med Filip och Fredrik
+ 34.5347 Vem kan slå Filip och Fredrik
+ 34.2223 Söndagsparty med Filip & Fredrik
+ 31.8290 Filip Hammar
+ 31.8157 Nexiko
+ 31.4382 Fredrik Wikingsson
+ 29.9140 High Chaparall
+ 27.4848 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 25.9728 Lars Beckung
+ 25.4075 Stockholm-Köpenhamn
+ 24.9806 Anders Adali
+ 24.3036 The Filip and Fredrik podcast
+ 23.9051 Filip och Fredriks podcast
+ 23.0062 Ska vi göra slut?
+ 22.9287 Lite sällskap
+ 22.7179 La Bamba (TV-program)
+ 22.2582 Jorden runt på 6 steg
+ 21.8588 Nugammalt
+ 21.8058 Filip Vilhelm av Brandenburg-Schwedt
+ 21.6441 Fredrik Hammar
+ 21.0443 Boston Tea Party (TV-program)
+ 20.8598 Racet till Vita huset
+ 20.6279 Filip Berg
+ 20.4645 Filip av Schwaben
+ 20.4190 Filip
+ 19.8537 Hissen
+ 19.6460 Kristallen 2009
+ 19.6441 Fredrik Hierta
+ 19.5896 Kristallen 2012
+ 19.5015 Filip Stiller
+ 19.3600 100 höjdare (säsong 1)
+ 19.3522 Filip Benko
+ 19.3407 Alla mot alla
+ 19.2447 Fredrik af Trampe
+ 19.2134 Filip I
+ 19.0912 Henrik Bastin
+ 18.8897 Filip Rogic
+ 18.8840 Kristoffer Triumf
+ 18.7472 Grattis världen
+ 18.5986 Filip VI
+ 18.4681 Fredrik Huldt
+ 18.4578 Filip den uppriktige av Pfalz
+ 18.4368 Edwin Johnsson
+ 18.4079 Claes Åkeson
+ 18.3815 Ursäkta röran (vi bygger om)
+ 18.2565 Jan Myrehed
+ 18.2493 Öppna dagar
+ 18.1448 Filip Hronek
+
+CLICK#05: Anders Adali
+ 43.0108 Filip och Fredrik
+ 38.4694 Breaking News med Filip och Fredrik
+ 35.7320 Alla mot alla med Filip och Fredrik
+ 34.8656 Vem kan slå Filip och Fredrik
+ 33.8145 Söndagsparty med Filip & Fredrik
+ 32.8520 Anders Adali
+ 31.9516 Filip Hammar
+ 31.5054 Fredrik Wikingsson
+ 30.6472 Nexiko
+ 29.0691 High Chaparall
+ 27.9957 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 24.8141 Lars Beckung
+ 24.7962 The Filip and Fredrik podcast
+ 24.2067 Stockholm-Köpenhamn
+ 23.8827 Filip och Fredriks podcast
+ 23.4574 Ska vi göra slut?
+ 23.4249 La Bamba (TV-program)
+ 22.8911 Lite sällskap
+ 22.5661 Jorden runt på 6 steg
+ 22.2357 Fredrik Hammar
+ 21.8280 Filip Vilhelm av Brandenburg-Schwedt
+ 21.3838 Nugammalt
+ 21.3115 Boston Tea Party (TV-program)
+ 21.2533 Filip Berg
+ 21.0297 Filip
+ 20.5540 Filip av Schwaben
+ 20.4133 Racet till Vita huset
+ 19.9401 Kristallen 2012
+ 19.8885 Filip Benko
+ 19.8356 Fredrik Hierta
+ 19.7518 Kristoffer Triumf
+ 19.4869 Fredrik af Trampe
+ 19.4013 Kristallen 2009
+ 19.3722 Hissen
+ 19.1942 Filip I
+ 19.1764 Filip Rogic
+ 19.1585 Alla mot alla
+ 19.0863 Filip Stiller
+ 19.0769 Claes Åkeson
+ 18.9805 Jan Myrehed
+ 18.9408 Fredrik Huldt
+ 18.8270 Edwin Johnsson
+ 18.7391 Grattis världen
+ 18.7041 Filip VI
+ 18.6276 Henrik Bastin
+ 18.5520 Filip den uppriktige av Pfalz
+ 18.4960 Karin Winther (programledare)
+ 18.4398 Filip Hronek
+ 18.3904 Filip Chytil
+ 18.3898 Filip Chlapík
+
+CLICK#06: Mässling
+ 41.9869 Filip och Fredrik
+ 37.4046 Breaking News med Filip och Fredrik
+ 35.1855 Alla mot alla med Filip och Fredrik
+ 34.1649 Vem kan slå Filip och Fredrik
+ 33.3030 Söndagsparty med Filip & Fredrik
+ 31.3980 Filip Hammar
+ 31.0125 Anders Adali
+ 30.8179 Fredrik Wikingsson
+ 29.4421 Nexiko
+ 27.9196 High Chaparall
+ 27.6282 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 24.6772 The Filip and Fredrik podcast
+ 23.8784 Lars Beckung
+ 23.7829 Filip och Fredriks podcast
+ 23.5421 Stockholm-Köpenhamn
+ 22.9855 Ska vi göra slut?
+ 22.9446 La Bamba (TV-program)
+ 22.3976 Lite sällskap
+ 22.0246 Jorden runt på 6 steg
+ 21.9956 Fredrik Hammar
+ 21.7748 Filip Vilhelm av Brandenburg-Schwedt
+ 21.0399 Filip Berg
+ 20.9529 Filip
+ 20.8390 Nugammalt
+ 20.8006 Boston Tea Party (TV-program)
+ 20.5744 Filip av Schwaben
+ 20.0143 Racet till Vita huset
+ 19.8049 Fredrik Hierta
+ 19.6659 Filip Benko
+ 19.3424 Kristoffer Triumf
+ 19.3291 Kristallen 2012
+ 19.2075 Fredrik af Trampe
+ 19.1854 Filip I
+ 19.0105 Kristallen 2009
+ 18.9403 Filip Rogic
+ 18.9315 Hissen
+ 18.8730 Filip Stiller
+ 18.7944 Alla mot alla
+ 18.6961 Filip VI
+ 18.6909 Claes Åkeson
+ 18.6578 Filip I av Kastilien
+ 18.6309 Edwin Johnsson
+ 18.5658 Fredrik Huldt
+ 18.5493 Jan Myrehed
+ 18.5470 Filip den uppriktige av Pfalz
+ 18.2870 Filip Hronek
+ 18.2610 Grattis världen
+ 18.2412 Filip Chlapík
+ 18.2340 Filip Chytil
+ 18.1617 Filip Dagerstål
+
+CLICK#07: Stockholm-Köpenhamn
+ 41.9356 Filip och Fredrik
+ 36.7446 Breaking News med Filip och Fredrik
+ 34.7286 Alla mot alla med Filip och Fredrik
+ 33.5969 Vem kan slå Filip och Fredrik
+ 32.9338 Söndagsparty med Filip & Fredrik
+ 32.0626 Filip Hammar
+ 31.6046 Nexiko
+ 31.1970 Fredrik Wikingsson
+ 29.6005 Anders Adali
+ 28.3827 Stockholm-Köpenhamn
+ 27.5362 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 26.9913 High Chaparall
+ 24.6569 Lars Beckung
+ 24.5809 The Filip and Fredrik podcast
+ 23.7804 Filip och Fredriks podcast
+ 22.8689 La Bamba (TV-program)
+ 22.6007 Ska vi göra slut?
+ 22.3384 Fredrik Hammar
+ 22.0324 Lite sällskap
+ 21.7956 Filip Vilhelm av Brandenburg-Schwedt
+ 21.6617 Jorden runt på 6 steg
+ 21.4041 Filip Berg
+ 21.0672 Filip
+ 20.6078 Filip av Schwaben
+ 20.5046 Nugammalt
+ 20.4189 Fredrik Hierta
+ 20.3984 Boston Tea Party (TV-program)
+ 20.0326 Filip Benko
+ 19.8988 Racet till Vita huset
+ 19.5050 Fredrik af Trampe
+ 19.3325 Kristoffer Triumf
+ 19.3304 Filip Stiller
+ 19.2741 Henrik Bastin
+ 19.1679 Filip I
+ 18.9018 Filip Rogic
+ 18.8972 Kristallen 2012
+ 18.8819 Claes Åkeson
+ 18.8708 Kristallen 2009
+ 18.7509 Hissen
+ 18.7254 Filip Månsson
+ 18.6784 Filip VI
+ 18.5355 Filip Alexanderson
+ 18.5340 Filip den uppriktige av Pfalz
+ 18.5180 Edwin Johnsson
+ 18.5078 Alla mot alla
+ 18.4851 Filip I av Kastilien
+ 18.4613 Fredrik Huldt
+ 18.3218 Tårtgeneralen
+ 18.2190 Jan Myrehed
+ 18.1860 Filip Hronek
+
+CLICK#08: Jan Myrdal
+ 40.9938 Filip och Fredrik
+ 35.7027 Breaking News med Filip och Fredrik
+ 34.1831 Alla mot alla med Filip och Fredrik
+ 33.0546 Vem kan slå Filip och Fredrik
+ 32.4075 Söndagsparty med Filip & Fredrik
+ 31.6758 Filip Hammar
+ 30.9424 Fredrik Wikingsson
+ 30.3428 Nexiko
+ 28.3345 Anders Adali
+ 27.6375 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 27.3958 Stockholm-Köpenhamn
+ 26.3972 High Chaparall
+ 24.4589 The Filip and Fredrik podcast
+ 23.6803 Filip och Fredriks podcast
+ 23.5900 Lars Beckung
+ 22.3990 La Bamba (TV-program)
+ 22.1281 Fredrik Hammar
+ 22.0158 Ska vi göra slut?
+ 21.7997 Filip Vilhelm av Brandenburg-Schwedt
+ 21.5644 Lite sällskap
+ 21.1113 Filip Berg
+ 21.1000 Filip
+ 21.0234 Jorden runt på 6 steg
+ 20.6519 Filip av Schwaben
+ 20.5104 Fredrik Hierta
+ 20.3731 Nugammalt
+ 19.8608 Boston Tea Party (TV-program)
+ 19.7166 Filip Benko
+ 19.6948 Racet till Vita huset
+ 19.3885 Fredrik af Trampe
+ 19.1946 Filip Stiller
+ 19.1596 Filip I
+ 19.0700 Kristoffer Triumf
+ 18.7705 Filip Månsson
+ 18.6972 Filip Rogic
+ 18.6947 Filip VI
+ 18.6879 Jan Myrehed
+ 18.5785 Tårtgeneralen
+ 18.5505 Filip den uppriktige av Pfalz
+ 18.5393 Filip Alexanderson
+ 18.4797 Kristallen 2009
+ 18.4531 Claes Åkeson
+ 18.4112 Henrik Bastin
+ 18.3441 Fredrik von Krusenstjerna
+ 18.3324 Edwin Johnsson
+ 18.3277 Kristallen 2012
+ 18.3213 Filip Lundberg
+ 18.2946 Filip I av Kastilien
+ 18.1834 Hissen
+ 18.1572 Fredrik Henkelmann
+
+CLICK#09: Nugammalt
+ 41.9925 Filip och Fredrik
+ 35.6581 Breaking News med Filip och Fredrik
+ 34.4395 Alla mot alla med Filip och Fredrik
+ 33.3540 Vem kan slå Filip och Fredrik
+ 32.5907 Söndagsparty med Filip & Fredrik
+ 32.3520 Filip Hammar
+ 31.8073 Fredrik Wikingsson
+ 31.1952 Nexiko
+ 27.9216 Anders Adali
+ 27.6663 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 26.4237 Stockholm-Köpenhamn
+ 26.2874 High Chaparall
+ 25.1095 Nugammalt
+ 24.4005 The Filip and Fredrik podcast
+ 23.6319 Filip och Fredriks podcast
+ 23.2704 Lars Beckung
+ 22.6999 La Bamba (TV-program)
+ 22.4850 Ska vi göra slut?
+ 22.1567 Fredrik Hammar
+ 21.8420 Filip Vilhelm av Brandenburg-Schwedt
+ 21.6587 Lite sällskap
+ 21.2673 Jorden runt på 6 steg
+ 21.1825 Filip Berg
+ 21.1715 Filip
+ 20.6278 Filip av Schwaben
+ 20.4317 Fredrik Hierta
+ 20.0355 Boston Tea Party (TV-program)
+ 19.7830 Filip Benko
+ 19.7023 Fredrik af Trampe
+ 19.6286 Racet till Vita huset
+ 19.3875 Filip Stiller
+ 19.1476 Filip I
+ 19.1240 Kristoffer Triumf
+ 18.7546 Filip Månsson
+ 18.7081 Tårtgeneralen
+ 18.6836 Filip Rogic
+ 18.6798 Filip VI
+ 18.6382 Claes Åkeson
+ 18.6226 Hissen
+ 18.5799 Filip Alexanderson
+ 18.5787 Jan Myrehed
+ 18.5451 Henrik Bastin
+ 18.5391 Filip den uppriktige av Pfalz
+ 18.4677 Alla mot alla
+ 18.3580 Kristallen 2009
+ 18.3531 Filip Lundberg
+ 18.3040 Kristallen 2012
+ 18.2938 Filip I av Kastilien
+ 18.2718 Fredrik Henkelmann
+ 18.2478 Fredrik von Krusenstjerna
+
+CLICK#10: Lite sällskap
+ 42.1668 Filip och Fredrik
+ 35.7243 Breaking News med Filip och Fredrik
+ 34.6234 Alla mot alla med Filip och Fredrik
+ 33.3804 Vem kan slå Filip och Fredrik
+ 32.9319 Söndagsparty med Filip & Fredrik
+ 32.8335 Filip Hammar
+ 32.3525 Fredrik Wikingsson
+ 30.4787 Nexiko
+ 27.6798 Lista över avsnitt av Vem kan slå Filip och Fredrik
+ 27.6370 Anders Adali
+ 26.4426 High Chaparall
+ 25.8800 Stockholm-Köpenhamn
+ 25.0866 Lite sällskap
+ 25.0310 Nugammalt
+ 24.2405 The Filip and Fredrik podcast
+ 23.7947 Filip och Fredriks podcast
+ 22.7768 La Bamba (TV-program)
+ 22.7448 Lars Beckung
+ 22.7003 Ska vi göra slut?
+ 22.2066 Fredrik Hammar
+ 21.7796 Filip Vilhelm av Brandenburg-Schwedt
+ 21.4966 Jorden runt på 6 steg
+ 21.3905 Filip Berg
+ 21.1818 Filip
+ 20.7277 Filip av Schwaben
+ 20.3528 Fredrik Hierta
+ 20.1577 Boston Tea Party (TV-program)
+ 19.9881 Filip Benko
+ 19.8879 Fredrik af Trampe
+ 19.7408 Racet till Vita huset
+ 19.7283 Tårtgeneralen
+ 19.3022 Filip Stiller
+ 19.1596 Kristoffer Triumf
+ 19.1482 Filip I
+ 18.7341 Edwin Johnsson
+ 18.7336 Alla mot alla
+ 18.7322 Filip Rogic
+ 18.6736 Filip VI
+ 18.6653 Hissen
+ 18.6186 Jan Myrehed
+ 18.6088 Filip Månsson
+ 18.6001 Henrik Bastin
+ 18.5852 Claes Åkeson
+ 18.5679 Filip Alexanderson
+ 18.5395 Kristallen 2009
+ 18.5307 Filip den uppriktige av Pfalz
+ 18.4034 Ursäkta röran (vi bygger om)
+ 18.3996 Kristallen 2012
+ 18.3695 Grattis världen
+ 18.2810 Fredrik von Krusenstjerna

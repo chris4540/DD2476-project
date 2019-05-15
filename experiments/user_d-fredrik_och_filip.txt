@@ -1,13 +1,43 @@
-3 41.4654 Filip och Fredrik
+3 19.3600 100 höjdare (säsong 1)
+3 19.3600 100 höjdare (säsong 2)
+3 19.3600 100 höjdare (säsong 6)
+3 19.4237 Alla mot alla
 3 39.2906 Alla mot alla med Filip och Fredrik
-3 38.2244 Söndagsparty med Filip & Fredrik
-3 37.6481 Vem kan slå Filip och Fredrik
-3 36.9309 Lista över avsnitt av Vem kan slå Filip och Fredrik
+1 25.5334 Anders Adali
+3 21.3115 Boston Tea Party (TV-program)
 3 35.2731 Breaking News med Filip och Fredrik
+1 18.4482 Edwin Johnsson
+1 20.0370 Emil Österholm
+2 19.4183 Ett herrans liv (svenskt TV-program)
 2 33.2694 Filip Hammar
-3 33.1369 The Filip and Fredrik podcast
+3 41.4654 Filip och Fredrik
 3 32.4848 Filip och Fredriks podcast
 2 30.9314 Fredrik Wikingsson
+2 19.1698 Får vi följa med?
+3 18.2610 Grattis världen
+2 19.1228 Hello Sydney
+3 32.0337 High Chaparall
+2 18.0437 Hissen
+3 22.2582 Jorden runt på 6 steg
+3 19.1416 La Bamba (TV-program)
+1 23.5900 Lars Beckung
+3 36.9309 Lista över avsnitt av Vem kan slå Filip och Fredrik
+3 21.5892 Lite sällskap
+3 30.6472 Nexiko
+2 18.5571 Nugammalt
+2 19.6948 Racet till Vita huset
+3 22.0158 Ska vi göra slut?
+1 19.6349 Stockholm-Köpenhamn
+1 19.2590 Sverige dansar och ler
+3 21.3892 Så tar du ut din lön i choklad
+3 38.2244 Söndagsparty med Filip & Fredrik
+1 20.0384 Trevligt folk
+3 18.3218 Tårtgeneralen
+3 33.1369 The Filip and Fredrik podcast
+3 18.4034 Ursäkta röran (vi bygger om)
+3 37.6481 Vem kan slå Filip och Fredrik
+2 19.4101 Öppna dagar
+
 0 30.5624 Filip Vilhelm av Brandenburg-Schwedt
 0 28.8791 Filip av Schwaben
 0 27.6143 Fredrik Hierta
