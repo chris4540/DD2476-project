@@ -17,7 +17,7 @@ if __name__ == '__main__':
         raise ValueError("Wrong number of columns")
     df["idx"] = df.index + 1
     df["log2(i+1)"] = np.log2(df["idx"]+1)
-    df["DCG"] = df["rel"] / df["log2(i+1)"]
+    df["DCG"] = (2**df["rel"] - 1) / df["log2(i+1)"]
     df["is_rel"] = df["rel"] > 0
     print("DCG@10 = ", np.sum(df["DCG"][:10]))
     print("DCG@20 = ", np.sum(df["DCG"][:20]))
