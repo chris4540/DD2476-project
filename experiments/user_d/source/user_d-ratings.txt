@@ -1,0 +1,80 @@
+3 19.3600 100 höjdare (säsong 1)
+3 19.3600 100 höjdare (säsong 2)
+3 19.3600 100 höjdare (säsong 6)
+3 19.4237 Alla mot alla
+3 39.2906 Alla mot alla med Filip och Fredrik
+1 25.5334 Anders Adali
+3 21.3115 Boston Tea Party (TV-program)
+3 35.2731 Breaking News med Filip och Fredrik
+1 18.4482 Edwin Johnsson
+1 20.0370 Emil Österholm
+2 19.4183 Ett herrans liv (svenskt TV-program)
+2 33.2694 Filip Hammar
+3 41.4654 Filip och Fredrik
+3 32.4848 Filip och Fredriks podcast
+2 30.9314 Fredrik Wikingsson
+2 19.1698 Får vi följa med?
+3 18.2610 Grattis världen
+2 19.1228 Hello Sydney
+3 32.0337 High Chaparall
+2 18.0437 Hissen
+3 22.2582 Jorden runt på 6 steg
+3 19.1416 La Bamba (TV-program)
+1 23.5900 Lars Beckung
+3 36.9309 Lista över avsnitt av Vem kan slå Filip och Fredrik
+3 21.5892 Lite sällskap
+3 30.6472 Nexiko
+2 18.5571 Nugammalt
+2 19.6948 Racet till Vita huset
+3 22.0158 Ska vi göra slut?
+1 19.6349 Stockholm-Köpenhamn
+1 19.2590 Sverige dansar och ler
+3 21.3892 Så tar du ut din lön i choklad
+3 38.2244 Söndagsparty med Filip & Fredrik
+1 20.0384 Trevligt folk
+3 18.3218 Tårtgeneralen
+3 33.1369 The Filip and Fredrik podcast
+3 18.4034 Ursäkta röran (vi bygger om)
+3 37.6481 Vem kan slå Filip och Fredrik
+2 19.4101 Öppna dagar
+
+0 30.5624 Filip Vilhelm av Brandenburg-Schwedt
+0 28.8791 Filip av Schwaben
+0 27.6143 Fredrik Hierta
+0 27.1409 Filip I
+0 26.6189 Filip
+0 26.5865 Fredrik Hammar
+0 26.4658 Filip VI
+0 26.3384 Filip den uppriktige av Pfalz
+0 25.5302 Filip Berg
+0 25.3219 Fredrik Ludvig av Schleswig-Holstein-Sonderburg-Beck
+0 25.0400 Fredrik Forsberg (ishockeyspelare född december 1996)
+0 24.9184 August Filip av Holstein-Beck
+0 24.6864 Filip V
+0 24.5244 Filip II
+0 24.4033 Filip av Burgund
+0 24.4033 Filip IV
+0 24.3878 Filip Månsson
+0 24.3813 Pavel Filip
+0 24.3043 Filipe
+0 24.2685 Svarte Filip
+0 24.2059 Filip III
+0 24.1133 Filip Hronek
+0 24.1108 Filip Chlapík
+0 24.1016 Fredrik von Krusenstjerna
+0 24.0745 Filip Augustson
+0 24.0360 Filip Chytil
+0 24.0242 Fredrik Ludvig av Mecklenburg-Schwerin
+0 23.9980 Filip Bradarić
+0 23.9276 Filip Knutsson
+0 23.9060 Filip Araben
+0 23.8467 Filip Larsson
+0 23.8467 Filip Ingebrigtsen
+0 23.7981 Filip Pivkovski
+0 23.7765 Filip Meirhaeghe
+0 23.7168 Filip av Sverige
+0 23.6827 Filip Dewinter
+0 23.6742 Filip Zubčić
+0 23.6515 Filip den sköne
+0 23.6470 Filip Ragvaldsson
+0 23.5962 Filip den djärve
