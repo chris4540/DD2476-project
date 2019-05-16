@@ -9,7 +9,6 @@ class Config:
     }
     # decaying factor / half life (in second)
     half_life = {
-        "query": 7*3600,
         "title": 1*3600,
         "category": 2*3600,
         "text": 600,

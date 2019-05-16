@@ -98,8 +98,6 @@ def search():
     query_body = {
         "query": {
             "bool": {
-                # "must": {
-                # },
                 "should": [
                     {
                         "match": {
@@ -186,10 +184,6 @@ def search():
     # search with the query body
     el_res = es.search(index=Config.index, body=query_body)
 
-    # log the query to profile if success
-    if el_res["hits"]["total"] > 0:
-        with UserProfileLogger(email) as profile_logger:
-            profile_logger.log_term_vec_to_profile(query_term_vec, field="query")
     # ==========================================================================
     # Perpare the well formated results
     docid_to_score = OrderedDict()  #  doc_id -> score
