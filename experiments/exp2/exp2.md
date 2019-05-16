@@ -19,6 +19,14 @@ clicking on relevant and documents and observed how their profile changed over t
 Rel score:
 ----------
 flyplats:
-3. japan related airports and the surronding area.
+3. Airports in Japan and the surrounding area.
 2. general airport information
 1. other airports
+0. unrelated infomation
+<!--  -->
+slott:
+3. Japanese castles and the surrounding area. E.g. himeji castle and himeji city
+2. general castles
+1. other castles
+0. unrelated infomation
+<!--  -->
