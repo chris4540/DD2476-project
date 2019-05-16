@@ -1,0 +1,47 @@
+{
+    "settings": {
+        "index": {
+            "number_of_shards": "1",
+            "similarity": {
+                "default": {
+                    "type": "BM25"
+                },
+                "arrays": {
+                    "type": "BM25",
+                    "b": "0.3",
+                    "k1": "1.2"
+                }
+            },
+            "creation_date": "1557576403160",
+            "analysis": {
+                "filter": {
+                    "light_swedish_stemmer": {
+                        "type": "stemmer",
+                        "language": "light_swedish"
+                    },
+                    "swedish_stop": {
+                        "type": "stop",
+                        "stopwords": "_swedish_"
+                    },
+                    "swedish_stemmer": {
+                        "type": "stemmer",
+                        "language": "swedish"
+                    }
+                },
+                "analyzer": {
+                    "sv_std": {
+                        "filter": [
+                            "swedish_stemmer",
+                            "lowercase",
+                            "swedish_stop",
+                            "swedish_stemmer",
+                            "asciifolding"
+                        ],
+                        "tokenizer": "standard"
+                    }
+                }
+            },
+            "number_of_replicas": "1"
+        }
+    }
+}
