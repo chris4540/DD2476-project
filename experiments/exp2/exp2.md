@@ -33,5 +33,5 @@ slott:
 tempel:
 3. Japanese temples / temples in japan and the surrounding area. E.g. Kyoto, Osaka
 2. general temples information E.g. buddhism
-1. Other temples
+1. Other temples in other regions
 0. unrelated infomation
