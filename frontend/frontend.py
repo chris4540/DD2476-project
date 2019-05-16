@@ -1,9 +1,11 @@
 import os.path
 import json
+from datetime import datetime
+from functools import update_wrapper, wraps
 from time import time
 from collections import OrderedDict
 from elasticsearch import Elasticsearch
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from usr_profile_lib.usr_profile_log import UserProfileLogger
 from algorithm import cosine_similarity as cos_sim
 from algorithm import aggregate_term_vecs
@@ -288,10 +290,24 @@ def static_profile():
             profile_logger.modify_user_static_profile_vec(vec)
         return "Ok"
 
+
+def nocache(view):
+    @wraps(view)
+    def no_cache(*args, **kwargs):
+        response = make_response(view(*args, **kwargs))
+        response.headers['Last-Modified'] = datetime.now()
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '-1'
+        return response
+
+
+    return update_wrapper(no_cache, view)
+
 @app.route("/wordcloud/<email>")
+@nocache
 def generate_wordcloud(email):
     return plot_usr_word_cloud_bytes(email)
-
 
 
 if __name__ == "__main__":
