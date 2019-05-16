@@ -1,0 +1,126 @@
+{
+    "page": {
+        "dynamic": "false",
+        "properties": {
+            "all": {
+                "type": "text",
+                "similarity": "BM25",
+                "analyzer": "sv_std",
+                "position_increment_gap": 10
+            },
+            "all_near_match": {
+                "type": "text",
+                "norms": false,
+                "index_options": "freqs",
+                "similarity": "BM25",
+                "analyzer": "sv_std"
+            },
+            "auxiliary_text": {
+                "type": "text",
+                "index_options": "offsets",
+                "similarity": "BM25",
+                "copy_to": [
+                    "all"
+                ],
+                "analyzer": "sv_std",
+                "position_increment_gap": 10
+            },
+            "category": {
+                "type": "text",
+                "store": true,
+                "term_vector": "yes",
+                "index_options": "offsets",
+                "similarity": "arrays",
+                "copy_to": [
+                    "all"
+                ],
+                "analyzer": "sv_std",
+                "position_increment_gap": 10
+            },
+            "external_link": {
+                "type": "text",
+                "norms": false,
+                "index_options": "docs",
+                "analyzer": "keyword"
+            },
+            "heading": {
+                "type": "text",
+                "index_options": "offsets",
+                "similarity": "arrays",
+                "copy_to": [
+                    "all"
+                ],
+                "analyzer": "sv_std",
+                "position_increment_gap": 10
+            },
+            "incoming_links": {
+                "type": "long"
+            },
+            "language": {
+                "type": "text",
+                "norms": false,
+                "index_options": "docs",
+                "analyzer": "sv_std"
+            },
+            "opening_text": {
+                "type": "text",
+                "similarity": "BM25",
+                "copy_to": [
+                    "all"
+                ],
+                "analyzer": "sv_std",
+                "position_increment_gap": 10
+            },
+            "outgoing_link": {
+                "type": "text",
+                "norms": false,
+                "index_options": "docs",
+                "analyzer": "sv_std"
+            },
+            "popularity_score": {
+                "type": "double"
+            },
+            "source_text": {
+                "type": "text",
+                "index": false,
+                "fields": {
+                    "plain": {
+                        "type": "text",
+                        "norms": false,
+                        "index_options": "offsets",
+                        "similarity": "BM25",
+                        "analyzer": "sv_std",
+                        "position_increment_gap": 10
+                    }
+                }
+            },
+            "text": {
+                "type": "text",
+                "store": true,
+                "term_vector": "yes",
+                "index_options": "offsets",
+                "similarity": "BM25",
+                "copy_to": [
+                    "all"
+                ],
+                "analyzer": "sv_std",
+                "position_increment_gap": 10
+            },
+            "timestamp": {
+                "type": "date",
+                "format": "dateOptionalTime"
+            },
+            "title": {
+                "type": "text",
+                "store": true,
+                "term_vector": "yes",
+                "similarity": "BM25",
+                "copy_to": [
+                    "all"
+                ],
+                "analyzer": "sv_std",
+                "position_increment_gap": 10
+            }
+        }
+    }
+}
