@@ -104,8 +104,8 @@
             <li v-else v-for="item in results">
                 <div class="collection-header" style="display: block"><span
                         style="padding-right: 20px;">[[ item.pos ]]</span>[[ item.string ]]
-                    <div class="right"><span class="green-text">Previous score: [[ item.score ]]</span> | <span
-                            class="blue-text">Modified score: [[ item.score ]]</span> | <span style="cursor: pointer"
+                    <div class="right"><span class="green-text">Previous score: [[ item.score.toFixed(3) ]]</span> | <span
+                            class="blue-text">Modified score: [[ item.modified_score.toFixed(3) ]]</span> | <span style="cursor: pointer"
                                                                                               v-on:click="click_link(item.id, item.url)">Link: <span
                             class="secondary-content"><i
                             class="material-icons blue-text">send</i></span></span></div>
