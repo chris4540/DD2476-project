@@ -10,7 +10,8 @@ CREATE TABLE users(
     gender      CHAR(1)             NOT NULL,
     lang        TEXT                NOT NULL,
     city        TEXT                NOT NULL,
-    country     TEXT                NOT NULL
+    country     TEXT                NOT NULL,
+    UNIQUE(email)
 );
 -- USER search log table
 CREATE TABLE user_search_log (
