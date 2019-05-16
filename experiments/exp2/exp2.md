@@ -30,3 +30,8 @@ slott:
 1. other castles
 0. unrelated infomation
 <!--  -->
+tempel:
+3. Japanese temples / temples in japan and the surrounding area. E.g. Kyoto, Osaka
+2. general temples information E.g. buddhism
+1. Other temples
+0. unrelated infomation
