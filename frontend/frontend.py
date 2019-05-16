@@ -19,6 +19,8 @@ from fetcher import fetch_mulitple_term_vecs
 from config import Config
 
 # the folder containing this script
+from word_cloud import plot_usr_word_cloud_bytes
+
 script_dir = os.path.dirname(__file__)
 
 es = Elasticsearch(Config.elastic_host, port=Config.elastic_port, timeout=Config.timeout)
@@ -285,6 +287,10 @@ def static_profile():
         with UserProfileLogger(email) as profile_logger:
             profile_logger.modify_user_static_profile_vec(vec)
         return "Ok"
+
+@app.route("/wordcloud/<email>")
+def generate_wordcloud(email):
+    return plot_usr_word_cloud_bytes(email)
 
 
 
