@@ -18,3 +18,4 @@ if __name__ == "__main__":
     # ax.set_title("Plot nDCG@20 against the number of clicks without query expansion")
     fig = ax.get_figure()
     fig.savefig("nDCG20_no_q_expand.png", bbox_inches='tight')
+    fig.savefig("nDCG20_no_q_expand.eps", format="eps", bbox_inches='tight')
