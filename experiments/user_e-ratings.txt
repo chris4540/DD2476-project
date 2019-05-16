@@ -1,0 +1,19 @@
+3 Java (programspråk)
+3 Java Development Kit
+2 Iterator
+2 Java Desktop System
+2 Java Runtime Environment
+2 Java Virtual Machine
+1 ++
+1 D (programspråk)
+1 Datorprogram
+1 E (programspråk)
+1 Groovy (programspråk)
+1 Haxe (programspråk)
+1 Interpreterande  programspråk
+1 Java Servlet
+1 J Sharp
+1 Multiplattform
+1 Pascal (programspråk)
+1 Plain Old Java Object
+1 Programspråk
