@@ -15,4 +15,10 @@ clicking on relevant and documents and observed how their profile changed over t
 % 2. airport (flygplats)
 % 3. tempel
 
-
+<!--  -->
+Rel score:
+----------
+flyplats:
+3. japan related airports and the surronding area.
+2. general airport information
+1. other airports
