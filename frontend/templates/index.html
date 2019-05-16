@@ -217,7 +217,7 @@
             click_link: function (element_id, url) {
                 window.open(url)
                 this.$http.post(this.log_url + "/click", {
-                    "email": this.email.value,
+                    "email": this.email,
                     "doc_id": element_id
                 }).then(success_response => {
 
